@@ -1,5 +1,4 @@
-# WPFinal
-# 期末專題加油 !
+# wpFinal
 
 1. Git-Work-Flow : 
 
