@@ -1,1 +1,21 @@
 
+<<<<<<< HEAD
+=======
+const MainPage = ()=>{
+    return(
+        <div className="Background" style={{backgroundColor:"#FDEFE1", height:"100%"}}>
+            <div className="Profile">
+                <img className="Photo"></img>
+                <p className="Name"></p>
+            </div>
+            <div className="EXP_Bar"></div>
+            <div className="Money"></div>
+            <div className="ToDo"></div>
+            <div className="Select_Bar"></div>
+            <div className="Monster"></div>
+        </div>
+    )
+}
+
+export default MainPage
+>>>>>>> f5935e23e6ff9130171bf3e85b123d4bf015775e
