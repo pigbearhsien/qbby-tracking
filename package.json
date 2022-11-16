@@ -9,5 +9,7 @@
     "start": "cd frontend && yarn start",
     "server": "cd backend && yarn server"
   },
-  "dependencies": {}
+  "dependencies": {
+    "antd": "^4.24.2"
+  }
 }
