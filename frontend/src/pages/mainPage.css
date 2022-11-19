@@ -1,0 +1,56 @@
+div .Background {
+  height: 100%;
+  background-color: #fdefe1;
+  padding: 2vh;
+  box-sizing: border-box;
+}
+
+div .header {
+  height: 15vh;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  border: solid 2px black;
+}
+
+div .body {
+  width: 100%;
+  height: 65vh;
+  border: solid 2px black;
+  display: flex;
+  padding-right: 2vw;
+}
+
+div .sideBar {
+  width: 15%;
+  height: 100%;
+  border: solid 2px black;
+}
+
+div .sideBar-child1 {
+  display: flex;
+  width: 100%;
+  height: 15%;
+  align-items: center;
+  border: solid 2px black;
+}
+
+div .Monster {
+  width: 70%;
+  height: 100%;
+  border: solid 2px black;
+}
+
+div .ToDo {
+  width: 20%;
+  height: 70%;
+  border: solid 2px black;
+}
+
+div .footer {
+  width: 100%;
+  height: 15vh;
+  border: solid 2px black;
+}
