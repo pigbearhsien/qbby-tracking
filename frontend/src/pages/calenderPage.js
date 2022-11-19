@@ -1,8 +1,13 @@
 import MyCalendar from "../components/calendar"
+import MainDrawer from "../components/mainDrawer"
 
-const CalendarPage = ()=>{
+const CalendarPage = ({setPage})=>{
     return(
-        <MyCalendar></MyCalendar>
+        <div style={{backgroundColor:"#FDEFE1"}}>
+            <MainDrawer setPage={setPage}></MainDrawer>
+            <MyCalendar></MyCalendar>
+        </div>
+
     )
 
 

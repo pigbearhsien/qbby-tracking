@@ -10,6 +10,10 @@
     "server": "cd backend && yarn server"
   },
   "dependencies": {
-    "antd": "^4.24.2"
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.14",
+    "antd": "^4.24.2",
+    "react-icons": "^4.6.0"
   }
 }
