@@ -6,7 +6,9 @@ import { FcLibrary, FcCalendar, FcClock, FcList } from "react-icons/fc";
 import { FaShoppingBag } from "react-icons/fa";
 import "./mainDrawer.css";
 
-const MainDrawer = ({ setPage }) => {
+
+const MainDrawer = ({setPage}) => {
+
   const [anchor, setAnchor] = useState(null);
   const open = Boolean(anchor);
   const childIconSize = 25;
@@ -21,24 +23,30 @@ const MainDrawer = ({ setPage }) => {
 
   const goToMain = () => {
     setAnchor(null);
+
     setPage("Main");
   };
 
   const goToCalendar = () => {
     setAnchor(null);
+
     setPage("Calendar");
+
+
   };
 
   const goToMarket = () => {
     setAnchor(null);
+
     setPage("Market");
   };
   const goToTimer = () => {
     setAnchor(null);
     setPage("Timer");
+
   };
 
-  return (
+  return ((
     <div className="mainDrawer">
       <Button
         id="basic-button"
@@ -76,7 +84,7 @@ const MainDrawer = ({ setPage }) => {
         </MenuItem>
       </Menu>
     </div>
-  );
+  ));
 };
 
 export default MainDrawer;
