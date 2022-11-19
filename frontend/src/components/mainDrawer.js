@@ -2,13 +2,15 @@ import { react, useState } from "react";
 import { Button } from "@mui/material";
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
-import { FcMenu, FcLibrary, FcCalendar, FcClock } from "react-icons/fc";
+import { FcLibrary, FcCalendar, FcClock, FcList } from "react-icons/fc";
 import { FaShoppingBag } from "react-icons/fa";
 import "./mainDrawer.css";
 
-const MainDrawer = () => {
+const MainDrawer = ({ setPage }) => {
   const [anchor, setAnchor] = useState(null);
   const open = Boolean(anchor);
+  const childIconSize = 25;
+
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
@@ -19,17 +21,21 @@ const MainDrawer = () => {
 
   const goToMain = () => {
     setAnchor(null);
+    setPage("Main");
   };
 
   const goToCalendar = () => {
     setAnchor(null);
+    setPage("Calendar");
   };
 
   const goToMarket = () => {
     setAnchor(null);
+    setPage("Market");
   };
   const goToTimer = () => {
     setAnchor(null);
+    setPage("Timer");
   };
 
   return (
@@ -41,7 +47,7 @@ const MainDrawer = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <FcMenu></FcMenu>
+        <FcList size={30}></FcList>
       </Button>
       <Menu
         id="basic-menu"
@@ -53,19 +59,19 @@ const MainDrawer = () => {
         }}
       >
         <MenuItem onClick={goToMain}>
-          <FcLibrary></FcLibrary>
+          <FcLibrary size={childIconSize}></FcLibrary>
           <div style={{ marginLeft: "2vh" }}>首頁</div>
         </MenuItem>
         <MenuItem onClick={goToCalendar}>
-          <FcCalendar></FcCalendar>
+          <FcCalendar size={childIconSize}></FcCalendar>
           <div style={{ marginLeft: "2vh" }}>行事曆</div>
         </MenuItem>
         <MenuItem onClick={goToTimer}>
-          <FcClock></FcClock>
+          <FcClock size={childIconSize}></FcClock>
           <div style={{ marginLeft: "2vh" }}>計時器</div>
         </MenuItem>
         <MenuItem onClick={goToMarket}>
-          <FaShoppingBag></FaShoppingBag>
+          <FaShoppingBag size={childIconSize}></FaShoppingBag>
           <div style={{ marginLeft: "2vh" }}>商城</div>
         </MenuItem>
       </Menu>

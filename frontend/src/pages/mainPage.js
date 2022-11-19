@@ -1,20 +1,31 @@
 import ExpBar from "../components/expBar";
+import MainDrawer from "../components/mainDrawer";
 import MoneyBar from "../components/moneyBar";
 import Profile from "../components/profile";
-import MainDrawer from "../components/mainDrawer";
+import TodoList from "../components/todoList";
 import "./mainPage.css";
 
-const MainPage = () => {
+const MainPage = ({ setPage }) => {
   return (
     <div className="Background">
-      <Profile></Profile>
-      <ExpBar></ExpBar>
-      <MoneyBar></MoneyBar>
-      <div className="ToDo"></div>
-      <div className="Select_Bar">
-        <MainDrawer></MainDrawer>
+      <div className="header">
+        <Profile></Profile>
+        <ExpBar></ExpBar>
+        <MoneyBar></MoneyBar>
       </div>
-      <div className="Monster"></div>
+      <div className="body">
+        <div className="sideBar">
+          <div className="sideBar-child1">
+            <MainDrawer setPage={setPage}></MainDrawer>
+            <div>選單</div>
+          </div>
+        </div>
+        <div className="Monster"></div>
+        <div className="ToDo">
+          <TodoList></TodoList>
+        </div>
+      </div>
+      <div className="footer"></div>
     </div>
   );
 };
