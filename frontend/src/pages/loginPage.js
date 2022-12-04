@@ -8,9 +8,19 @@ const LogInPage = ({setLogIn}) => {
 
   return (
     <>
-     <Button type="primary" icon={<BulbFilled />} size={"large"} style={{backgroundColor:"#507be6"}} onClick={LogIn}>
-        LogIn
-     </Button>
+     <button className="btn btn-lg btn-primary" type="button" onClick={LogIn}>LogIn</button>
+
+     <div className="form-group has-success" style={{width: 300}}>
+      <label className="form-label mt-4" for="inputValid">Valid input</label>
+      <input type="text" value="correct value" className="form-control is-valid" id="inputValid"/>
+      <div className="valid-feedback">Success! You've done it.</div>
+    </div>
+
+    <div className="form-group has-danger" style={{width: 300}}>
+      <label className="form-label mt-4" for="inputInvalid">Invalid input</label>
+      <input type="text" value="wrong value" className="form-control is-invalid" id="inputInvalid"/>
+      <div className="invalid-feedback">Sorry, that username's taken. Try another?</div>
+    </div>
     </>
   );
 };
