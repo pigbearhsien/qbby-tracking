@@ -3,6 +3,8 @@ import { FcEngineering } from "react-icons/fc";
 import "./todoList.css";
 
 const todoList = () => {
+  const [todos, setTodos] = useState([]);
+
   return (
     <div
       className="todoList"
@@ -10,8 +12,7 @@ const todoList = () => {
     >
       <div className="todoHeader">
         <div className="title" style={{ fontSize: "20px" }}>
-          {/* <FcEngineering size={20}></FcEngineering> */}
-          <h2>TodoList</h2>
+          <FcEngineering size={20}></FcEngineering>今日任務
         </div>
       </div>
       <div className="todoBody">
