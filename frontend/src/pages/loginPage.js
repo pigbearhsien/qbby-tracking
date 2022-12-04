@@ -8,7 +8,7 @@ const LogInPage = ({setLogIn}) => {
 
   return (
     <>
-     <button className="btn btn-lg btn-primary" type="button" onClick={LogIn}>LogIn</button>
+     <button className="btn btn-lg btn-outline-info" type="button" onClick={LogIn}>LogIn</button>
 
      <div className="form-group has-success" style={{width: 300}}>
       <label className="form-label mt-4" for="inputValid">Valid input</label>
