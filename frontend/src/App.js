@@ -11,7 +11,6 @@ import LogInPage from "./pages/loginPage";
 function App() {
   const [page, setPage] = useState("Main")
   const [logIn, setLogIn] = useState(false)
-
   if(logIn){
     if(page == "Main") return<MainPage setPage={setPage}></MainPage>
     else if(page == "Calendar") return<CalendarPage setPage={setPage}></CalendarPage>
