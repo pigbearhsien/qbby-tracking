@@ -81,16 +81,16 @@ const StudyTimer = () => {
       <div className="TimerWrapper">
         <p className="title">StudyTimer</p>
         <div className="countingTime">{formatTime(studyTime)}</div>
-        <button className="btn" onClick={() => handleStart()}>
+        <button className="btn btn-info" onClick={() => handleStart()}>
           Start
         </button>
-        <button className="btn" onClick={() => handleStop()}>
+        <button className="btn btn-info" onClick={() => handleStop()}>
           Stop
         </button>
-        <button className="btn" onClick={() => handolReset()}>
+        <button className="btn btn-info" onClick={() => handolReset()}>
           Reset
         </button>
-        <button className="btn" onClick={() => handleSave()}>
+        <button className="btn btn-info" onClick={() => handleSave()}>
           Save record
         </button>
       </div>
