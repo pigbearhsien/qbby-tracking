@@ -3,7 +3,7 @@ import MainDrawer from "../components/mainDrawer"
 
 const CalendarPage = ({setPage})=>{
     return(
-        <div style={{backgroundColor:"#FDEFE1"}}>
+        <div>
             <MainDrawer setPage={setPage}></MainDrawer>
             <MyCalendar></MyCalendar>
         </div>
