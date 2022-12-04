@@ -10,7 +10,8 @@ const todoList = () => {
     >
       <div className="todoHeader">
         <div className="title" style={{ fontSize: "20px" }}>
-          <FcEngineering size={20}></FcEngineering>今日任務
+          {/* <FcEngineering size={20}></FcEngineering> */}
+          <h2>TodoList</h2>
         </div>
       </div>
       <div className="todoBody">

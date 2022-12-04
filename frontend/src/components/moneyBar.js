@@ -7,18 +7,19 @@ const MoneyBar = () => {
   let money = 20000;
 
   return (
-    <div>
-      <Segmented
-        options={[
-          {
-            label: money,
-            value: "Money",
-            icon: <DollarOutlined />,
-          },
-        ]}
-        style={{ backgroundColor: "#F9EE90" }}
-      />
-    </div>
+    <span class="badge rounded-pill bg-info">$$ {money}</span>
+    // <div>
+    //   <Segmented
+    //     options={[
+    //       {
+    //         label: money,
+    //         value: "Money",
+    //         icon: <DollarOutlined />,
+    //       },
+    //     ]}
+    //     style={{ backgroundColor: "#F9EE90" }}
+    //   />
+    // </div>
   );
 };
 

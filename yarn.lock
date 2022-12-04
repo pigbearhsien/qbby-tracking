@@ -378,11 +378,28 @@
   "resolved" "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.3.0.tgz"
   "version" "0.3.0"
 
+"@fullcalendar/bootstrap5@^5.11.3":
+  "integrity" "sha512-nZ0ny3rYbr0YmEznNfZyAwUTWhzEBx6v4EO2fpeW0oR6Y3DeaAVSgLlFCFSEJRniNDX+K2pUpwS5CK9VF2yzHQ=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/bootstrap5/-/bootstrap5-5.11.3.tgz"
+  "version" "5.11.3"
+  dependencies:
+    "@fullcalendar/common" "~5.11.3"
+    "tslib" "^2.1.0"
+
 "@fullcalendar/common@~5.11.3":
   "integrity" "sha512-welVwyfQOXQQGfDwBMSfYEPbiO1cPfUD+C7jd3ZoweJR+dSO11ddFugxIQ7dGfABAGZ63oq/+LW9FsmAJezVNg=="
   "resolved" "https://registry.npmjs.org/@fullcalendar/common/-/common-5.11.3.tgz"
   "version" "5.11.3"
   dependencies:
+    "tslib" "^2.1.0"
+
+"@fullcalendar/core@^5.11.3":
+  "integrity" "sha512-YUFxCvVJytUwFeXCx4J17kFMM7Ixwn9zBjVRw5NM2bMwgR6VAhSnlZc6yNQSOIy7Hj2TF0vDkO/4JNlTvxyAXw=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/core/-/core-5.11.3.tgz"
+  "version" "5.11.3"
+  dependencies:
+    "@fullcalendar/common" "~5.11.3"
+    "preact" "^10.0.5"
     "tslib" "^2.1.0"
 
 "@fullcalendar/daygrid@^5.11.3":
@@ -676,6 +693,21 @@
     "cosmiconfig" "^7.0.0"
     "resolve" "^1.19.0"
 
+"bootstrap-icons@^1.10.2":
+  "integrity" "sha512-PTPYadRn1AMGr+QTSxe4ZCc+Wzv9DGZxbi3lNse/dajqV31n2/wl/7NX78ZpkvFgRNmH4ogdIQPQmxAfhEV6nA=="
+  "resolved" "https://registry.npmjs.org/bootstrap-icons/-/bootstrap-icons-1.10.2.tgz"
+  "version" "1.10.2"
+
+"bootstrap@^5.2.3":
+  "integrity" "sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ=="
+  "resolved" "https://registry.npmjs.org/bootstrap/-/bootstrap-5.2.3.tgz"
+  "version" "5.2.3"
+
+"bootswatch@^5.2.2":
+  "integrity" "sha512-ByybawTUbMzzsdIb+5lYjme088UBYtNBhJCBt4W77PKG57fzjd2Y11rdGDgHgFGXVTMD2Oaci3/qJon4L0ceTQ=="
+  "resolved" "https://registry.npmjs.org/bootswatch/-/bootswatch-5.2.2.tgz"
+  "version" "5.2.2"
+
 "browserslist@^4.21.3", "browserslist@>= 4.21.0":
   "integrity" "sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw=="
   "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.21.4.tgz"
@@ -961,6 +993,11 @@
   "integrity" "sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ=="
   "resolved" "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz"
   "version" "1.0.0"
+
+"preact@^10.0.5":
+  "integrity" "sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg=="
+  "resolved" "https://registry.npmjs.org/preact/-/preact-10.11.3.tgz"
+  "version" "10.11.3"
 
 "prop-types@^15.6.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
