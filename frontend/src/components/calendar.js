@@ -19,7 +19,7 @@ const MyCalendar = () => {
     console.log(arg)
     let event = prompt("Create an event from "+arg.startStr+" to "+arg.endStr+"(excl)\nEnter the event :")
     console.log(!event)
-    if(event)setEvents([...events, {title: event, start: arg.startStr, end: arg.endStr, color: "blue"}])
+    if(event)setEvents([...events, {title: event, start: arg.startStr, end: arg.endStr}])
   }
 
   return(
