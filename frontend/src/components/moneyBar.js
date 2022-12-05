@@ -7,7 +7,7 @@ const MoneyBar = () => {
   let money = 20000;
 
   return (
-    <span class="badge rounded-pill bg-info">$$ {money}</span>
+    <span className="badge rounded-pill bg-info">$$ {money}</span>
     // <div>
     //   <Segmented
     //     options={[
