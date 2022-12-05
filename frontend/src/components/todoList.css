@@ -9,7 +9,7 @@ div .todoHeader {
 
 div .todoBody {
   width: 100%;
-  height: 75%;
+  height: 88%;
   border: solid 2px black;
 }
 
@@ -22,5 +22,18 @@ div .todoFooter {
 div .todoContainer {
   width: 100%;
   height: 100%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: 1vh;
   overflow-y: scroll;
+}
+
+div .todoContainerRow {
+  user-select: none;
+  width: 100%;
+  padding-top: 2px;
+  font-size: 3vh;
+  border-bottom: 2px solid;
+  border-color: rgba(128, 128, 128, 0.4);
+  display: flex;
 }

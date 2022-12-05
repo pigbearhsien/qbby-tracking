@@ -17,7 +17,7 @@ const MainPage = ({ setPage }) => {
         <div className="sideBar">
           <div className="sideBar-child1">
             <MainDrawer setPage={setPage}></MainDrawer>
-            <div>選單</div>
+            <h2>Pages</h2>
           </div>
         </div>
         <div className="Monster"></div>
@@ -26,6 +26,8 @@ const MainPage = ({ setPage }) => {
         </div>
       </div>
       <div className="footer"></div>
-    </div>)}
+    </div>
+  );
+};
 
 export default MainPage;

@@ -1,96 +1,37 @@
-import { Badge, Calendar } from 'antd';
-import "antd/dist/antd.css"
-import React from 'react';
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-      ];
-      break;
-    case 10:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event.',
-        },
-      ];
-      break;
-    case 15:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event',
-        },
-        {
-          type: 'success',
-          content: 'This is very long usual event。。....',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 1.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 2.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 3.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 4.',
-        },
-      ];
-      break;
-    default:
-  }
-  return listData || [];
-};
-const getMonthData = (value) => {
-  if (value.month() === 8) {
-    return 1394;
-  }
-};
+import {React, useEffect, useState} from 'react'
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
+import bootstrap5Plugin from '@fullcalendar/bootstrap5'
+import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'; // needs additional webpack config!
+import { unstable_detectScrollType } from '@mui/utils'
+
 const MyCalendar = () => {
-  const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month" >
-        <section >{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  };
-  const dateCellRender = (value) => {
-    const listData = getListData(value);
-    return (
-      <ul className="events">
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
-          </li>
-        ))}
-      </ul>
-    );
-  };
-  return <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} style={{backgroundColor:"#FDEFE1"}} />;
-};
-export default MyCalendar;
+  const [events, setEvents] = useState([])
+
+  const handleDateClick = (arg) => { // bind with an arrow function
+    console.log(arg)
+    let event = prompt("Create an event from "+arg.startStr+" to "+arg.endStr+"(excl)\nEnter the event :")
+    if(event)setEvents([...events, {title: event, start: arg.startStr, end: arg.endStr}])
+  }
+
+  return(
+    <FullCalendar
+        plugins={[ dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin, listPlugin, dayGridPlugin]}
+        themeSystem= 'bootstrap5'
+        initialView="dayGridMonth"
+        selectable={true}
+        selectMirror={true}
+        select={(e) => handleDateClick(e)}
+        events={events}
+        headerToolbar={{left: 'today prev,next', center: "title", end: 'dayGridMonth timeGridWeek timeGridDay listWeek'}}
+        // initialView='timeGridWeek'
+        
+      />
+  )
+}
+
+export default MyCalendar
