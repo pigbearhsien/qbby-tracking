@@ -4,10 +4,11 @@ import MoneyBar from "../components/moneyBar";
 import Profile from "../components/profile";
 import TodoList from "../components/todoList";
 import "./mainPage.css";
+import bgImg from "../assets/Background70.png";
 
 const MainPage = ({ setPage }) => {
   return (
-    <div className="Background">
+    <div className="Background" style={{ backgroundImage: `url(${bgImg})` }}>
       <div className="header">
         <Profile></Profile>
         <ExpBar></ExpBar>
@@ -17,7 +18,7 @@ const MainPage = ({ setPage }) => {
         <div className="sideBar">
           <div className="sideBar-child1">
             <MainDrawer setPage={setPage}></MainDrawer>
-            <h2>Pages</h2>
+            <p style={{ marginTop: "3vh", fontSize: "4vh" }}>選單</p>
           </div>
         </div>
         <div className="Monster"></div>
