@@ -12,8 +12,9 @@ const ExpBar = () => {
       className="progress"
       style={{
         width: 500,
-        height: 30,
+        height: 40,
         display: "flex",
+        border: "3px solid black",
       }}
     >
       <div
