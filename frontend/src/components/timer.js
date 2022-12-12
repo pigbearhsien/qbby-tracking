@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import "./timer.css";
+import Clock from "../images/clock.png";
 var clocktimer;
 var startAt = 0;
 var lapTime = 0;
 
-const StudyTimer = () => {
+const StudyTimer = ({ page }) => {
   // 時、分、秒　幾位數　格式
   const pad = (num, size) => {
     var s = "00" + num;
@@ -29,7 +31,7 @@ const StudyTimer = () => {
     s = Math.floor(time / 1000);
 
     // 顯示時間計算結果，套用到幾位數格式上
-    newTime = pad(h, 2) + "h" + pad(m, 2) + "m" + pad(s, 2) + "s";
+    newTime = [pad(h, 2), pad(m, 2), pad(s, 2)];
     return newTime;
   };
 
@@ -65,36 +67,76 @@ const StudyTimer = () => {
     setStudyTime(0);
   };
 
-  const handleSave = () => {
-    let currentTime = formatTime(now());
-    let newRecord = { currentTime: currentTime, recordTime: studyTime };
-    setRecord(() => (studyTime ? [...record, newRecord] : [...record]));
-    handolReset();
-  };
+  // const handleSave = () => {
+  //   let currentTime = formatTime(now());
+  //   let newRecord = { currentTime: currentTime, recordTime: studyTime };
+  //   setRecord(() => (studyTime ? [...record, newRecord] : [...record]));
+  //   handolReset();
+  // };
 
   useEffect(() => {
     setTotalTime(record.reduce((a, v) => (a = a + v.recordTime), 0));
   }, [record]);
 
+  useEffect(() => {
+    if (startAt) {
+      setStudyTime(lapTime + now() - startAt);
+      handleStart();
+    } else {
+      setStudyTime(lapTime);
+    }
+    // setStudyTime(lapTime + (startAt ? now() - startAt : 0));
+    // setStudyTime(studyTime);
+  }, [page]);
+
   return (
     <>
       <div className="TimerWrapper">
-        <p className="title">StudyTimer</p>
-        <div className="countingTime">{formatTime(studyTime)}</div>
-        <button className="btn btn-info" onClick={() => handleStart()}>
-          Start
-        </button>
-        <button className="btn btn-info" onClick={() => handleStop()}>
-          Stop
-        </button>
-        <button className="btn btn-info" onClick={() => handolReset()}>
-          Reset
-        </button>
-        <button className="btn btn-info" onClick={() => handleSave()}>
+        <p className="title h1">StudyTimer</p>
+        <div className="clock">
+          <img src={Clock} alt="Clock" width={"250px"} />
+        </div>
+        <div className="button">
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() => handleStart()}
+          >
+            Start
+          </button>
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() => handleStop()}
+          >
+            Stop
+          </button>
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() => handolReset()}
+          >
+            Reset
+          </button>
+        </div>
+        <div className="time">
+          <div className="time-block">
+            <p className="mb-0 text">HOURS</p>
+            <p className="text-warning num">{formatTime(studyTime)[0]}</p>
+          </div>
+          <div className="time-block">
+            <p className="mb-0 text">MINUTES</p>
+            <p className="text-warning num">{formatTime(studyTime)[1]}</p>
+          </div>
+          <div className="time-block">
+            <p className="mb-0 text">SECONDS</p>
+            <p className="text-warning num">{formatTime(studyTime)[2]}</p>
+          </div>
+        </div>
+        {/* <div className="countingTime">{formatTime(studyTime)}</div> */}
+
+        {/* <button className="btn btn-info" onClick={() => handleSave()}>
           Save record
-        </button>
+        </button> */}
       </div>
-      <div className="RecordWrapper">
+      {/* <div className="RecordWrapper">
         <p className="title">Record</p>
         <div>
           {record.map((item) => (
@@ -106,7 +148,7 @@ const StudyTimer = () => {
           ))}
         </div>
         <p className="totaTime">Total time: {formatTime(totalTime)}</p>
-      </div>
+      </div> */}
     </>
   );
 };
