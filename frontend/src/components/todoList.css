@@ -1,22 +1,26 @@
+div .todoWrapper {
+  background-color: #c9a984;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px double black;
+  border-radius: 10%;
+}
+
 div .todoHeader {
   width: 100%;
-  height: 12%;
+  height: 20%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: solid 2px black;
 }
 
 div .todoBody {
-  width: 100%;
-  height: 88%;
-  border: solid 2px black;
-}
-
-div .todoFooter {
-  width: 100%;
-  height: 13%;
-  border: solid 2px black;
+  width: 90%;
+  height: 78%;
+  border: solid 4px #694822;
+  border-radius: 3%;
 }
 
 div .todoContainer {

@@ -11,13 +11,13 @@ import LogInPage from "./pages/loginPage";
 function App() {
   const [page, setPage] = useState("Main");
   const [logIn, setLogIn] = useState(false);
-
   if (logIn) {
     if (page == "Main") return <MainPage setPage={setPage}></MainPage>;
     else if (page == "Calendar")
       return <CalendarPage setPage={setPage}></CalendarPage>;
     else if (page == "Market") return <MarketPage setPage={setPage} />;
-    else if (page == "Timer") return <TimerPage setPage={setPage} />;
+    else if (page == "Timer")
+      return <TimerPage setPage={setPage} page={page} />;
   } else return <LogInPage setLogIn={setLogIn}></LogInPage>;
 }
 

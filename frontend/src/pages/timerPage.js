@@ -1,5 +1,6 @@
 import StudyTimer from "../components/timer";
 import MainDrawer from "../components/mainDrawer";
+import "./timerPage.css";
 
 const TimerPage = ({ setPage }) => {
   return (

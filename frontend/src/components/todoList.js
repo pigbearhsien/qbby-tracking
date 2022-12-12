@@ -1,10 +1,10 @@
 import { react, useEffect, useState } from "react";
-import { FcEngineering } from "react-icons/fc";
 import { FaOptinMonster } from "react-icons/fa";
 import { Icon, IconButton } from "@mui/material";
 import { BiBadgeCheck } from "react-icons/bi";
-import { GrFormAdd } from "react-icons/gr";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -26,19 +26,29 @@ const TodoList = () => {
       <>
         {todos.map((todo) => (
           <div className="todoContainerRow">
-            <div className="partA" style={{ width: "80%" }}>
+            <div className="partA" style={{ width: "80%", fontWeight: "600" }}>
               <Checkbox
                 {...label}
-                icon={<FaOptinMonster size={25} />}
-                checkedIcon={<BiBadgeCheck size={25} />}
+                onChange={(e) => {
+                  let tmp = todos;
+                  for (let i = 0; i < todos.length; i++) {
+                    if (todos[i].task === todo.task) {
+                      tmp[i].checked = !tmp[i].checked;
+                    }
+                  }
+                  setTodos(tmp);
+                  e.target.checked = todo.checked;
+                }}
+                icon={<FaOptinMonster size={30} />}
+                checkedIcon={<BiBadgeCheck size={30} />}
               />
-              {todo}
+
+              {todo.task}
             </div>
             <IconButton
-              style={{ width: "20%", verticalAlign: "bottom" }}
+              style={{ width: "25%", verticalAlign: "bottom" }}
               onClick={() => {
-                todos.filter((item) => item === todo);
-                console.log(todos);
+                setTodos(todos.filter((item) => item.task !== todo.task));
               }}
             >
               <RiDeleteBin5Fill size={25} />
@@ -54,13 +64,18 @@ const TodoList = () => {
   }, [todos]);
 
   return (
-    <div
-      className="todoList"
-      style={{ height: "100%", boxSizing: "border-box" }}
-    >
+    <div className="todoWrapper" style={{ height: "100%" }}>
       <div className="todoHeader">
-        <div className="title" style={{ fontSize: "20px" }}>
-          <FcEngineering size={20}></FcEngineering>今日任務
+        <div
+          className="title"
+          style={{
+            fontSize: "30px",
+            fontWeight: "600",
+            padding: "2vh",
+            textAlign: "bottom",
+          }}
+        >
+          <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>今日任務
         </div>
       </div>
       <div className="todoBody">
@@ -77,18 +92,22 @@ const TodoList = () => {
                   }}
                   startAdornment={
                     <InputAdornment position="start">
-                      <GrFormAdd
+                      <AddCircleRoundedIcon
+                        color={newTodo ? "" : "disabled"}
                         size={20}
                         style={{ userSelect: "none" }}
                         onClick={() => {
                           if (!newTodo) setLoad(false);
                           else {
-                            setTodos([...todos, newTodo]);
+                            setTodos([
+                              ...todos,
+                              { task: newTodo, checked: false },
+                            ]);
                             setNewTodo("");
                             setLoad(true);
                           }
                         }}
-                      ></GrFormAdd>
+                      ></AddCircleRoundedIcon>
                     </InputAdornment>
                   }
                 />
@@ -104,18 +123,22 @@ const TodoList = () => {
                   }}
                   startAdornment={
                     <InputAdornment position="start">
-                      <GrFormAdd
+                      <AddCircleRoundedIcon
+                        color={newTodo ? "" : "disabled"}
                         size={20}
                         style={{ userSelect: "none" }}
                         onClick={() => {
                           if (!newTodo) setLoad(false);
                           else {
-                            setTodos([...todos, newTodo]);
+                            setTodos([
+                              ...todos,
+                              { task: newTodo, checked: false },
+                            ]);
                             setNewTodo("");
                             setLoad(true);
                           }
                         }}
-                      ></GrFormAdd>
+                      ></AddCircleRoundedIcon>
                     </InputAdornment>
                   }
                 />

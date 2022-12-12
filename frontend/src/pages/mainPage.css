@@ -13,13 +13,12 @@ div .header {
   align-items: center;
   justify-content: space-between;
   font-weight: 500;
-  border: solid 2px black;
 }
 
 div .body {
   width: 100%;
   height: 65vh;
-  border: solid 2px black;
+
   display: flex;
   padding-right: 2vw;
 }
@@ -27,34 +26,28 @@ div .body {
 div .sideBar {
   width: 15%;
   height: 100%;
-  border: solid 2px black;
 }
 
 div .sideBar-child1 {
-  display: flex;
+  padding-top: "5vh";
   width: 100%;
-  height: 15%;
-  align-items: center;
+  height: 22%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: solid 2px black;
 }
 
 div .Monster {
-  width: 70%;
+  width: 65%;
   height: 100%;
-  border: solid 2px black;
 }
 
 div .ToDo {
   width: 20%;
-  height: 70%;
-  border: solid 2px black;
+  height: 80%;
 }
 
 div .footer {
   width: 100%;
   height: 15vh;
-  border: solid 2px black;
 }

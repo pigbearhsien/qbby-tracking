@@ -1,0 +1,44 @@
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+div .clock {
+  display: flex;
+  justify-content: center;
+}
+
+div .button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.btn {
+  margin: 1%;
+}
+
+div .time {
+  display: flex;
+  justify-content: center;
+}
+
+div .time-block {
+  display: block;
+  justify-content: center;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 5%;
+}
+
+.num {
+  display: flex;
+  justify-content: center;
+  font-size: 8ch;
+}
