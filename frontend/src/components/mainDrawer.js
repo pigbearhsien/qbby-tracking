@@ -5,10 +5,10 @@ import { MenuItem } from "@mui/material";
 import { FcLibrary, FcCalendar, FcClock, FcList } from "react-icons/fc";
 import { FaShoppingBag } from "react-icons/fa";
 import "./mainDrawer.css";
+import menuImg from "../assets/menu.png";
+import { width } from "@mui/system";
 
-
-const MainDrawer = ({setPage}) => {
-
+const MainDrawer = ({ setPage }) => {
   const [anchor, setAnchor] = useState(null);
   const open = Boolean(anchor);
   const childIconSize = 25;
@@ -31,8 +31,6 @@ const MainDrawer = ({setPage}) => {
     setAnchor(null);
 
     setPage("Calendar");
-
-
   };
 
   const goToMarket = () => {
@@ -43,10 +41,9 @@ const MainDrawer = ({setPage}) => {
   const goToTimer = () => {
     setAnchor(null);
     setPage("Timer");
-
   };
 
-  return ((
+  return (
     <div className="mainDrawer">
       <Button
         id="basic-button"
@@ -55,8 +52,18 @@ const MainDrawer = ({setPage}) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <FcList size={30}></FcList>
+        <div className="wrapper" style={{ width: "45px", height: "45px" }}>
+          <div
+            className="menuImg"
+            style={{
+              backgroundImage: `url(${menuImg})`,
+              width: "100%",
+              height: "100%",
+            }}
+          ></div>
+        </div>
       </Button>
+
       <Menu
         id="basic-menu"
         anchorEl={anchor}
@@ -84,7 +91,7 @@ const MainDrawer = ({setPage}) => {
         </MenuItem>
       </Menu>
     </div>
-  ));
+  );
 };
 
 export default MainDrawer;

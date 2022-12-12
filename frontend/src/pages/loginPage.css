@@ -1,0 +1,69 @@
+.loginPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: black;
+  user-select: none;
+}
+
+.loginWrapper {
+  width: 25vw;
+  height: 60vh;
+  padding: 2vh;
+  background-color: aliceblue;
+  border-radius: 10%;
+  border: 5px double gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginTitle {
+  height: 20%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginInput {
+  height: 65%;
+  width: 90%;
+  padding-bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.userNameWrapper {
+  width: 100%;
+  height: 25%;
+}
+
+.idWrapper {
+  width: 100%;
+  height: 25%;
+}
+
+.passWordWrapper {
+  width: 100%;
+  height: 30%;
+}
+
+.loginButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.switchBar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
