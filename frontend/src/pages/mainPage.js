@@ -8,7 +8,7 @@ import bgImg from "../assets/Background70.png";
 
 const MainPage = ({ setPage }) => {
   return (
-    <div className="Background" style={{ backgroundImage: `url(${bgImg})` }}>
+    <div className="Background" style={{ backgroundImage: `url(${bgImg})` , backgroundSize: "cover"}}>
       <div className="header">
         <Profile></Profile>
         <ExpBar></ExpBar>

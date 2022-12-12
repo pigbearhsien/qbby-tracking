@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'; // needs additional webpack config!
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { display, rgbToHex } from '@mui/system'
 
 
 const MyCalendar = () => {
