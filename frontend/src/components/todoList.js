@@ -75,7 +75,7 @@ const TodoList = () => {
             textAlign: "bottom",
           }}
         >
-          <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>今日任務
+          <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>TODOS
         </div>
       </div>
       <div className="todoBody">
@@ -143,7 +143,7 @@ const TodoList = () => {
                   }
                 />
                 <FormHelperText id="component-error-text">
-                  尚未輸入代辦事項
+                  Please enter a ToDo
                 </FormHelperText>
               </FormControl>
             )}

@@ -50,6 +50,7 @@ const LogInPage = ({ setLogIn }) => {
                 error={checkErr}
                 id="input-with-icon-textfield"
                 label="Username"
+                fullWidth
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
