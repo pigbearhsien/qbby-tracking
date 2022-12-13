@@ -72,6 +72,7 @@ const LogInPage = ({ setLogIn }) => {
               error={checkErr}
               id="input-with-icon-textfield"
               label="Student ID"
+              fullWidth
               onChange={(e) => {
                 setUserId(e.target.value);
               }}
@@ -91,6 +92,7 @@ const LogInPage = ({ setLogIn }) => {
               type={mode === "SignIn" ? "password" : "text"}
               id="input-with-icon-textfield"
               label="Password"
+              fullWidth
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
