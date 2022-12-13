@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./timer.css";
-import Clock from "../images/clock.png";
+import Clock from "../assets/clock.png";
 var clocktimer;
 var startAt = 0;
 var lapTime = 0;
@@ -61,7 +61,7 @@ const StudyTimer = ({ page }) => {
     setStarted(false);
   };
 
-  const handolReset = () => {
+  const handleReset = () => {
     handleStop();
     startAt = lapTime = 0;
     setStudyTime(0);
@@ -91,27 +91,27 @@ const StudyTimer = ({ page }) => {
 
   return (
     <>
-      <div className="TimerWrapper">
+      <div className="TimerWrapper" style={{ userSelect: "none" }}>
         <p className="title h1">StudyTimer</p>
         <div className="clock">
           <img src={Clock} alt="Clock" width={"250px"} />
         </div>
         <div className="button">
           <button
-            className="btn btn-primary btn-lg"
+            className="btn timerBtn btn-primary btn-lg"
             onClick={() => handleStart()}
           >
             Start
           </button>
           <button
-            className="btn btn-primary btn-lg"
+            className="btn timerBtn btn-primary btn-lg"
             onClick={() => handleStop()}
           >
             Stop
           </button>
           <button
-            className="btn btn-primary btn-lg"
-            onClick={() => handolReset()}
+            className="btn timerBtn btn-primary btn-lg"
+            onClick={() => handleReset()}
           >
             Reset
           </button>

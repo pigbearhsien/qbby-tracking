@@ -11,6 +11,22 @@ import useSelection from "antd/es/table/hooks/useSelection";
 import { useState } from "react";
 import savemoney from "../images/savemoney.gif"
 import banners from "../images/banners.gif"
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "http://localhost:4000/api",
+});
+
+const MainPage = ({ setPage }) => {
+  const storeTest = async () => {
+    await instance.post("createLoginInfo/", {
+      username: "Vincent",
+      studentId: "B10901059",
+      password: "20021214",
+      experience: 5432,
+      money: 1000,
+    });
+  };
 
 const MainPage = ({ setPage }) => {
   const [popup, setPopup] = useState(true)
@@ -19,6 +35,9 @@ const MainPage = ({ setPage }) => {
     <div
       className="Background"
       style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
+      onClick={() => {
+        storeTest();
+      }}
     >
       <div className="header">
         <Profile></Profile>
@@ -30,7 +49,7 @@ const MainPage = ({ setPage }) => {
           <div className="sideBar-child1">
             <MainDrawer setPage={setPage}></MainDrawer>
             <p style={{ marginTop: "3vh", fontSize: "4vh", fontWeight: "700" }}>
-              選單
+              Menu
             </p>
           </div>
         </div>
