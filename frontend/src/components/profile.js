@@ -4,7 +4,7 @@ import React from "react";
 const Profile = () => (
   <>
     <div>
-      <Avatar shape="square" size={80} icon={<UserOutlined />} />
+      <Avatar shape="square" size={100} icon={<UserOutlined />} />
     </div>
   </>
 );

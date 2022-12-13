@@ -8,7 +8,10 @@ const MoneyBar = () => {
   let money = 20000;
 
   return (
-    <span className="badge rounded-pill bg-info">
+    <span
+      className="badge rounded-pill bg-info"
+      style={{ border: "3px solid black" }}
+    >
       <ImCoinDollar style={{ margin: "auto" }}></ImCoinDollar>
       {money}
     </span>

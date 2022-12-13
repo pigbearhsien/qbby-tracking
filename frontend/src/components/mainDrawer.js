@@ -75,19 +75,19 @@ const MainDrawer = ({ setPage }) => {
       >
         <MenuItem onClick={goToMain}>
           <FcLibrary size={childIconSize}></FcLibrary>
-          <div style={{ marginLeft: "2vh" }}>首頁</div>
+          <div style={{ marginLeft: "2vh" }}>Home</div>
         </MenuItem>
         <MenuItem onClick={goToCalendar}>
           <FcCalendar size={childIconSize}></FcCalendar>
-          <div style={{ marginLeft: "2vh" }}>行事曆</div>
+          <div style={{ marginLeft: "2vh" }}>Calendar</div>
         </MenuItem>
         <MenuItem onClick={goToTimer}>
           <FcClock size={childIconSize}></FcClock>
-          <div style={{ marginLeft: "2vh" }}>計時器</div>
+          <div style={{ marginLeft: "2vh" }}>Timer</div>
         </MenuItem>
         <MenuItem onClick={goToMarket}>
           <FaShoppingBag size={childIconSize}></FaShoppingBag>
-          <div style={{ marginLeft: "2vh" }}>商城</div>
+          <div style={{ marginLeft: "2vh" }}>Market</div>
         </MenuItem>
       </Menu>
     </div>
