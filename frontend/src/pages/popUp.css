@@ -1,0 +1,43 @@
+.popupTitle {
+    font-size: 3vw;
+    font-family: 'Futura';
+    font-weight: 900;
+    padding-top: 50px;
+    color: #0f0f4b;
+}
+
+.popupsmallTitle {
+    font-size: 1vw;
+    font-family: 'Futura';
+    font-weight: 900;
+    padding-top: 50px;
+    color: #0f0f4b;
+}
+
+.popupwords {
+    font-size: 1vw;
+    font-family: 'Futura';
+    font-weight: 90;
+    color: #0f0f4b;
+}
+
+.popupbtn {
+    font-size: 30px;
+    font-family: 'Futura';
+    font-weight: 900;
+    padding: 10px 30px;
+    border: transparent;
+    border-radius: 25px;
+    margin: 20px auto;
+    color: #0f0f4b;
+    background-color: rgb(131, 231, 233);
+    border: 3px solid #0f0f4b;
+
+}
+
+.popupbtn:hover {
+    cursor: pointer;
+    background-color: #0f0f4b;
+    color: rgb(131, 231, 233);
+    border: 3px solid transparent;
+}
