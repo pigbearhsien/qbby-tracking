@@ -1,5 +1,5 @@
 div .todoWrapper {
-  background-color: #c9a984;
+  background-color: #f5d2aa;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@ div .todoHeader {
 div .todoBody {
   width: 90%;
   height: 78%;
-  border: solid 4px #694822;
+  border: solid 4px #a17e56;
   border-radius: 3%;
 }
 

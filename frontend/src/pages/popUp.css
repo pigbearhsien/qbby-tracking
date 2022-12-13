@@ -1,6 +1,6 @@
 .popupTitle {
     font-size: 3vw;
-    font-family: 'Futura';
+    font-family: 'Comic Sans MS';
     font-weight: 900;
     padding-top: 50px;
     color: #0f0f4b;
@@ -8,22 +8,22 @@
 
 .popupsmallTitle {
     font-size: 1vw;
-    font-family: 'Futura';
+    font-family: 'Comic Sans MS';
     font-weight: 900;
-    padding-top: 50px;
+    padding-top: 4vh;
     color: #0f0f4b;
 }
 
 .popupwords {
     font-size: 1vw;
-    font-family: 'Futura';
+    font-family: 'Comic Sans MS';
     font-weight: 90;
     color: #0f0f4b;
 }
 
 .popupbtn {
-    font-size: 30px;
-    font-family: 'Futura';
+    font-size: 2vw;
+    font-family: 'Comic Sans MS';
     font-weight: 900;
     padding: 10px 30px;
     border: transparent;

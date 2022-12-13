@@ -71,9 +71,11 @@ const MainPage = ({ setPage }) => {
         <div
           style={{
             backgroundColor: "white",
-            height: "60vh",
+            height: "35vw",
             width: "30vw",
             borderRadius: "2vw",
+            display: "flex",
+            flexDirection: "column"
           }}
         >
           <header style={{ display: "flex", justifyContent: "center" }}>
@@ -81,14 +83,14 @@ const MainPage = ({ setPage }) => {
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>
             <img src={banners} style={{ width: "8vw" }}></img>
-            <div style={{ width: "18vw" }}>
+            <div style={{ width: "18vw"}}>
               <p className="popupsmallTitle">Congratulation!</p>
               <p className="popupwords">You worked for 10 hours yesterday</p>
             </div>
           </header>
-          <header style={{ display: "flex", justifyContent: "center" }}>
-            <img src={savemoney} style={{ width: "8vw", height: "14vh" }}></img>
-            <div style={{ width: "18vw" }}>
+          <header style={{ display: "flex", justifyContent: "center", alignItems:"center"}}>
+            <img src={savemoney} style={{ width: "8vw"}}></img>
+            <div style={{ width: "18vw", height: "15vh"}}>
               <p className="popupsmallTitle">Money & Exp</p>
               <p className="popupwords">You won 1000 $ and 10000 exp !</p>
             </div>
