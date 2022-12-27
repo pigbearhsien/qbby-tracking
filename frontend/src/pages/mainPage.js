@@ -30,12 +30,38 @@ const MainPage = ({ setPage }) => {
     });
   };
 
+  const createTimerUserTest = async () => {
+    await instance.post("createTimerUser/", {
+      studentId: "B10303123",
+      allRecord: [
+        {
+          date: "2022/12/27",
+          currentTime: "07:22",
+          tag: "homework",
+          recordTime: "4000",
+        },
+        {
+          date: "2022/12/27",
+          currentTime: "23:00",
+          tag: "exam",
+          recordTime: "4000",
+        },
+        {
+          date: "2022/12/25",
+          currentTime: "09:22",
+          tag: "math",
+          recordTime: "4000",
+        },
+      ],
+    });
+  };
   return (
     <div
       className="Background"
       style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
       onClick={() => {
         storeTest();
+        createTimerUserTest();
       }}
     >
       <div className="header">
@@ -75,7 +101,7 @@ const MainPage = ({ setPage }) => {
             width: "30vw",
             borderRadius: "2vw",
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
           <header style={{ display: "flex", justifyContent: "center" }}>
@@ -83,14 +109,20 @@ const MainPage = ({ setPage }) => {
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>
             <img src={banners} style={{ width: "8vw" }}></img>
-            <div style={{ width: "18vw"}}>
+            <div style={{ width: "18vw" }}>
               <p className="popupsmallTitle">Congratulation!</p>
               <p className="popupwords">You worked for 10 hours yesterday</p>
             </div>
           </header>
-          <header style={{ display: "flex", justifyContent: "center", alignItems:"center"}}>
-            <img src={savemoney} style={{ width: "8vw"}}></img>
-            <div style={{ width: "18vw", height: "15vh"}}>
+          <header
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={savemoney} style={{ width: "8vw" }}></img>
+            <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
               <p className="popupwords">You won 1000 $ and 10000 exp !</p>
             </div>
