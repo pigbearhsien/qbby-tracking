@@ -26,7 +26,14 @@ const TodoList = () => {
       <>
         {todos.map((todo) => (
           <div className="todoContainerRow">
-            <div className="partA" style={{ width: "80%", fontWeight: "600" }}>
+            <div
+              className="partA"
+              style={{
+                width: "80%",
+                fontWeight: "600",
+                fontFamily: "Trebuchet MS",
+              }}
+            >
               <Checkbox
                 {...label}
                 onChange={(e) => {
@@ -73,6 +80,7 @@ const TodoList = () => {
             fontWeight: "600",
             padding: "2vh",
             textAlign: "bottom",
+            fontFamily: "Trebuchet MS",
           }}
         >
           <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>TODOS

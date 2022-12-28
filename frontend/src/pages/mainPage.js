@@ -11,32 +11,14 @@ import useSelection from "antd/es/table/hooks/useSelection";
 import { useState } from "react";
 import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "http://localhost:4000/api",
-});
 
 const MainPage = ({ setPage }) => {
   const [popup, setPopup] = useState(true);
-
-  const storeTest = async () => {
-    await instance.post("createLoginInfo/", {
-      username: "Vincent",
-      studentId: "B10901059",
-      password: "20021214",
-      experience: 5432,
-      money: 1000,
-    });
-  };
 
   return (
     <div
       className="Background"
       style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
-      onClick={() => {
-        storeTest();
-      }}
     >
       <div className="header">
         <Profile></Profile>
@@ -47,7 +29,14 @@ const MainPage = ({ setPage }) => {
         <div className="sideBar">
           <div className="sideBar-child1">
             <MainDrawer setPage={setPage}></MainDrawer>
-            <p style={{ marginTop: "3vh", fontSize: "4vh", fontWeight: "700" }}>
+            <p
+              style={{
+                marginTop: "3vh",
+                fontSize: "4vh",
+                fontWeight: "700",
+                fontFamily: "Trebuchet MS",
+              }}
+            >
               Menu
             </p>
           </div>
@@ -75,7 +64,7 @@ const MainPage = ({ setPage }) => {
             width: "30vw",
             borderRadius: "2vw",
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
           <header style={{ display: "flex", justifyContent: "center" }}>
@@ -83,14 +72,20 @@ const MainPage = ({ setPage }) => {
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>
             <img src={banners} style={{ width: "8vw" }}></img>
-            <div style={{ width: "18vw"}}>
+            <div style={{ width: "18vw" }}>
               <p className="popupsmallTitle">Congratulation!</p>
               <p className="popupwords">You worked for 10 hours yesterday</p>
             </div>
           </header>
-          <header style={{ display: "flex", justifyContent: "center", alignItems:"center"}}>
-            <img src={savemoney} style={{ width: "8vw"}}></img>
-            <div style={{ width: "18vw", height: "15vh"}}>
+          <header
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={savemoney} style={{ width: "8vw" }}></img>
+            <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
               <p className="popupwords">You won 1000 $ and 10000 exp !</p>
             </div>
