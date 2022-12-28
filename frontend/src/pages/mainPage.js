@@ -11,10 +11,10 @@ import useSelection from "antd/es/table/hooks/useSelection";
 import { useState } from "react";
 import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
+import instance from "../hooks/api";
 
 const MainPage = ({ setPage }) => {
   const [popup, setPopup] = useState(true);
-
 
   const createTimerUserTest = async () => {
     await instance.post("createTimerUser/", {
@@ -46,12 +46,9 @@ const MainPage = ({ setPage }) => {
     <div
       className="Background"
       style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
-
       onClick={() => {
-        
         createTimerUserTest();
       }}
-
     >
       <div className="header">
         <Profile></Profile>
