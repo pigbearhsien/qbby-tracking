@@ -11,7 +11,14 @@ const wrap =
 function main(app) {
   app.post("/api/createLoginInfo", wrap(infoRoute.createLoginInfo));
   app.post("/api/createMonsterData", wrap(infoRoute.createMonsterData));
+
+  app.post("/api/createTimerUser", wrap(timerRoute.createTimerUser));
+  app.get("/api/getTimerRecord", wrap(timerRoute.getTimerRecord));
+  app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));
+  app.delete("/api/deleteTimerRecord"), wrap(timerRoute.deleteTimerRecord);
+
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
+
   //app.get(
   //"/api/getCommentsByRestaurantId",
   //wrap(commentRoute.GetCommentsByRestaurantId)
