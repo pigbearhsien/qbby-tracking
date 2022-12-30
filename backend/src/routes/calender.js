@@ -13,6 +13,24 @@ exports.createCalendarEvent = async (req, res) => {
     await res.send({msg: "done"})
   };
 
+exports.deleteCalendarEvent = async (req, res)=>{
+    const body = req.body;
+    console.log(body)
+    let event = await EventModel.findOne({$and :[{name: body.name}, {stdEventEnd: body.stdEventEnd}, {stdEventStart: body.stdEventStart}]})
+    let eventID = event._id.toString()
+    var ObjectId = require('mongodb').ObjectId;    
+    var o_id = new ObjectId(eventID);
+    console.log(eventID)
+    const eventInCalendar = await CalendarModel.findOneAndUpdate(
+        {id: 'B10901098'},
+        {$pull: {events: o_id}}
+    )
+    await EventModel.deleteOne(event);
+    await res.send({msg: "deleted"})
+}
+
+
+
 exports.getCalendarEvent = async (req, res) => {
     const id = req.query.id;
     let calendarUser = await CalendarModel.findOne({id: id})
