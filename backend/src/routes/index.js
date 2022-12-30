@@ -19,6 +19,7 @@ function main(app) {
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
 
   app.post("/api/createCalendarEvent", wrap(calendarRoute.createCalendarEvent));
+  app.post("/api/deleteCalendarEvent", wrap(calendarRoute.deleteCalendarEvent));
   app.get("/api/getCalendarEvent", wrap(calendarRoute.getCalendarEvent));
 
   //app.get(

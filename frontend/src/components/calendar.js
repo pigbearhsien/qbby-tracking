@@ -14,6 +14,9 @@ import axios from "../hooks/api"
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
   const [eventClicked, setEventClicked] = useState("")
+  const [stdStartClicked, setStdStartClicked] = useState("")
+  const [stdEndClicked, setStdEndClicked] = useState("")
+
   const [resetCount, setResetCount] = useState(0)
   const [newEvent, setNewEvent] = useState("");
   const [delEvent, setDelEvent] = useState("")
@@ -31,8 +34,29 @@ const MyCalendar = () => {
 
   const eventOnClick = (e)=>{
     const event = e.event.title
+    setStdStartClicked(e.event.startStr)
+    setStdEndClicked(e.event.endStr)
     setEventClicked(event)
     setDelPopup(true)
+  }
+
+  const deleteEvent = async()=>{
+    if(delEvent === eventClicked){
+      console.log("correct input")
+      const {data:{msg}} = await axios.post("deleteCalendarEvent/", {
+        name: eventClicked,              
+        stdEventStart: stdStartClicked,          // start time in standard form
+        stdEventEnd: stdEndClicked               // end time in standard form
+      })
+      getEvent()
+      setDelPopup(false);
+      setEventWarn("hidden")
+    }
+    else{
+      setWarnmsg("Wrong Input")
+      setEventWarn("");
+    }
+    setDelEvent("")
   }
 
   const createEvent = async()=>{  // save event to mongoDB
@@ -136,20 +160,6 @@ const MyCalendar = () => {
     setDelEvent("")
     setNewEvent("");
   };
-
-  const deleteEvent = async()=>{
-    if(delEvent === eventClicked){
-      // await delete in DB
-      // getEvent
-      setDelPopup(false);
-      setEventWarn("hidden")
-    }
-    else{
-      setWarnmsg("Wrong Input")
-      setEventWarn("");
-    }
-    setDelEvent("")
-  }
 
   const confirm = async() => {
 
