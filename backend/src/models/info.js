@@ -8,6 +8,7 @@ const InfoSchema = Schema({
   password: { type: String, required: true },
   experience: { type: Number },
   money: { type: Number },
+  timerRecords: { type: Array },
 });
 
 const exportSchema = mongoose.model("UserInfo", InfoSchema);

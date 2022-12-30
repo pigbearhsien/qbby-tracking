@@ -49,13 +49,25 @@ const StudyTimer = ({ page }) => {
     return newTime;
   };
 
+  //從外面傳入id跟timerRecords
+  const studentId = "d";
+
   const [studyTime, setStudyTime] = useState(0);
-  const [record, setRecord] = useState([]);
-  const [showRecord, setShowRecord] = useState([]);
+  const [allRecords, setAllRecords] = useState([]);
+  const [showRecords, setShowRecords] = useState([]);
   const [totalTime, setTotalTime] = useState(0);
   const [started, setStarted] = useState(false);
   const [date, setDate] = useState(moment());
   const [tag, setTag] = useState("");
+
+  const getTimerRecord = async () => {
+    const {
+      data: { timerRecords },
+    } = await instance.get("/getTimerRecords", {
+      params: { studentId: studentId },
+    });
+    setAllRecords(timerRecords);
+  };
 
   var now = () => {
     return new Date().getTime();
@@ -82,45 +94,61 @@ const StudyTimer = ({ page }) => {
     handleStop();
     startAt = lapTime = 0;
     setStudyTime(0);
+    setTag("");
   };
 
   useEffect(() => {
     if (startAt) {
       setStudyTime(lapTime + now() - startAt);
       handleStart();
+      getTimerRecord();
     } else {
       setStudyTime(lapTime);
+      getTimerRecord();
     }
   }, [page]);
 
-  const getTimerRecord = async () => {
-    const {
-      data: { allRecord },
-    } = await instance.get("/getTimerRecord", {
-      params: { studentId: "B10303123" },
+  const createRecord = async (record) => {
+    await instance.post("/createTimerRecord", {
+      studentId: studentId,
+      newRecord: record,
     });
-    setRecord(allRecord);
   };
 
   const handleSave = () => {
-    let newRecord = {
-      date: moment().format("YYYY/MM/DD"),
-      currentTime: moment().format("HH:mm"),
-      tag: tag,
-      recordTime: studyTime,
-    };
-    console.log(newRecord);
-    setRecord(() => (studyTime ? [...record, newRecord] : [...record]));
-    handleReset();
+    if (studyTime) {
+      let newRecord = {
+        date: moment().format("YYYY/MM/DD"),
+        currentTime: moment().format("HH:mm"),
+        tag: tag,
+        recordTime: studyTime,
+      };
+      setAllRecords([...allRecords, newRecord]);
+      handleReset();
+      createRecord(newRecord);
+    }
+  };
+
+  const deleteRecord = async (newRecords) => {
+    await instance.post("/deleteTimerRecord", {
+      studentId: studentId,
+      new: newRecords,
+    });
+  };
+  const handleDelete = (item) => {
+    setAllRecords(allRecords.filter((r) => r !== item.item));
+    deleteRecord(allRecords.filter((r) => r !== item.item));
   };
 
   useEffect(() => {
-    setShowRecord(record.filter((r) => r.date === date.format("YYYY/MM/DD")));
-  }, [record, date]);
+    setShowRecords(
+      allRecords.filter((r) => r.date === date.format("YYYY/MM/DD"))
+    );
+  }, [allRecords, date]);
 
   useEffect(() => {
-    setTotalTime(showRecord.reduce((a, v) => (a = a + v.recordTime), 0));
-  }, [showRecord]);
+    setTotalTime(showRecords.reduce((a, v) => (a = a + v.recordTime), 0));
+  }, [showRecords]);
 
   return (
     <>
@@ -128,14 +156,7 @@ const StudyTimer = ({ page }) => {
         <div className="TimerWrapper" style={{ userSelect: "none" }}>
           <p className="timerTitle">FocusTimer</p>
           <div className="clock">
-            <img
-              src={Clock}
-              alt="Clock"
-              width={"250px"}
-              onClick={() => {
-                getTimerRecord();
-              }}
-            />
+            <img src={Clock} alt="Clock" width={"250px"} />
           </div>
           <div className="button">
             <button className="timerBtn" onClick={() => handleStart()}>
@@ -189,9 +210,9 @@ const StudyTimer = ({ page }) => {
             </p>
           </div>
           <div variant="outlined" className="content">
-            {showRecord.length !== 0 ? (
+            {showRecords.length !== 0 ? (
               <>
-                {showRecord.map((item, i) => (
+                {showRecords.map((item, i) => (
                   <>
                     <div key={i} className="recordRow">
                       <div
@@ -211,9 +232,7 @@ const StudyTimer = ({ page }) => {
                       </div>
                       <IconButton
                         style={{ width: "20%" }}
-                        onClick={() => {
-                          setRecord(record.filter((r) => r !== item));
-                        }}
+                        onClick={() => handleDelete({ item })}
                       >
                         <RiDeleteBin5Fill size={22} />
                       </IconButton>

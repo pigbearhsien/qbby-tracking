@@ -1,24 +1,34 @@
-import Timer from "../models/timer";
+import Info from "../models/info";
 
-exports.createTimerUser = async (req, res) => {
-  const body = req.body;
-  new Timer(body).save();
-};
-
-exports.getTimerRecord = async (req, res) => {
-  let qId = req.query.studentId;
+exports.getTimerRecords = async (req, res) => {
+  let Id = req.query.studentId;
   try {
-    const qUser = await Timer.findOne({ studentId: qId });
-    if (qUser.allRecord.length === 0) {
-      res.send({ allRecord: [] });
-    } else {
-      res.send({ allRecord: qUser.allRecord });
-    }
+    const user = await Info.findOne({ studentId: Id });
+    res.send({ timerRecords: user.timerRecords });
   } catch (e) {
     throw new Error("Query error: " + e);
   }
 };
 
-exports.createTimerRecord = async (req, res) => {};
+exports.createTimerRecord = async (req, res) => {
+  let Id = req.body.studentId;
+  let newRecord = req.body.newRecord;
+  try {
+    const user = await Info.findOne({ studentId: Id });
+    user.timerRecords.push(newRecord);
+    user.save();
+  } catch (e) {
+    throw new Error("Query error: " + e);
+  }
+};
 
-exports.deleteTimerRecord = async (req, res) => {};
+exports.deleteTimerRecord = async (req, res) => {
+  let filter = { studentId: req.body.studentId };
+  let update = { timerRecords: req.body.new };
+  try {
+    const doc = await Info.findOneAndUpdate(filter, update);
+    doc.save();
+  } catch (e) {
+    throw new Error("Query error: " + e);
+  }
+};
