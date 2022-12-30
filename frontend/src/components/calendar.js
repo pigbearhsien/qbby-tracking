@@ -35,7 +35,6 @@ const MyCalendar = () => {
     setDelPopup(true)
   }
 
-  const handleDateClick = (arg) => {
   const createEvent = async()=>{  // save event to mongoDB
     const {data:{msg}} = await axios.post("createCalendarEvent/", {
       id: "B10901098",
@@ -412,5 +411,5 @@ const MyCalendar = () => {
     </div>
   );
 };
-}
+
 export default MyCalendar;
