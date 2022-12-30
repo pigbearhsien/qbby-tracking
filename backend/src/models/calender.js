@@ -6,6 +6,9 @@ const EventSchema = new Schema({
   name: {type: String, required: [true, 'Name field is required.'] },
   type: {type: String, required: [true, 'Type field is required.'] },
   time: {type: String, required: [true, 'Time field is required.'] },
+  color: {type: String, required: [true, 'Time field is required.'] },
+  stdEventStart: {type: String, required: [true, 'Time field is required.'] },
+  stdEventEnd: {type: String, required: [true, 'Time field is required.'] },
 });
 
 const EventModel = mongoose.model('Event', EventSchema);
