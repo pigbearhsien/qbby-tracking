@@ -81,6 +81,7 @@ const MainPage = ({ setPage }) => {
         open={popup}
         contentStyle={{
           display: "flex",
+          userSelect: "none",
           justifyContent: "center",
           backgroundColor: "rgba(255,255,255,0)",
           borderColor: "rgba(255,255,255,0)",
