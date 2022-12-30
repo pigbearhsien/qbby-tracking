@@ -12,16 +12,25 @@ import "reactjs-popup/dist/index.css";
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
+  const [eventClicked, setEventClicked] = useState("")
   const [newEvent, setNewEvent] = useState("");
+  const [delEvent, setDelEvent] = useState("")
   const [eventStart, setEventStart] = useState("");
   const [eventEnd, setEventEnd] = useState("");
   const [eventStartShow, setEventStartShow] = useState("");
   const [eventEndShow, setEventEndShow] = useState("");
   const [eventWarn, setEventWarn] = useState("hidden");
   const [warnmsg, setWarnmsg] = useState("");
+  const [delPopup, setDelPopup] = useState(false)
   const [popup, setPopup] = useState(false);
   const [type, setType] = useState("");
   const [typecolor, setTypeColor] = useState("");
+
+  const eventOnClick = (e)=>{
+    const event = e.event.title
+    setEventClicked(event)
+    setDelPopup(true)
+  }
 
   const handleDateClick = (arg) => {
     // bind with an arrow function
@@ -70,14 +79,30 @@ const MyCalendar = () => {
     // setEventEndShow(arg.endStr)
     // let event = prompt("Create an event from "+arg.startStr+" to "+arg.endStr+"(excl)\nEnter the event :")
     // prompt("hello")
-    // if(event)setEvents([...events, {title: event, start: arg.startStr, end: arg.endStr, backgroundColor: typecolor, borderColor: typecolor}])
+    // if(event)setEvents([...eevent: event, start: arg.startStr, end: arg.endStr, backgroundColor: typecolor, borderColor: typecolor}])
   };
 
   const closePopup = () => {
     setPopup(false);
+    setDelPopup(false);
     setEventWarn("hidden");
+    setDelEvent("")
     setNewEvent("");
   };
+
+  const deleteEvent = async()=>{
+    if(delEvent === eventClicked){
+      // await delete in DB
+      // getEvent
+      setDelPopup(false);
+      setEventWarn("hidden")
+    }
+    else{
+      setWarnmsg("Wrong Input")
+      setEventWarn("");
+    }
+    setDelEvent("")
+  }
 
   const confirm = () => {
     if (newEvent != "" && type != "") {
@@ -139,12 +164,71 @@ const MyCalendar = () => {
         selectMirror={true}
         select={(e) => handleDateClick(e)}
         events={events}
+        eventClick={(e)=>eventOnClick(e)}
         headerToolbar={{
           left: "today prev,next",
           center: "title",
           end: "dayGridMonth timeGridWeek timeGridDay listWeek",
         }}
       />
+
+      <Popup
+        open={delPopup}
+        contentStyle={{
+          width: "25%",
+          backgroundColor: "rgba(255,255,255,0)",
+          borderColor: "rgba(255,255,255,0)",
+        }}
+        closeOnDocumentClick={false}
+      >
+        <div
+          className="toast show"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div className="toast-header">
+            <strong className="me-auto">My Event</strong>
+          </div>
+          <div className="toast-body" style={{ opacity: "1" }}>
+            <p>Enter [ {eventClicked} ] to delete</p>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Event"
+                id="inputDefault"
+                value={delEvent}
+                onChange={(e) => setDelEvent(e.target.value)}
+              />
+            </div>
+            <p></p>
+            <span
+              className="badge rounded-pill"
+              style={{ backgroundColor: typecolor }}
+            >
+              {type}
+            </span>
+            <p style={{ color: "#FC7659", visibility: eventWarn }}>{warnmsg}</p>
+            <button
+              type="button"
+              className="btn btn-primary btn-danger btn-sm"
+              style={{ position: "left" }}
+              onClick={deleteEvent}
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={closePopup}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Popup>
+
       <Popup
         open={popup}
         contentStyle={{
