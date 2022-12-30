@@ -16,39 +16,10 @@ import instance from "../hooks/api";
 const MainPage = ({ setPage }) => {
   const [popup, setPopup] = useState(true);
 
-  const createTimerUserTest = async () => {
-    await instance.post("createTimerUser/", {
-      studentId: "B10303123",
-      allRecord: [
-        {
-          date: "2022/12/27",
-          currentTime: "07:22",
-          tag: "homework",
-          recordTime: "4000",
-        },
-        {
-          date: "2022/12/27",
-          currentTime: "23:00",
-          tag: "exam",
-          recordTime: "4000",
-        },
-        {
-          date: "2022/12/25",
-          currentTime: "09:22",
-          tag: "math",
-          recordTime: "4000",
-        },
-      ],
-    });
-  };
-
   return (
     <div
       className="Background"
       style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
-      onClick={() => {
-        createTimerUserTest();
-      }}
     >
       <div className="header">
         <Profile></Profile>

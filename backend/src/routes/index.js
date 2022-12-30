@@ -12,10 +12,9 @@ function main(app) {
   app.post("/api/createLoginInfo", wrap(infoRoute.createLoginInfo));
   app.post("/api/createMonsterData", wrap(infoRoute.createMonsterData));
 
-  app.post("/api/createTimerUser", wrap(timerRoute.createTimerUser));
-  app.get("/api/getTimerRecord", wrap(timerRoute.getTimerRecord));
+  app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));
-  app.delete("/api/deleteTimerRecord"), wrap(timerRoute.deleteTimerRecord);
+  app.post("/api/deleteTimerRecord", wrap(timerRoute.deleteTimerRecord));
 
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
 
