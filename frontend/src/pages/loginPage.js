@@ -9,10 +9,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import "./loginPage.css";
 import instance from "../hooks/api";
+import { useInfo } from "../hooks/util";
+import lgImg from "../assets/loginPage.png";
+import lgWrapperImg from "../assets/loginPage_info.png";
+import lgTitleImg from "../assets/loginPage_title.png";
 
 const LogInPage = ({ setLogIn }) => {
-  const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState("");
+  const { userName, userId, setUserName, setUserId } = useInfo();
   const [password, setPassword] = useState("");
   const [experience, setExperience] = useState(0);
   const [money, setMoney] = useState(0);
@@ -45,109 +48,132 @@ const LogInPage = ({ setLogIn }) => {
   };
 
   return (
-    <div className="loginPage">
-      <div className="loginWrapper">
-        <div className="loginTitle">
-          <h3>Welcome Back !</h3>
-        </div>
-        <div className="loginInput">
-          <div className="switchBar">
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    size="small"
-                    onChange={() => {
-                      if (mode === "SignIn") setMode("Register");
-                      else if (mode === "Register") setMode("SignIn");
-                    }}
-                  />
-                }
-                label="Register"
-              />
-            </FormGroup>
-          </div>
-          {mode === "Register" ? (
-            <div className="userNameWrapper">
+    <div
+      className="loginPage"
+      style={{ backgroundImage: `url(${lgImg})`, backgroundSize: "cover" }}
+    >
+      <div className="loginBody">
+        <div
+          className="loginTitle"
+          style={{
+            backgroundImage: `url(${lgTitleImg})`,
+            backgroundSize: "cover",
+            backgroundPositionX: "center",
+            backgroundPositionY: "center",
+          }}
+        ></div>
+        <div
+          className="loginWrapper"
+          style={{
+            backgroundImage: `url(${lgWrapperImg})`,
+            backgroundSize: "130% 130%",
+            backgroundPositionX: "center",
+            backgroundPositionY: "center",
+          }}
+        >
+          <div className="loginInput">
+            <div className="switchBar">
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      size="small"
+                      onChange={() => {
+                        if (mode === "SignIn") setMode("Register");
+                        else if (mode === "Register") setMode("SignIn");
+                      }}
+                      color="warning"
+                    />
+                  }
+                  label="Register"
+                />
+              </FormGroup>
+            </div>
+            {mode === "Register" ? (
+              <div className="userNameWrapper">
+                <TextField
+                  error={checkErr}
+                  id="input-with-icon-textfield"
+                  label="Username"
+                  fullWidth
+                  color="warning"
+                  onChange={(e) => {
+                    setUserName(e.target.value);
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="idWrapper">
               <TextField
                 error={checkErr}
                 id="input-with-icon-textfield"
-                label="Username"
+                label="Student ID"
                 fullWidth
+                color="warning"
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserId(e.target.value);
                 }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <NumbersRoundedIcon />
                     </InputAdornment>
                   ),
                 }}
                 variant="standard"
               />
             </div>
-          ) : (
-            <></>
-          )}
-          <div className="idWrapper">
-            <TextField
-              error={checkErr}
-              id="input-with-icon-textfield"
-              label="Student ID"
-              fullWidth
-              onChange={(e) => {
-                setUserId(e.target.value);
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <NumbersRoundedIcon />
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-            />
+            <div className="passWordWrapper">
+              <TextField
+                error={checkErr}
+                type={mode === "SignIn" ? "password" : "text"}
+                id="input-with-icon-textfield"
+                label="Password"
+                color="warning"
+                fullWidth
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LockPersonRoundedIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="standard"
+                helperText={checkErr ? "Invalid Entry :(" : ""}
+              />
+            </div>
           </div>
-          <div className="passWordWrapper">
-            <TextField
-              error={checkErr}
-              type={mode === "SignIn" ? "password" : "text"}
-              id="input-with-icon-textfield"
-              label="Password"
-              fullWidth
-              onChange={(e) => {
-                setPassword(e.target.value);
+          <div className="loginButtons">
+            <button
+              className="loginBtn"
+              type="button"
+              onClick={() => {
+                if (mode === "SignIn") {
+                  findUserInfo();
+                } else if (mode === "Register") {
+                  if (userName && userId && password) {
+                    createLoginInfo();
+                    setLogIn(true);
+                  } else setCheckErr(true);
+                }
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockPersonRoundedIcon />
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-              helperText={checkErr ? "Invalid Entry :(" : ""}
-            />
+            >
+              SignIn
+            </button>
           </div>
-        </div>
-        <div className="loginButtons">
-          <button
-            className="btn btn-lg btn-outline-info"
-            type="button"
-            onClick={() => {
-              if (mode === "SignIn") {
-                findUserInfo();
-              } else if (mode === "Register") {
-                if (userName && userId && password) {
-                  createLoginInfo();
-                  setLogIn(true);
-                } else setCheckErr(true);
-              }
-            }}
-          >
-            SignIn
-          </button>
         </div>
       </div>
     </div>

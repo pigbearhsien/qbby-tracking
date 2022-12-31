@@ -5,21 +5,67 @@ import { BiBadgeCheck } from "react-icons/bi";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
-import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 import "./todoList.css";
+import instance from "../hooks/api";
+import { useInfo } from "../hooks/util";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const TodoList = () => {
+  const { userName, userId } = useInfo();
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
   const [load, setLoad] = useState(true);
+
+  const addTodo = async () => {
+    console.log(newTodo);
+    await instance.post("/addTodo", {
+      studentId: userId,
+      event: newTodo,
+      status: "undone",
+    });
+  };
+
+  const getTodo = async () => {
+    console.log("frontend get");
+    const {
+      data: { eventList },
+    } = await instance.get("/getTodo", { params: { studentId: userId } });
+    //console.log(eventList);
+    setTodos(eventList);
+  };
+
+  const checkTodo = async (target, state) => {
+    let newState = "";
+    if (state === "undone") newState = "done";
+    else if (state === "done") newState = "undone";
+
+    await instance.put("/checkTodo", {
+      studentId: userId,
+      event: target,
+      status: newState,
+    });
+  };
+
+  const deleteTodo = async (target) => {
+    await instance.delete("/deleteTodo", {
+      params: {
+        studentId: userId,
+        event: target,
+      },
+    });
+  };
+
+  useEffect(() => {
+    getTodo();
+  }, []);
+
+  useEffect(() => {}, [load]);
 
   const todoFormat = () => {
     return (
@@ -36,26 +82,21 @@ const TodoList = () => {
             >
               <Checkbox
                 {...label}
-                onChange={(e) => {
-                  let tmp = todos;
-                  for (let i = 0; i < todos.length; i++) {
-                    if (todos[i].task === todo.task) {
-                      tmp[i].checked = !tmp[i].checked;
-                    }
-                  }
-                  setTodos(tmp);
-                  e.target.checked = todo.checked;
+                onChange={() => {
+                  checkTodo(todo.event, todo.status);
                 }}
                 icon={<FaOptinMonster size={30} />}
                 checkedIcon={<BiBadgeCheck size={30} />}
               />
 
-              {todo.task}
+              {todo.event}
             </div>
             <IconButton
               style={{ width: "25%", verticalAlign: "bottom" }}
               onClick={() => {
-                setTodos(todos.filter((item) => item.task !== todo.task));
+                deleteTodo(todo.event);
+                //bug
+                getTodo();
               }}
             >
               <RiDeleteBin5Fill size={25} />
@@ -65,10 +106,6 @@ const TodoList = () => {
       </>
     );
   };
-
-  useEffect(() => {
-    //console.log(todos);
-  }, [todos]);
 
   return (
     <div className="todoWrapper" style={{ height: "100%" }}>
@@ -107,12 +144,10 @@ const TodoList = () => {
                         onClick={() => {
                           if (!newTodo) setLoad(false);
                           else {
-                            setTodos([
-                              ...todos,
-                              { task: newTodo, checked: false },
-                            ]);
-                            setNewTodo("");
+                            addTodo();
+                            getTodo();
                             setLoad(true);
+                            setNewTodo("");
                           }
                         }}
                       ></AddCircleRoundedIcon>
@@ -138,12 +173,10 @@ const TodoList = () => {
                         onClick={() => {
                           if (!newTodo) setLoad(false);
                           else {
-                            setTodos([
-                              ...todos,
-                              { task: newTodo, checked: false },
-                            ]);
-                            setNewTodo("");
+                            addTodo();
+                            getTodo();
                             setLoad(true);
+                            setNewTodo("");
                           }
                         }}
                       ></AddCircleRoundedIcon>

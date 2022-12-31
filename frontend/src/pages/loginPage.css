@@ -1,4 +1,3 @@
-
 .loginPage {
   font-family: "Trebuchet MS";
   width: 100%;
@@ -10,31 +9,36 @@
   user-select: none;
 }
 
+.loginBody {
+  width: 40vw;
+  height: 100vh;
+  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8vh;
+}
+
 .loginWrapper {
   width: 25vw;
-  height: 60vh;
+  height: 25vw;
   padding: 2vh;
-  background-color: aliceblue;
-  border-radius: 10%;
-  border: 5px double gray;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .loginTitle {
-  height: 20%;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 35%;
+  width: 120%;
 }
 
 .loginInput {
-  height: 65%;
+  height: 70%;
   width: 100%;
+  padding-top: 3vh;
   padding-left: 1vw;
-  padding-right: 1vw;
+  padding-right: 2vw;
   padding-bottom: 2vh;
   display: flex;
   flex-direction: column;
@@ -44,12 +48,12 @@
 
 .userNameWrapper {
   width: 100%;
-  height: 25%;
+  height: 30%;
 }
 
 .idWrapper {
   width: 100%;
-  height: 25%;
+  height: 30%;
 }
 
 .passWordWrapper {
@@ -68,4 +72,24 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-bottom: 1vh;
+}
+
+.loginBtn {
+  font-size: 1.5vw;
+  font-family: "Comic Sans MS";
+  font-weight: 900;
+  padding: 10px 20px;
+  color: #5a1714;
+  border-radius: 25px;
+  background-color: #fccfcd;
+  border: 3px solid #b84742;
+  margin: 1%;
+}
+
+.loginBtn:hover {
+  cursor: pointer;
+  background-color: #b84742;
+  color: #fccfcd;
+  border: 3px solid transparent;
 }

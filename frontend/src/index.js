@@ -3,11 +3,24 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { InfoProvider } from "./hooks/util";
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: `"Comic Sans MS"`,
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <InfoProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </InfoProvider>
   </React.StrictMode>
 );
 

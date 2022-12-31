@@ -12,8 +12,15 @@ exports.findUserInfo = async (req, res) => {
 
 exports.createLoginInfo = async (req, res) => {
   const body = req.body;
-  //console.log(body);
-  new Info(body).save();
+  let flag = false;
+  Info.find({
+    username: body.username,
+    studentId: body.userId,
+    password: body.password,
+  }).exec((err, data) => {
+    if (data.length === 0) flag = true;
+  });
+  if (!flag) new Info(body).save();
 };
 
 exports.createMonsterData = async (req, res) => {
