@@ -1,7 +1,7 @@
 import MyCalendar from "../components/calendar";
 import MainDrawer from "../components/mainDrawer";
 
-const CalendarPage = ({ setPage }) => {
+const CalendarPage = ({ setPage, page }) => {
   return (
     <div>
       <link

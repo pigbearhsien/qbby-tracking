@@ -9,23 +9,99 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import axios from "../hooks/api"
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
+  const [eventClicked, setEventClicked] = useState("")
+  const [stdStartClicked, setStdStartClicked] = useState("")
+  const [stdEndClicked, setStdEndClicked] = useState("")
+
+  const [resetCount, setResetCount] = useState(0)
   const [newEvent, setNewEvent] = useState("");
+  const [delEvent, setDelEvent] = useState("")
   const [eventStart, setEventStart] = useState("");
   const [eventEnd, setEventEnd] = useState("");
   const [eventStartShow, setEventStartShow] = useState("");
   const [eventEndShow, setEventEndShow] = useState("");
   const [eventWarn, setEventWarn] = useState("hidden");
   const [warnmsg, setWarnmsg] = useState("");
+  const [delPopup, setDelPopup] = useState(false)
   const [popup, setPopup] = useState(false);
   const [type, setType] = useState("");
   const [typecolor, setTypeColor] = useState("");
 
-  const handleDateClick = (arg) => {
+
+  const eventOnClick = (e)=>{
+    const event = e.event.title
+    setStdStartClicked(e.event.startStr)
+    setStdEndClicked(e.event.endStr)
+    setEventClicked(event)
+    setDelPopup(true)
+  }
+
+  const deleteEvent = async()=>{
+    if(delEvent === eventClicked){
+      console.log("correct input")
+      const {data:{msg}} = await axios.post("deleteCalendarEvent/", {
+        name: eventClicked,              
+        stdEventStart: stdStartClicked,          // start time in standard form
+        stdEventEnd: stdEndClicked               // end time in standard form
+      })
+      getEvent()
+      setDelPopup(false);
+      setEventWarn("hidden")
+    }
+    else{
+      setWarnmsg("Wrong Input")
+      setEventWarn("");
+    }
+    setDelEvent("")
+  }
+
+  const createEvent = async()=>{  // save event to mongoDB
+    const {data:{msg}} = await axios.post("createCalendarEvent/", {
+      id: "B10901098",
+      name: newEvent,
+      type: type,
+      time: eventStartShow+eventEndShow,  // time
+      color: typecolor,                   // color
+      stdEventStart: eventStart,          // start time in standard form
+      stdEventEnd: eventEnd               // end time in standard form
+    })
+  }
+
+  const getEvent = async()=>{   // get events from mongoDB
+    console.log("in getEvent")
+    
+    let {data: {msg, events}} = await axios.get("getCalendarEvent/", {
+      params: {id: "B10901098"},
+    })
+    console.log("done")
+    let eventArr = []
+    events.events.map(event => {eventArr = [...eventArr, {
+      title: event.name,
+      start: event.stdEventStart,
+      end: event.stdEventEnd,
+      backgroundColor: event.color,
+      borderColor: event.color,
+    }]})
+    console.log("eventArr", eventArr)
+    console.log("get")
+    setEvents(eventArr)
+    setResetCount(resetCount+1)
+  }
+
+  useEffect(()=>{
+    if(resetCount===0){
+      console.log("in");
+      getEvent();
+    }
+  }, [resetCount])
+
+
+  const handleDateClick = (arg) => {  // handle select and event
     // bind with an arrow function
-    console.log(arg.startStr);
     setPopup(true);
     setEventStart(arg.startStr);
     setEventEnd(arg.endStr);
@@ -64,23 +140,31 @@ const MyCalendar = () => {
           endBuffer[2].split("+")[0].slice(0, 8).split("T")[1]
       );
     endBuffer = endBuffer[2].split("+")[0].slice(0, 8).split("T");
+
     console.log(endBuffer);
 
     // console.log((parseInt(buffer[2], 10)-1).toString())
     // setEventEndShow(arg.endStr)
     // let event = prompt("Create an event from "+arg.startStr+" to "+arg.endStr+"(excl)\nEnter the event :")
     // prompt("hello")
-    // if(event)setEvents([...events, {title: event, start: arg.startStr, end: arg.endStr, backgroundColor: typecolor, borderColor: typecolor}])
+    // if(event)setEvents([...eevent: event, start: arg.startStr, end: arg.endStr, backgroundColor: typecolor, borderColor: typecolor}])
+
+    
+
   };
 
   const closePopup = () => {
     setPopup(false);
+    setDelPopup(false);
     setEventWarn("hidden");
+    setDelEvent("")
     setNewEvent("");
   };
 
-  const confirm = () => {
+  const confirm = async() => {
+
     if (newEvent != "" && type != "") {
+      await createEvent();
       setEventWarn("hidden");
       setEvents([
         ...events,
@@ -139,12 +223,71 @@ const MyCalendar = () => {
         selectMirror={true}
         select={(e) => handleDateClick(e)}
         events={events}
+        eventClick={(e)=>eventOnClick(e)}
         headerToolbar={{
           left: "today prev,next",
           center: "title",
           end: "dayGridMonth timeGridWeek timeGridDay listWeek",
         }}
       />
+
+      <Popup
+        open={delPopup}
+        contentStyle={{
+          width: "25%",
+          backgroundColor: "rgba(255,255,255,0)",
+          borderColor: "rgba(255,255,255,0)",
+        }}
+        closeOnDocumentClick={false}
+      >
+        <div
+          className="toast show"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div className="toast-header">
+            <strong className="me-auto">My Event</strong>
+          </div>
+          <div className="toast-body" style={{ opacity: "1" }}>
+            <p>Enter [ {eventClicked} ] to delete</p>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Event"
+                id="inputDefault"
+                value={delEvent}
+                onChange={(e) => setDelEvent(e.target.value)}
+              />
+            </div>
+            <p></p>
+            <span
+              className="badge rounded-pill"
+              style={{ backgroundColor: typecolor }}
+            >
+              {type}
+            </span>
+            <p style={{ color: "#FC7659", visibility: eventWarn }}>{warnmsg}</p>
+            <button
+              type="button"
+              className="btn btn-primary btn-danger btn-sm"
+              style={{ position: "left" }}
+              onClick={deleteEvent}
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={closePopup}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Popup>
+
       <Popup
         open={popup}
         contentStyle={{

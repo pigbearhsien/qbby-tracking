@@ -44,6 +44,7 @@ const LogInPage = ({ setLogIn }) => {
       password: password,
       experience: 0,
       money: 0,
+      timerRecords: [],
     });
   };
 
