@@ -6,14 +6,16 @@ import TodoList from "../components/todoList";
 import "./mainPage.css";
 import "./popUp.css";
 import Popup from "reactjs-popup";
-import bgImg from "../assets/Background70.png";
-import useSelection from "antd/es/table/hooks/useSelection";
+import bgImg from "../assets/Background.png";
+import yellowMonImg from "../assets/yellowMon.png";
 import { useState } from "react";
 import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
 import instance from "../hooks/api";
+import { useInfo } from "../hooks/util";
 
 const MainPage = ({ setPage }) => {
+  const { userName, userId } = useInfo();
   const [popup, setPopup] = useState(true);
 
   return (
@@ -42,7 +44,15 @@ const MainPage = ({ setPage }) => {
             </p>
           </div>
         </div>
-        <div className="Monster"></div>
+        <div className="Monster">
+          <div
+            className="monsImg"
+            style={{
+              backgroundImage: `url(${yellowMonImg})`,
+              backgroundSize: "cover",
+            }}
+          ></div>
+        </div>
         <div className="ToDo">
           <TodoList></TodoList>
         </div>

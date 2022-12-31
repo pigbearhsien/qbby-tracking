@@ -17,13 +17,12 @@ div .header {
 
 div .body {
   width: 100%;
-  height: 65vh;
-
+  height: 70vh;
   display: flex;
   padding-right: 2vw;
 }
 
-.Background{
+.Background {
   font-family: "Trebuchet MS";
 }
 
@@ -44,15 +43,23 @@ div .sideBar-child1 {
 div .Monster {
   width: 65%;
   height: 100%;
+  padding-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.monsImg {
+  height: 100%;
+  width: 50%;
 }
 
 div .ToDo {
   width: 20%;
   height: 80%;
-
 }
 
 div .footer {
   width: 100%;
-  height: 15vh;
+  height: 10vh;
 }
