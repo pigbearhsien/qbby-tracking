@@ -2,7 +2,7 @@ import {EventModel, CalendarModel} from "../models/calender"
 
 exports.createCalendarEvent = async (req, res) => {
     const body = req.body;
-    const newEvent = await new EventModel({name: body.name, time: body.time, type: body.type, color: body.color, stdEventStart: body.stdEventStart, stdEventEnd: body.stdEventEnd}).save()
+    const newEvent = await new EventModel({name: body.name, interval: body.interval,time: body.time, type: body.type, color: body.color, stdEventStart: body.stdEventStart, stdEventEnd: body.stdEventEnd}).save()
     let calendarUser = await CalendarModel.findOne({id: body.id})
     if(!calendarUser)
        await new CalendarModel({id: body.id}).save()

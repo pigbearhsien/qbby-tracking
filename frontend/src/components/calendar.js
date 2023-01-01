@@ -16,6 +16,7 @@ const MyCalendar = () => {
   const [eventClicked, setEventClicked] = useState("")
   const [stdStartClicked, setStdStartClicked] = useState("")
   const [stdEndClicked, setStdEndClicked] = useState("")
+  const [eventInterval, setEventInterval] = useState(0)
 
   const [resetCount, setResetCount] = useState(0)
   const [newEvent, setNewEvent] = useState("");
@@ -62,6 +63,7 @@ const MyCalendar = () => {
   const createEvent = async()=>{  // save event to mongoDB
     const {data:{msg}} = await axios.post("createCalendarEvent/", {
       id: "B10901098",
+      interval: eventInterval,
       name: newEvent,
       type: type,
       time: eventStartShow+eventEndShow,  // time
@@ -102,6 +104,9 @@ const MyCalendar = () => {
 
   const handleDateClick = (arg) => {  // handle select and event
     // bind with an arrow function
+    let start = new Date(arg.startStr)
+    let end = new Date(arg.endStr)
+    setEventInterval(Math.abs(end-start)/60000)
     setPopup(true);
     setEventStart(arg.startStr);
     setEventEnd(arg.endStr);
