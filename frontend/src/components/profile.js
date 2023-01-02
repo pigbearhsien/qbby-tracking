@@ -1,12 +1,31 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import React from "react";
-import baby from "../assets/profileBaby.gif"
-const Profile = () => (
-  <>
-    <div>
-      <img src={baby} style={{width: "8vw", borderRadius: "3vw", padding: "0.2vw", backgroundColor: "black", opacity: "0.9"}}></img>
-    </div>
-  </>
-);
+import baby from "../assets/profileBaby.gif";
+import { useInfo } from "../hooks/util";
+import profileMan from "../assets/man.png";
+import "./profile.css";
+
+const Profile = () => {
+  const { userName, userId } = useInfo();
+
+  return (
+    <>
+      <div className="profileWrapper">
+        <div
+          className="profileHead"
+          style={{
+            backgroundImage: `url(${profileMan})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+          }}
+        ></div>
+        <div className="nameWrapper">
+          <div className="userName">{userName}</div>
+        </div>
+      </div>
+    </>
+  );
+};
 export default Profile;

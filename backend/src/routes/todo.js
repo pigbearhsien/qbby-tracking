@@ -1,7 +1,6 @@
 import Todo from "../models/todo";
 
 exports.getTodo = async (req, res) => {
-  console.log("get");
   const studentId = req.query.studentId;
   const todos = Todo.collection.find({ studentId: studentId });
   let eventList = new Set();
@@ -13,12 +12,14 @@ exports.getTodo = async (req, res) => {
     eventList = Array.from(eventList);
     res.status(200).send({ eventList: eventList });
   }
+  console.log("updated");
 };
 
 exports.addTodo = async (req, res) => {
   const body = req.body;
-  console.log(body);
+  //console.log(body);
   new Todo(body).save();
+  console.log("added");
 };
 
 exports.checkTodo = async (req, res) => {
@@ -26,12 +27,13 @@ exports.checkTodo = async (req, res) => {
   const event = req.body.event;
   const body = req.body;
   await Todo.updateOne({ studentId: studentId, event: event }, body);
-  console.log("updated");
+  console.log("checked");
 };
 
 exports.deleteTodo = async (req, res) => {
-  const userId = req.query.studentId;
+  const studentId = req.query.studentId;
   const event = req.query.event;
-  await Todo.collection.deleteMany({ studentId: userId, event: event });
+  //console.log(studentId);
+  await Todo.collection.deleteMany({ studentId: studentId, event: event });
   console.log("deleted");
 };

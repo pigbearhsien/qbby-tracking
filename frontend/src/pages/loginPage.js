@@ -31,6 +31,8 @@ const LogInPage = ({ setLogIn }) => {
     });
     //console.log(userInfo.data.message);
     if (userInfo.data.message === "success") {
+      setUserName(userInfo.data.contents[0].username);
+      setUserId(userInfo.data.contents[0].studentId);
       setLogIn(true);
     } else if (userInfo.data.message === "nouser") {
       setCheckErr(true);

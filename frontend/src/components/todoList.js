@@ -20,10 +20,12 @@ const TodoList = () => {
   const { userName, userId } = useInfo();
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
+  const [del, setDel] = useState(false);
+  const [chkInput, setChkInput] = useState(true);
+  const [chkTodo, setChkTodo] = useState(false);
 
   const addTodo = async () => {
-    console.log(newTodo);
     await instance.post("/addTodo", {
       studentId: userId,
       event: newTodo,
@@ -32,11 +34,10 @@ const TodoList = () => {
   };
 
   const getTodo = async () => {
-    console.log("frontend get");
     const {
       data: { eventList },
     } = await instance.get("/getTodo", { params: { studentId: userId } });
-    //console.log(eventList);
+    console.log(eventList);
     setTodos(eventList);
   };
 
@@ -65,7 +66,29 @@ const TodoList = () => {
     getTodo();
   }, []);
 
-  useEffect(() => {}, [load]);
+  useEffect(() => {
+    if (load) {
+      console.log("get");
+      getTodo();
+      setLoad(false);
+    }
+  }, [load]);
+
+  useEffect(() => {
+    if (del) {
+      console.log("delete");
+      getTodo();
+      setDel(false);
+    }
+  }, [del]);
+
+  useEffect(() => {
+    if (chkTodo) {
+      console.log("get check");
+      getTodo();
+      setChkTodo(false);
+    }
+  }, [chkTodo]);
 
   const todoFormat = () => {
     return (
@@ -84,7 +107,10 @@ const TodoList = () => {
                 {...label}
                 onChange={() => {
                   checkTodo(todo.event, todo.status);
+                  setChkTodo(true);
                 }}
+                inputProps={{ "aria-label": "controlled" }}
+                checked={todo.status === "done" ? true : false}
                 icon={<FaOptinMonster size={30} />}
                 checkedIcon={<BiBadgeCheck size={30} />}
               />
@@ -95,8 +121,7 @@ const TodoList = () => {
               style={{ width: "25%", verticalAlign: "bottom" }}
               onClick={() => {
                 deleteTodo(todo.event);
-                //bug
-                getTodo();
+                setDel(true);
               }}
             >
               <RiDeleteBin5Fill size={25} />
@@ -126,7 +151,7 @@ const TodoList = () => {
       <div className="todoBody">
         <div className="todoContainer">
           <div className="todoAddBar">
-            {load ? (
+            {chkInput ? (
               <FormControl variant="standard">
                 {/*<InputLabel></InputLabel>*/}
                 <Input
@@ -142,10 +167,12 @@ const TodoList = () => {
                         size={20}
                         style={{ userSelect: "none" }}
                         onClick={() => {
-                          if (!newTodo) setLoad(false);
-                          else {
+                          if (!newTodo) {
+                            setChkInput(false);
+                            console.log(load);
+                          } else {
                             addTodo();
-                            getTodo();
+                            setChkInput(true);
                             setLoad(true);
                             setNewTodo("");
                           }
@@ -171,10 +198,12 @@ const TodoList = () => {
                         size={20}
                         style={{ userSelect: "none" }}
                         onClick={() => {
-                          if (!newTodo) setLoad(false);
-                          else {
+                          if (!newTodo) {
+                            setChkInput(false);
+                            console.log(load);
+                          } else {
                             addTodo();
-                            getTodo();
+                            setChkInput(true);
                             setLoad(true);
                             setNewTodo("");
                           }
@@ -184,7 +213,7 @@ const TodoList = () => {
                   }
                 />
                 <FormHelperText id="component-error-text">
-                  Please enter a ToDo
+                  It seems you've forgot to enter a TODO...
                 </FormHelperText>
               </FormControl>
             )}

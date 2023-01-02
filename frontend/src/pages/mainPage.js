@@ -8,15 +8,33 @@ import "./popUp.css";
 import Popup from "reactjs-popup";
 import bgImg from "../assets/Background.png";
 import yellowMonImg from "../assets/yellowMon.png";
-import { useState } from "react";
+import chatBubbleImg from "../assets/thinking.png";
+import { useState, useEffect } from "react";
 import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
 import instance from "../hooks/api";
 import { useInfo } from "../hooks/util";
 
+const chatContents = [
+  "Good Job",
+  "Well done!",
+  "🤤🤤🤤",
+  "YOLO😎",
+  "Catch some Z's!",
+  "WP is lit🔥",
+];
+
 const MainPage = ({ setPage }) => {
   const { userName, userId } = useInfo();
   const [popup, setPopup] = useState(true);
+  const [randomSeed, setRandomSeed] = useState(5);
+  const textGenerator = () => {
+    return <>{chatContents[randomSeed]}</>;
+  };
+
+  useEffect(() => {
+    setInterval(() => setRandomSeed(Math.floor(Math.random() * 6)), 6000);
+  }, []);
 
   return (
     <div
@@ -31,28 +49,45 @@ const MainPage = ({ setPage }) => {
       <div className="body">
         <div className="sideBar">
           <div className="sideBar-child1">
-            <MainDrawer setPage={setPage}></MainDrawer>
-            <p
-              style={{
-                marginTop: "3vh",
-                fontSize: "4vh",
-                fontWeight: "700",
-                fontFamily: "Trebuchet MS",
-              }}
-            >
-              Menu
-            </p>
+            <div className="menuWrapper">
+              <MainDrawer setPage={setPage}></MainDrawer>
+              <p
+                style={{
+                  marginTop: "3vh",
+                  fontSize: "4vh",
+                  fontWeight: "900",
+                  color: "black",
+                }}
+              >
+                Menu
+              </p>
+            </div>
           </div>
         </div>
+
         <div className="Monster">
           <div
             className="monsImg"
             style={{
               backgroundImage: `url(${yellowMonImg})`,
-              backgroundSize: "cover",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center center",
             }}
-          ></div>
+          >
+            <div
+              className="ChatBubble"
+              style={{
+                backgroundImage: `url(${chatBubbleImg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="ChatContents">{textGenerator()}</div>
+            </div>
+          </div>
         </div>
+
         <div className="ToDo">
           <TodoList></TodoList>
         </div>

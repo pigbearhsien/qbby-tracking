@@ -1,0 +1,30 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 9vw;
+  height: 100%;
+  border: 3px solid black;
+  border-radius: 10%;
+  background-color: #b3e9fc;
+  box-sizing: border-box;
+}
+
+.profileHead {
+  width: 100%;
+  height: 80%;
+  border-bottom: 3px solid black;
+}
+
+.nameWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userName {
+  font-weight: 900;
+  font-size: 1.5vw;
+  color: black;
+}

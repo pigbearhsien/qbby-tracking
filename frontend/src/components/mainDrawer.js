@@ -52,16 +52,16 @@ const MainDrawer = ({ setPage }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <div className="wrapper" style={{ width: "45px", height: "45px" }}>
-          <div
-            className="menuImg"
-            style={{
-              backgroundImage: `url(${menuImg})`,
-              width: "100%",
-              height: "100%",
-            }}
-          ></div>
-        </div>
+        <div
+          className="menu"
+          style={{
+            width: "45px",
+            height: "45px",
+            backgroundImage: `url(${menuImg})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
       </Button>
 
       <Menu
