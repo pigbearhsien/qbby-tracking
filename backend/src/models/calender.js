@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 /******* Event Schema *******/
 const EventSchema = new Schema({
   name: {type: String, required: [true, 'Name field is required.'] },
+  interval: {type: Number, required: [true, 'Interval field is required']}, // minutes
   type: {type: String, required: [true, 'Type field is required.'] },
   time: {type: String, required: [true, 'Time field is required.'] },
   color: {type: String, required: [true, 'Time field is required.'] },
