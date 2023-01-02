@@ -12,7 +12,7 @@ const ExpBar = () => {
       className="progress"
       style={{
         width: 500,
-        height: 40,
+        height: 60,
         display: "flex",
         border: "3px solid black",
       }}
@@ -27,27 +27,16 @@ const ExpBar = () => {
       ></div>
       <p
         className="text-primary"
-        style={{ marginTop: "auto", marginBottom: "auto" }}
+        style={{
+          marginTop: "auto",
+          marginBottom: "auto",
+          fontSize: "1.2vw",
+          fontWeight: "900",
+        }}
       >
         EXP: {percent}%
       </p>
     </div>
-    // <div
-    // style={{
-    //     width: 350,
-    // }}
-    // >
-    // <Progress
-    // type='line'
-    // strokeColor={{
-    //     '0%': '#AAE5F9',
-    //     '100%': '#BEAAF9',
-    // }}
-    // format={percent => `${percent} EXP`}
-    // trailColor='#D7E1E5'
-    // strokeWidth={20}
-    // percent={45} />
-    // </div>
   );
 };
 

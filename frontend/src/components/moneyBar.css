@@ -1,0 +1,11 @@
+.moneyBarWrapper {
+  font-size: 1.5vw;
+  font-weight: 900;
+  padding: 10px 20px;
+  border: 3px solid black;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  background-color: #c9d9f3;
+  color: black;
+}
