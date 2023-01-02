@@ -70,6 +70,7 @@ const TodoList = () => {
     if (load) {
       console.log("get");
       getTodo();
+      console.log(todos);
       setLoad(false);
     }
   }, [load]);
@@ -120,6 +121,7 @@ const TodoList = () => {
             <IconButton
               style={{ width: "25%", verticalAlign: "bottom" }}
               onClick={() => {
+                console.log(todos);
                 deleteTodo(todo.event);
                 setDel(true);
               }}
