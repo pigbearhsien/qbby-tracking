@@ -14,6 +14,8 @@ import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
 import instance from "../hooks/api";
 import { useInfo } from "../hooks/util";
+import axios from "../hooks/api"
+
 
 const chatContents = [
   "Good Job",
@@ -26,13 +28,89 @@ const chatContents = [
 
 const MainPage = ({ setPage }) => {
   const { userName, userId } = useInfo();
-  const [popup, setPopup] = useState(true);
+  const [popup, setPopup] = useState(false);
   const [randomSeed, setRandomSeed] = useState(5);
+  const [eventTime, setEventTime] = useState(0);
+  const [exp, setExp] = useState(0);
+  const [money, setMoney] = useState(0);
+  const [level, setLevel] = useState(0)
   const textGenerator = () => {
     return <>{chatContents[randomSeed]}</>;
   };
 
+  const getMoneyandExp = async()=>{
+    const {data: {msg, MONEY, EXP, LEVEL}} = await axios.get("getMoneyandExp/", {
+      params: {userId: userId}
+    })
+    console.log("getMoneyandExp", LEVEL)
+    return {EXP, MONEY, LEVEL}
+  }
+
+  const checkEventCounted = async()=>{  // check event's EXP counted or not
+    let now = new Date()
+    let threshold = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22, 26, 37)
+    const {data: {msg1, lastLoginTime}} = await axios.get("getDailyCheckInfo/", {
+      params: {userId: userId}
+    })
+    let last = new Date(lastLoginTime)
+    console.log(last, threshold, now)
+    if(now > threshold && last < threshold){
+      let {data: {msg2, eventTotalTime}} = await axios.post("checkEventCounted/", {
+        params: {id: userId},
+      })
+      setEventTime(eventTotalTime/60);
+      let EXP = 0
+      let MONEY = 0
+      let LEVEL = 0
+      await getMoneyandExp().then(Info => {
+        EXP = Info.EXP;
+        MONEY = Info.MONEY;
+        LEVEL = Info.LEVEL;
+      })
+      let sum = 0;
+      let level_count = 0;
+      for(let i = 1; sum<eventTotalTime/120; i++){
+        sum = Math.pow(2, i)-1
+        level_count = i
+      }
+      const {data: {msg4, MONEY_post, LEVEL_post, EXP_post}} = await axios.post("/updateMoneyandExp", {
+        params: {studentId: userId, money: MONEY+eventTotalTime, exp: EXP+eventTotalTime, level: level_count-1}
+      })
+      console.log("EXP_Post", EXP_post)
+      console.log("MONEY_Post", MONEY_post)
+
+      setExp(EXP_post)
+      setMoney(MONEY_post)
+      setLevel(LEVEL_post)
+      setPopup(true);
+    }
+    else{
+      let EXP = 0
+      let MONEY = 0
+      let LEVEL = 0
+      await getMoneyandExp().then(Info => {
+        EXP = Info.EXP;
+        MONEY = Info.MONEY;
+        LEVEL = Info.LEVEL;
+      })
+      setExp(EXP)
+      setMoney(MONEY)
+      setLevel(LEVEL)
+    }
+    const {data: {msg3}} = await axios.post("/updateLoginTime", {
+      params: {studentId: userId}
+    })
+  }
+
   useEffect(() => {
+    checkEventCounted()
+    // getMoneyandExp().then(Info => {
+    //   setExp(Info.EXP)
+    //   setMoney(Info.MONEY)
+    //   setLevel(Info.LEVEL)
+    //   console.log("INFOOOOO", Info.EXP, Info.MONEY)
+    // })
+    // console.log("EXP", )
     setInterval(() => setRandomSeed(Math.floor(Math.random() * 6)), 6000);
   }, []);
 
@@ -43,8 +121,8 @@ const MainPage = ({ setPage }) => {
     >
       <div className="header">
         <Profile></Profile>
-        <ExpBar></ExpBar>
-        <MoneyBar></MoneyBar>
+        <ExpBar exp={exp} level={level}></ExpBar>
+        <MoneyBar money={money}></MoneyBar>
       </div>
       <div className="body">
         <div className="sideBar">
@@ -120,7 +198,7 @@ const MainPage = ({ setPage }) => {
             <img src={banners} style={{ width: "8vw" }}></img>
             <div style={{ width: "18vw" }}>
               <p className="popupsmallTitle">Congratulation!</p>
-              <p className="popupwords">You worked for 10 hours yesterday</p>
+              <p className="popupwords">You worked for {eventTime} hours yesterday</p>
             </div>
           </header>
           <header
