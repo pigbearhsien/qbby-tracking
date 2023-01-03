@@ -47,10 +47,15 @@ div .sideBar-child1 {
   flex-direction: row;
   height: 10vh;
   width: 11vw;
+  color: black;
   border: 3px solid black;
   border-radius: 8%;
   align-items: center;
   background-color: #ffd8f3;
+}
+
+.menuWrapper:hover {
+  background-color: #d6eaff;
 }
 
 div .Monster {

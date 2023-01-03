@@ -1,0 +1,47 @@
+.itemOutline {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemPic {
+  height: 75%;
+  width: 100%;
+  padding-top: 3vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.item {
+  width: 60%;
+  height: 98%;
+  border-radius: 50%;
+  background-color: #b7b1ba;
+  border: 5px solid white;
+}
+
+.butButton {
+  border: 3px solid white;
+  height: 25%;
+  width: 100%;
+}
+
+.buyBtn {
+  font-size: 1.2vw;
+  font-family: "Comic Sans MS";
+  font-weight: 900;
+  padding: 10px 20px;
+  color: #754526;
+  border-radius: 25px;
+  background-color: #f1d8c9;
+  border: 3px solid #754526;
+  margin: 1%;
+}
+
+.buyBtn:hover {
+  cursor: pointer;
+  background-color: #754526;
+  color: #f1d8c9;
+  border: 3px solid transparent;
+}
