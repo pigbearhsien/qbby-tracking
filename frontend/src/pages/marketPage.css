@@ -1,0 +1,109 @@
+.marketWrapper {
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  padding-top: 4vh;
+  padding-left: 2vw;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.itemsWrapper {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.items {
+  width: 55%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemRow {
+  width: 100%;
+  height: 48%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.popUpContentWrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.popUpImageWrapper {
+  height: 50%;
+  width: 100%;
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.popUpImage {
+  height: 100%;
+  width: 20%;
+  border-radius: 50%;
+  background-color: #b7b1ba;
+  border: 3px solid black;
+}
+
+.popUpDescriptionWrapper {
+  height: 50%;
+  width: 100%;
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.popUpDescription {
+  height: 100%;
+  width: 70%;
+}
+
+.descriptionContent {
+  height: 55%;
+  width: 100%;
+  font-weight: 900;
+  font-family: "Comic Sans MS";
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirmBtnWrapper {
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirmBtn {
+  font-size: 1.2vh;
+  font-family: "Comic Sans MS";
+  font-weight: 900;
+  padding: 5px 10px;
+  color: black;
+  border-radius: 25px;
+  background-color: white;
+  border: 3px solid #b7b1ba;
+  margin: 1%;
+}
+
+.confirmBtn:hover {
+  cursor: pointer;
+  background-color: #b7b1ba;
+  color: black;
+  border: 3px solid transparent;
+}

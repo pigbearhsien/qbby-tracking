@@ -3,11 +3,11 @@ import { Avatar } from "antd";
 import React from "react";
 import baby from "../assets/profileBaby.gif";
 import { useInfo } from "../hooks/util";
-import profileMan from "../assets/man.png";
+
 import "./profile.css";
 
 const Profile = () => {
-  const { userName, userId } = useInfo();
+  const { userName, userId, profileHead } = useInfo();
 
   return (
     <>
@@ -15,7 +15,7 @@ const Profile = () => {
         <div
           className="profileHead"
           style={{
-            backgroundImage: `url(${profileMan})`,
+            backgroundImage: `url(${profileHead})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",

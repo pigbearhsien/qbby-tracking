@@ -56,7 +56,6 @@ const MainPage = ({ setPage }) => {
                   marginTop: "3vh",
                   fontSize: "4vh",
                   fontWeight: "900",
-                  color: "black",
                 }}
               >
                 Menu

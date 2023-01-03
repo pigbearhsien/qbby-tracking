@@ -4,7 +4,7 @@ import MainPage from "./pages/mainPage";
 import { Hidden } from "@material-ui/core";
 import { useCallback, useState } from "react";
 import CalendarPage from "./pages/calenderPage";
-import MarketPage from "./pages/market";
+import MarketPage from "./pages/marketPage";
 import TimerPage from "./pages/timerPage";
 import LogInPage from "./pages/loginPage";
 
