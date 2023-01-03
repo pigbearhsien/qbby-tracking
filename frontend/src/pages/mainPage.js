@@ -14,6 +14,7 @@ import savemoney from "../images/savemoney.gif";
 import banners from "../images/banners.gif";
 import instance from "../hooks/api";
 import { useInfo } from "../hooks/util";
+import { height } from "@mui/system";
 
 const chatContents = [
   "Good Job",
@@ -54,7 +55,7 @@ const MainPage = ({ setPage }) => {
               <p
                 style={{
                   marginTop: "3vh",
-                  fontSize: "4vh",
+                  fontSize: "150%",
                   fontWeight: "900",
                 }}
               >
@@ -72,6 +73,8 @@ const MainPage = ({ setPage }) => {
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
+              width: "200vh",
+              height: "200vh"
             }}
           >
             <div
@@ -109,6 +112,7 @@ const MainPage = ({ setPage }) => {
             height: "35vw",
             width: "30vw",
             borderRadius: "2vw",
+            border: "4px solid black",
             display: "flex",
             flexDirection: "column",
           }}

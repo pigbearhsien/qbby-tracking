@@ -1,10 +1,10 @@
 div .todoWrapper {
-  background-color: #f5d2aa;
+  background-color: #ffd4a0e8;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid black;
+  border: 3px solid #020201;
   border-radius: 10%;
 }
 
@@ -18,14 +18,15 @@ div .todoHeader {
 
 div .todoBody {
   width: 90%;
-  height: 78%;
-  border: solid 4px #a17e56;
-  border-radius: 3%;
+  height: 70%;
 }
 
 div .todoContainer {
+  background-color: #f6f6f6ec;
+  border: 2px solid rgba(128, 128, 128, 0.4);
+  border-radius: 25px;
   width: 100%;
-  height: 100%;
+  height: 90%;
   padding-left: 1vw;
   padding-right: 1vw;
   padding-top: 1vh;
@@ -35,9 +36,15 @@ div .todoContainer {
 div .todoContainerRow {
   user-select: none;
   width: 100%;
-  padding-top: 2px;
-  font-size: 3vh;
+  font-size: 2.5vh;
   border-bottom: 2px solid;
   border-color: rgba(128, 128, 128, 0.4);
   display: flex;
+}
+
+div .todoAddBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
 }

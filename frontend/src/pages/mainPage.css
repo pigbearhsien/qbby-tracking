@@ -1,6 +1,5 @@
 div .Background {
   height: 100%;
-  /* background-color: #fdefe1; */
   padding-top: 2vh;
   padding-left: 3vw;
   padding-right: 3vw;
@@ -19,13 +18,13 @@ div .header {
 
 div .body {
   width: 100%;
-  height: 68vh;
+  height: 67vh;
   display: flex;
   padding-right: 2vw;
 }
 
 .Background {
-  font-family: "Trebuchet MS";
+  font-family: "Comic Sans MS";
 }
 
 div .sideBar {
@@ -49,22 +48,22 @@ div .sideBar-child1 {
   width: 140px;
   color: black;
   border: 3px solid black;
-  border-radius: 8%;
+  border-radius: 15px;
   align-items: center;
-  background-color: #ffd8f3;
+  background-color: #dacaf2;
 }
 
 .menuWrapper:hover {
-  background-color: #d6eaff;
+  background-color: #b9afc7;
 }
 
 div .Monster {
-  width: 65%;
-  height: 100%;
-  padding-top: 10vh;
+  width: 60%;
+  height: 115%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: #ffd8f3; */
 }
 
 @keyframes chat {
@@ -77,29 +76,25 @@ div .Monster {
 }
 
 .ChatBubble {
-  width: 35%;
-  height: 65%;
+  width: 20%;
+  height: 45%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: center;
   animation-name: chat;
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  /*border: 3px solid black;*/
+  margin-bottom: 10%;
+  margin-right: 20%;
 }
 
 .ChatContents {
-  height: 100%;
-  width: 95%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-top: 90px;
+  padding-bottom: 30px;
   font-size: 1.5vw;
   font-weight: 900;
   color: #6f4511;
-  /*border: 3px solid black;*/
 }
 
 .monsImg {
@@ -111,8 +106,9 @@ div .Monster {
 }
 
 div .ToDo {
-  width: 20%;
+  width: 25%;
   height: 80%;
+  margin-top: 10%;
 }
 
 div .footer {

@@ -54,8 +54,9 @@ const MarketPage = ({ setPage }) => {
         <p
           style={{
             marginTop: "3vh",
-            fontSize: "4vh",
+            fontSize: "150%",
             fontWeight: "900",
+            fontFamily: "Comic Sans MS"
           }}
         >
           Menu
