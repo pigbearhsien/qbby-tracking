@@ -12,6 +12,7 @@ function main(app) {
   app.post("/api/createLoginInfo", wrap(infoRoute.createLoginInfo));
   app.post("/api/createMonsterData", wrap(infoRoute.createMonsterData));
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
+  app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));
