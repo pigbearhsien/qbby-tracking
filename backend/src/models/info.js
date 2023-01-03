@@ -7,6 +7,7 @@ const InfoSchema = Schema({
   studentId: { type: String, required: true },
   password: { type: String, required: true },
   level: {type: Number},
+  profileHead: { type: String },
   experience: { type: Number },
   money: { type: Number },
   timerRecords: { type: Array },

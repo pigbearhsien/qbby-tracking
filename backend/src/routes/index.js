@@ -16,6 +16,8 @@ function main(app) {
   app.post("/api/updateLoginTime", wrap(infoRoute.updateLoginTime));
   app.get("/api/getMoneyandExp", wrap(infoRoute.getMoneyandExp))
   app.post("/api/updateMoneyandExp", wrap(infoRoute.updateMoneyandExp))
+  app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
+
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));

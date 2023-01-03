@@ -15,7 +15,14 @@ import lgWrapperImg from "../assets/loginPage_info.png";
 import lgTitleImg from "../assets/loginPage_title.png";
 
 const LogInPage = ({ setLogIn }) => {
-  const { userName, userId, setUserName, setUserId } = useInfo();
+  const {
+    userName,
+    userId,
+    profileHead,
+    setUserName,
+    setUserId,
+    setProfileHead,
+  } = useInfo();
   const [password, setPassword] = useState("");
   const [experience, setExperience] = useState(0);
   const [money, setMoney] = useState(0);
@@ -33,6 +40,7 @@ const LogInPage = ({ setLogIn }) => {
     if (userInfo.data.message === "success") {
       setUserName(userInfo.data.contents[0].username);
       setUserId(userInfo.data.contents[0].studentId);
+      setProfileHead(userInfo.data.contents[0].profileHead);
       setLogIn(true);
     } else if (userInfo.data.message === "nouser") {
       setCheckErr(true);
@@ -47,6 +55,7 @@ const LogInPage = ({ setLogIn }) => {
       studentId: userId,
       password: password,
       level: 1,
+      profileHead: profileHead,
       experience: 0,
       money: 0,
       timerRecords: [],

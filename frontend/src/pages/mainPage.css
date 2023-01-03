@@ -45,8 +45,8 @@ div .sideBar-child1 {
 .menuWrapper {
   display: flex;
   flex-direction: row;
-  height: 10vh;
-  width: 11vw;
+  height: 60px;
+  width: 140px;
   color: black;
   border: 3px solid black;
   border-radius: 8%;
@@ -81,21 +81,25 @@ div .Monster {
   height: 65%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   animation-name: chat;
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  /*border: 3px solid black;*/
 }
 
 .ChatContents {
   height: 100%;
-  width: auto;
-  padding-top: 15vh;
-  padding-bottom: 18vh;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
   font-size: 1.5vw;
   font-weight: 900;
   color: #6f4511;
+  /*border: 3px solid black;*/
 }
 
 .monsImg {

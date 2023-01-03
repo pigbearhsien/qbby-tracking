@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInfo } from "../hooks/util";
 import MainDrawer from "../components/mainDrawer";
 import MarketItem from "../components/marketItem";
@@ -11,6 +11,7 @@ import profileAngel from "../assets/angel.png";
 import profileRobot from "../assets/robot.png";
 import profileCupCake from "../assets/cupcake.png";
 import Popup from "reactjs-popup";
+import instance from "../hooks/api";
 
 const marketList = {
   Cat: 1500,
@@ -26,6 +27,19 @@ const MarketPage = ({ setPage }) => {
   const [popUp, setPopUp] = useState(false);
   const [headType, setHeadType] = useState("");
   const [head, setHead] = useState("");
+
+  const saveProfileHead = async () => {
+    await instance.put("/buyHeadProfile", {
+      username: userName,
+      studentId: userId,
+      profileHead: profileHead,
+    });
+  };
+
+  useEffect(() => {
+    console.log(profileHead);
+    saveProfileHead();
+  }, [profileHead]);
 
   return (
     <div

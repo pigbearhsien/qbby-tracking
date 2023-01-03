@@ -1,10 +1,10 @@
 import Info from "../models/info";
 
 exports.findUserInfo = async (req, res) => {
-  const userId = req.query.userId;
+  const studentId = req.query.userId;
   const password = req.query.password;
 
-  Info.find({ studentId: userId, password: password }).exec((err, data) => {
+  Info.find({ studentId: studentId, password: password }).exec((err, data) => {
     if (data.length === 0) res.send({ message: "nouser", contents: [] });
     else res.status(200).send({ message: "success", contents: data });
   });
@@ -26,6 +26,7 @@ exports.createLoginInfo = async (req, res) => {
 exports.createMonsterData = async (req, res) => {
   console.log("monster");
 };
+
 
 exports.getDailyCheckInfo = async (req, res) => {
   // console.log(req.query)
@@ -60,3 +61,17 @@ exports.updateMoneyandExp = async (req, res) => {
   if(!User) res.send({msg: "no user", MONEY: 0, LEVEL: 0, EXP: 0})
   else res.send({msg: "success", MONEY_post: userInfo.money, LEVEL_post: userInfo.level, EXP_post: userInfo.exp})
 }
+
+exports.buyHeadProfile = async (req, res) => {
+  console.log(req.body);
+  const username = req.body.username;
+  const studentId = req.body.studentId;
+  const profileHead = req.body.profileHead;
+  await Info.updateOne(
+    { username: username, studentId: studentId },
+    { profileHead: profileHead }
+  );
+
+  console.log("Head updated.");
+};
+
