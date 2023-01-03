@@ -40,13 +40,18 @@ const LogInPage = ({ setLogIn }) => {
   };
 
   const createLoginInfo = async () => {
+    let time = new Date();
+    time = time.toString()
     await instance.post("/createLoginInfo", {
       username: userName,
       studentId: userId,
       password: password,
+      level: 1,
       experience: 0,
       money: 0,
       timerRecords: [],
+      dailyPopup: false,
+      lastLoginTime: time
     });
   };
 

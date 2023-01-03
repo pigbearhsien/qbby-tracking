@@ -12,6 +12,10 @@ function main(app) {
   app.post("/api/createLoginInfo", wrap(infoRoute.createLoginInfo));
   app.post("/api/createMonsterData", wrap(infoRoute.createMonsterData));
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
+  app.get("/api/getDailyCheckInfo", wrap(infoRoute.getDailyCheckInfo))
+  app.post("/api/updateLoginTime", wrap(infoRoute.updateLoginTime));
+  app.get("/api/getMoneyandExp", wrap(infoRoute.getMoneyandExp))
+  app.post("/api/updateMoneyandExp", wrap(infoRoute.updateMoneyandExp))
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));
@@ -25,6 +29,7 @@ function main(app) {
   app.post("/api/createCalendarEvent", wrap(calendarRoute.createCalendarEvent));
   app.post("/api/deleteCalendarEvent", wrap(calendarRoute.deleteCalendarEvent));
   app.get("/api/getCalendarEvent", wrap(calendarRoute.getCalendarEvent));
+  app.post("/api/checkEventCounted", wrap(calendarRoute.checkEventCounted))
 
   //app.get(
   //"/api/getCommentsByRestaurantId",

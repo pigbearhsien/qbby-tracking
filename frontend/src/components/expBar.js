@@ -3,14 +3,22 @@ import { useState } from "react";
 
 import "antd/dist/antd.css";
 import React from "react";
+import "./expBar.css";
+import { rgbToHex } from "@mui/system";
 
-const ExpBar = () => {
-  const [percent, setPercent] = useState(75);
+
+const ExpBar = ({exp, level}) => {
+  console.log("EXP", exp-((Math.pow(2, level)-1)*120), (120*Math.pow(2, level)))
 
   return (
+    <>
+    <div className="levelBarWrapper">
+      Lv. {level}
+    </div>
     <div
       className="progress"
       style={{
+        margin: "0",
         width: 500,
         height: 60,
         display: "flex",
@@ -23,20 +31,22 @@ const ExpBar = () => {
         aria-valuenow="75"
         aria-valuemin="0"
         aria-valuemax="100"
-        style={{ flex: percent / 100 }}
+        style={{ flex: (exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level)) }}
       ></div>
       <p
-        className="text-primary"
         style={{
+          color: "rgb(105, 71, 29)",
           marginTop: "auto",
+          marginLeft: "0.2vw",
           marginBottom: "auto",
           fontSize: "1.2vw",
-          fontWeight: "900",
+          fontWeight: "1000",
         }}
       >
-        EXP: {percent}%
+        {Math.round((exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level))*100)} %
       </p>
     </div>
+    </>
   );
 };
 
