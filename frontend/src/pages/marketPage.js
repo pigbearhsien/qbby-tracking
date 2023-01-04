@@ -26,7 +26,26 @@ const MarketPage = ({ setPage }) => {
   const { userName, userId, profileHead, setProfileHead } = useInfo();
   const [popUp, setPopUp] = useState(false);
   const [headType, setHeadType] = useState("");
-  const [head, setHead] = useState("");
+  const [head, setHead] = useState(""); //for mapping
+  const [market, setMarket] = useState([]);
+  const [purchase, setPurchase] = useState(false);
+
+  const getMarket = async () => {
+    const {
+      data: { marketList },
+    } = await instance.get("/getMarket", { params: { studentId: userId } });
+
+    setMarket(marketList);
+  };
+
+  const purchaseItem = async () => {
+    instance.put("/purchaseItem", {
+      studentId: userId,
+      item: profileHead,
+    });
+    console.log("pur!");
+    setPurchase(true);
+  };
 
   const saveProfileHead = async () => {
     await instance.put("/buyHeadProfile", {
@@ -37,9 +56,21 @@ const MarketPage = ({ setPage }) => {
   };
 
   useEffect(() => {
-    console.log(profileHead);
+    console.log(market);
+  }, [market]);
+
+  useEffect(() => {
+    console.log("in");
     saveProfileHead();
-  }, [profileHead]);
+    purchaseItem();
+  }, [popUp]);
+
+  useEffect(() => {
+    if (purchase) {
+      getMarket();
+      setPurchase(false);
+    }
+  }, [purchase]);
 
   return (
     <div
