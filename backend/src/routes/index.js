@@ -2,6 +2,7 @@ import infoRoute from "./info";
 import timerRoute from "./timer";
 import calendarRoute from "./calender";
 import todoRoute from "./todo";
+import marketRoute from "./market";
 
 const wrap =
   (fn) =>
@@ -27,11 +28,9 @@ function main(app) {
   app.post("/api/deleteCalendarEvent", wrap(calendarRoute.deleteCalendarEvent));
   app.get("/api/getCalendarEvent", wrap(calendarRoute.getCalendarEvent));
 
-  //app.get(
-  //"/api/getCommentsByRestaurantId",
-  //wrap(commentRoute.GetCommentsByRestaurantId)
-  //);
-  //app.post("/api/createComment", wrap(commentRoute.CreateComment));
+  app.post("/api/createMarket", wrap(marketRoute.createMarket));
+  app.get("/api/getMarket", wrap(marketRoute.getMarket));
+  app.put("/api/purchaseItem", wrap(marketRoute.purchaseItem));
 }
 
 export default main;
