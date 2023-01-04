@@ -172,8 +172,8 @@ const MainPage = ({ setPage }) => {
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
-              width: "200vh",
-              height: "200vh",
+              width: "100vw",
+              height: "40vw",
             }}
           >
             <div
