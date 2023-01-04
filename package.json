@@ -12,32 +12,5 @@
     "install:prod": "cd frontend && yarn install --freeze-lockfile && cd ../backend && yarn install",
     "build": "cd frontend && yarn build",
     "deploy": "cd backend && yarn deploy"
-  },
-  "dependencies": {
-    "@babel/core": "^7.20.7",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@fullcalendar/bootstrap5": "^5.11.3",
-    "@fullcalendar/core": "^5.11.3",
-    "@fullcalendar/daygrid": "^5.11.3",
-    "@fullcalendar/interaction": "^5.11.3",
-    "@fullcalendar/list": "^5.11.3",
-    "@fullcalendar/react": "^5.11.3",
-    "@fullcalendar/timegrid": "^5.11.3",
-    "@mui/icons-material": "^5.10.16",
-    "@mui/material": "^5.10.14",
-    "@mui/x-date-pickers": "^5.0.12",
-    "antd": "^5.0.3",
-    "bootstrap": "^5.2.3",
-    "bootstrap-icons": "^1.10.2",
-    "bootswatch": "^5.2.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
-    "reactjs-popup": "^2.0.5"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^7.0.0-bridge.0"
   }
 }

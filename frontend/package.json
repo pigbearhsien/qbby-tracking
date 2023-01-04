@@ -23,7 +23,18 @@
     "react-icons": "^4.6.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@fullcalendar/bootstrap5": "^5.11.3",
+    "@fullcalendar/core": "^5.11.3",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/interaction": "^5.11.3",
+    "@fullcalendar/list": "^5.11.3",
+    "@fullcalendar/react": "^5.11.3",
+    "@fullcalendar/timegrid": "^5.11.3",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.2",
+    "bootswatch": "^5.2.2",
+    "reactjs-popup": "^2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
