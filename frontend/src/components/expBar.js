@@ -44,7 +44,7 @@ const ExpBar = ({exp, level}) => {
           fontWeight: "1000",
         }}
       >
-        {Math.round((exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level))*100)} %
+        {Math.round((exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level)))*100} %
       </p>
     </div>
     </>

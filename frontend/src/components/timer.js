@@ -10,6 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import { IconButton } from "@mui/material";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import axios from "axios";
+import { useInfo } from "../hooks/util";
+
 
 const instance = axios.create({
   baseURL: "http://localhost:4000/api",
@@ -20,6 +22,7 @@ var startAt = 0;
 var lapTime = 0;
 
 const StudyTimer = ({ page }) => {
+  const { userName, userId } = useInfo();
   // 時、分、秒　幾位數　格式
   const pad = (num, size) => {
     var s = "00" + num;
@@ -50,7 +53,7 @@ const StudyTimer = ({ page }) => {
   };
 
   //從外面傳入id跟timerRecords
-  const studentId = "d";
+  const studentId = userId;
 
   const [studyTime, setStudyTime] = useState(0);
   const [allRecords, setAllRecords] = useState([]);
@@ -97,6 +100,13 @@ const StudyTimer = ({ page }) => {
     setTag("");
   };
 
+  const updateStudyTime = async(studyTime)=>{
+    const {date: {msg}} = await instance.post("/updateStudyTime", {
+      studentId: studentId,
+      studyTime: studyTime
+    })
+  }
+
   useEffect(() => {
     if (startAt) {
       setStudyTime(lapTime + now() - startAt);
@@ -116,12 +126,14 @@ const StudyTimer = ({ page }) => {
   };
 
   const handleSave = () => {
+    
     if (studyTime) {
+      let recordTime = parseInt(formatTime(studyTime)[0])+parseInt(formatTime(studyTime)[1])+parseInt(formatTime(studyTime)[2])
       let newRecord = {
         date: moment().format("YYYY/MM/DD"),
         currentTime: moment().format("HH:mm"),
         tag: tag,
-        recordTime: studyTime,
+        recordTime: recordTime,
       };
       setAllRecords([...allRecords, newRecord]);
       handleReset();
@@ -149,6 +161,11 @@ const StudyTimer = ({ page }) => {
   useEffect(() => {
     setTotalTime(showRecords.reduce((a, v) => (a = a + v.recordTime), 0));
   }, [showRecords]);
+
+  useEffect(()=>{
+    let studyTime = parseInt(formatTime(studyTime)[0])+parseInt(formatTime(studyTime)[1])+parseInt(formatTime(studyTime)[2])
+    updateStudyTime(studyTime)
+  }, [totalTime])
 
   return (
     <>

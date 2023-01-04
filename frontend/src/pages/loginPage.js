@@ -100,6 +100,7 @@ const LogInPage = ({ setLogIn }) => {
       experience: 0,
       money: 0,
       timerRecords: [],
+      studyTime: 0,
       dailyPopup: false,
       lastLoginTime: time
     });

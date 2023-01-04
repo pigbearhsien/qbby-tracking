@@ -3,7 +3,7 @@ import MainDrawer from "../components/mainDrawer";
 
 const CalendarPage = ({ setPage, page }) => {
   return (
-    <div style={{ paddingTop: "2vh", paddingLeft: "2vw" }}>
+    <div style={{ paddingTop: "2vh", paddingLeft: "2vw", paddingRight: "2vw", backgroundColor: "#99beda"}}>
       <link
         id="theme"
         rel="stylesheet"

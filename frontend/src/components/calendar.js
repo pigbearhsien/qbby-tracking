@@ -10,6 +10,7 @@ import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack c
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import axios from "../hooks/api"
+import "./calendar.css"
 import { useInfo } from "../hooks/util";
 
 
@@ -169,6 +170,7 @@ const MyCalendar = () => {
     setEventWarn("hidden");
     setDelEvent("")
     setNewEvent("");
+    setType("");
   };
 
   const confirm = async() => {
@@ -279,21 +281,23 @@ const MyCalendar = () => {
               {type}
             </span>
             <p style={{ color: "#FC7659", visibility: eventWarn }}>{warnmsg}</p>
-            <button
-              type="button"
-              className="btn btn-primary btn-danger btn-sm"
-              style={{ position: "left" }}
-              onClick={deleteEvent}
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={closePopup}
-            >
-              Cancel
-            </button>
+            <div className="btns">
+              <button
+                type="button"
+                className="btn btn-primary btn-danger btn-sm"
+                style={{ position: "left" }}
+                onClick={deleteEvent}
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={closePopup}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </Popup>
@@ -314,7 +318,7 @@ const MyCalendar = () => {
           aria-atomic="true"
         >
           <div className="toast-header">
-            <strong className="me-auto">My TODO</strong>
+            <strong className="me-auto">My Event</strong>
           </div>
           <div className="toast-body" style={{ opacity: "1" }}>
             Create an event <br></br>
@@ -405,26 +409,36 @@ const MyCalendar = () => {
             </ul>
             <span
               className="badge rounded-pill"
-              style={{ backgroundColor: typecolor }}
+              style={{ 
+                fontSize: "Medium",
+                color: typecolor,
+                backgroundColor: "rgb(255,255,255,0.5)",
+                border: `3px solid ${typecolor}`,
+                width: "60%"
+             }}
             >
               {type}
             </span>
             <p style={{ color: "#FC7659", visibility: eventWarn }}>{warnmsg}</p>
-            <button
-              type="button"
-              className="btn btn-primary btn-info btn-sm"
-              style={{ position: "left" }}
-              onClick={confirm}
-            >
-              Confirm
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={closePopup}
-            >
-              Cancel
-            </button>
+            <div className="btns">
+              <button
+                type="button"
+                className="btn btn-primary btn-info btn-sm"
+                style={{ 
+                  position: "left",
+                }}
+                onClick={confirm}
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={closePopup}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </Popup>

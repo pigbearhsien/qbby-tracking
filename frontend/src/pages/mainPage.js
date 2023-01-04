@@ -87,6 +87,7 @@ const MainPage = ({ setPage }) => {
         sum = Math.pow(2, i) - 1;
         level_count = i;
       }
+      if(level_count == 0)level_count=1
       const {
         data: { msg4, MONEY_post, LEVEL_post, EXP_post },
       } = await axios.post("/updateMoneyandExp", {
@@ -135,7 +136,6 @@ const MainPage = ({ setPage }) => {
     // console.log("EXP", )
     setInterval(() => setRandomSeed(Math.floor(Math.random() * 6)), 6000);
   }, []);
-
   return (
     <div
       className="Background"
@@ -238,7 +238,7 @@ const MainPage = ({ setPage }) => {
             <img src={savemoney} style={{ width: "8vw" }}></img>
             <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
-              <p className="popupwords">You won 1000 $ and 10000 exp !</p>
+              <p className="popupwords">You won {money} $ and {exp} exp !</p>
             </div>
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>

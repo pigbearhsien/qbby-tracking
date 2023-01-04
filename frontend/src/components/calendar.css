@@ -1,0 +1,79 @@
+* {
+    font-family: "Comic Sans MS";
+}
+
+.fc-toolbar-title{
+    font-family: "Comic Sans MS";
+}
+
+#fc-dom-2 {
+    font-size: xx-large;
+    font-weight: bolder;
+    font-family: "Comic Sans MS"
+}
+
+.fc-toolbar-chunk > .btn-primary {
+    font-size: large;
+    color: black;
+    background-color: #c2c2c2;
+    border-radius: 25px;
+}
+
+.toast-body {
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.toast-body > .form-group {
+    margin-top: 3%;
+}
+
+.form-control {
+    font-family: "Comic Sans MS";
+}
+
+.btns {
+    display: flex;
+    align-self: flex-end;
+}
+
+.btns > .btn-primary {
+    font-size: medium;
+    font-weight: 700;
+    color: black;
+    background-color: #abd8f8;
+    border: 3px solid #738ebf;
+    border-radius: 25px;
+    margin: 2%;
+}
+
+.btns > .btn-primary:hover {
+    font-size: medium;
+    font-weight: 700;
+    color: white;
+    background-color: #738ebf;
+    border: 3px solid #738ebf;
+    border-radius: 25px;
+    margin: 2%;
+}
+
+.btns > .btn-secondary {
+    font-size: medium;
+    font-weight: 700;
+    color: black;
+    background-color: #c2c2c2;
+    border: 3px solid #656565;
+    border-radius: 25px;
+    margin: 2%;
+}
+
+.btns > .btn-secondary:hover {
+    font-size: medium;
+    font-weight: 700;
+    color: white;
+    background-color: #656565;
+    border: 3px solid #656565;
+    border-radius: 25px;
+    margin: 2%;
+}
