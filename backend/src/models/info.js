@@ -11,7 +11,8 @@ const InfoSchema = Schema({
   experience: { type: Number },
   money: { type: Number },
   timerRecords: { type: Array },
-  lastLoginTime: {type: String}
+  lastLoginTime: {type: String},
+  studyTime: {type: Number},
 });
 
 const exportSchema = mongoose.model("UserInfo", InfoSchema);

@@ -3,6 +3,7 @@ import timerRoute from "./timer";
 import calendarRoute from "./calender";
 import todoRoute from "./todo";
 import marketRoute from "./market";
+import { Info } from "@mui/icons-material";
 
 const wrap =
   (fn) =>
@@ -18,6 +19,7 @@ function main(app) {
   app.get("/api/getMoneyandExp", wrap(infoRoute.getMoneyandExp))
   app.post("/api/updateMoneyandExp", wrap(infoRoute.updateMoneyandExp))
   app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
+  app.post("/api/updateStudyTime", wrap(infoRoute.updateStudyTime))
 
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));

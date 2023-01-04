@@ -96,3 +96,14 @@ exports.buyHeadProfile = async (req, res) => {
   res.send({ msg: "buyHeadProfile" });
   console.log("Head updated.");
 };
+
+exports.updateStudyTime = async (req, res) =>{
+  const id = req.body.params.studentId;
+  const time = req.body.params.studyTime;
+  const User = await Info.findOneAndUpdate(
+    {studentId: id},
+    {studyTime: time}
+  )
+  if (!User) res.send({ msg: "no user" });
+  else res.send({ msg: "success" });
+}

@@ -239,7 +239,7 @@ const MainPage = ({ setPage }) => {
             <img src={savemoney} style={{ width: "8vw" }}></img>
             <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
-              <p className="popupwords">You won 1000 $ and 10000 exp !</p>
+              <p className="popupwords">You won {money} $ and {exp} exp !</p>
             </div>
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>
