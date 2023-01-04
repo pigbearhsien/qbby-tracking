@@ -9,22 +9,16 @@ const CalendarPage = ({ setPage, page }) => {
         rel="stylesheet"
         href="https://bootswatch.com/5/sketchy/bootstrap.css"
       />
-      <div className="menuWrapper"
-        style={{
-          marginBottom: "3vh"
-        }}
-        >
+      <div className="menuWrapper">
         <MainDrawer setPage={setPage}></MainDrawer>
-        <p
+        <div
           style={{
-            marginTop: "3vh",
-            fontSize: "150%",
+            fontSize: "4vh",
             fontWeight: "900",
-            fontFamily: "Comic Sans MS"
           }}
         >
           Menu
-        </p>
+        </div>
       </div>
       <MyCalendar></MyCalendar>
     </div>

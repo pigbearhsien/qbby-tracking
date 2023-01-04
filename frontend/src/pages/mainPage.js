@@ -151,15 +151,14 @@ const MainPage = ({ setPage }) => {
           <div className="sideBar-child1">
             <div className="menuWrapper">
               <MainDrawer setPage={setPage}></MainDrawer>
-              <p
+              <div
                 style={{
-                  marginTop: "3vh",
-                  fontSize: "150%",
+                  fontSize: "4vh",
                   fontWeight: "900",
                 }}
               >
                 Menu
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,8 +171,8 @@ const MainPage = ({ setPage }) => {
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
-              width: "200vh",
-              height: "200vh",
+              width: "100vw",
+              height: "40vw",
             }}
           >
             <div

@@ -70,7 +70,7 @@ const TodoList = () => {
 
   useEffect(() => {
     getTodo();
-  }, []);
+  });
 
   useEffect(() => {
     if (load) {
@@ -159,7 +159,7 @@ const TodoList = () => {
         <div className="todoContainer">{todoFormat()}</div>
         <div className="todoAddBar">
           {chkInput ? (
-            <FormControl variant="standard">
+            <FormControl variant="standard" fullWidth>
               {/*<InputLabel></InputLabel>*/}
               <Input
                 id="input-with-icon-adornment"
@@ -190,7 +190,7 @@ const TodoList = () => {
               />
             </FormControl>
           ) : (
-            <FormControl error variant="standard">
+            <FormControl error variant="standard" fullWidth>
               {/*<InputLabel></InputLabel>*/}
               <Input
                 id="input-with-icon-adornment"

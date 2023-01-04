@@ -9,10 +9,10 @@ div .Background {
 
 div .header {
   height: 20vh;
-  width: 72%;
+  width: 70%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-weight: 500;
 }
 
@@ -20,7 +20,9 @@ div .body {
   width: 100%;
   height: 67vh;
   display: flex;
+  padding-top: 1vh;
   padding-right: 2vw;
+  padding-left: 2.3vh;
 }
 
 .Background {
@@ -51,6 +53,7 @@ div .sideBar-child1 {
   border-radius: 15px;
   align-items: center;
   background-color: #dacaf2;
+  font-family: "Comic Sans MS";
 }
 
 .menuWrapper:hover {
@@ -63,6 +66,7 @@ div .Monster {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /*border: 3px solid black;*/
   /* background-color: #ffd8f3; */
 }
 

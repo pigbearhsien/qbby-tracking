@@ -86,16 +86,14 @@ const MarketPage = ({ setPage }) => {
     >
       <div className="menuWrapper">
         <MainDrawer setPage={setPage}></MainDrawer>
-        <p
+        <div
           style={{
-            marginTop: "3vh",
-            fontSize: "150%",
+            fontSize: "4vh",
             fontWeight: "900",
-            fontFamily: "Comic Sans MS",
           }}
         >
           Menu
-        </p>
+        </div>
       </div>
       <div className="itemsWrapper">
         <div className="items">
