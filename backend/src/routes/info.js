@@ -63,7 +63,6 @@ exports.updateMoneyandExp = async (req, res) => {
 }
 
 exports.buyHeadProfile = async (req, res) => {
-  console.log(req.body);
   const username = req.body.username;
   const studentId = req.body.studentId;
   const profileHead = req.body.profileHead;

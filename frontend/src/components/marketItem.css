@@ -1,34 +1,33 @@
 .itemOutline {
   width: 25%;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .itemPic {
   height: 75%;
   width: 100%;
-  padding-top: 3vh;
   display: flex;
   justify-content: space-around;
 }
 
 .item {
-  width: 110px;
-  height: 110px;
+  width: 8.5vw;
+  height: 8.5vw;
   border-radius: 50%;
   background-color: #b7b1ba;
   border: 5px solid white;
 }
 
-.butButton {
-  border: 3px solid white;
+.buyButton {
   height: 25%;
   width: 100%;
 }
 
 .buyBtn {
-  font-size: 1.2vw;
+  font-size: 1vw;
   font-family: "Comic Sans MS";
   font-weight: 900;
   padding: 10px 20px;

@@ -26,7 +26,9 @@ const TodoList = () => {
   const [chkTodo, setChkTodo] = useState(false);
 
   const addTodo = async () => {
-    await instance.post("/addTodo", {
+    const {
+      data: { msg },
+    } = await instance.post("/addTodo", {
       studentId: userId,
       event: newTodo,
       status: "undone",
@@ -35,7 +37,7 @@ const TodoList = () => {
 
   const getTodo = async () => {
     const {
-      data: { eventList },
+      data: { eventList, msg },
     } = await instance.get("/getTodo", { params: { studentId: userId } });
     console.log(eventList);
     setTodos(eventList);
@@ -46,7 +48,9 @@ const TodoList = () => {
     if (state === "undone") newState = "done";
     else if (state === "done") newState = "undone";
 
-    await instance.put("/checkTodo", {
+    const {
+      data: { msg },
+    } = await instance.put("/checkTodo", {
       studentId: userId,
       event: target,
       status: newState,
@@ -54,7 +58,9 @@ const TodoList = () => {
   };
 
   const deleteTodo = async (target) => {
-    await instance.delete("/deleteTodo", {
+    const {
+      data: { msg },
+    } = await instance.delete("/deleteTodo", {
       params: {
         studentId: userId,
         event: target,
@@ -64,7 +70,7 @@ const TodoList = () => {
 
   useEffect(() => {
     getTodo();
-  }, []);
+  });
 
   useEffect(() => {
     if (load) {
