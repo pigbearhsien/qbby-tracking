@@ -2,6 +2,7 @@ import infoRoute from "./info";
 import timerRoute from "./timer";
 import calendarRoute from "./calender";
 import todoRoute from "./todo";
+import marketRoute from "./market";
 
 const wrap =
   (fn) =>
@@ -12,7 +13,12 @@ function main(app) {
   app.post("/api/createLoginInfo", wrap(infoRoute.createLoginInfo));
   app.post("/api/createMonsterData", wrap(infoRoute.createMonsterData));
   app.get("/api/findUserInfo", wrap(infoRoute.findUserInfo));
+  app.get("/api/getDailyCheckInfo", wrap(infoRoute.getDailyCheckInfo))
+  app.post("/api/updateLoginTime", wrap(infoRoute.updateLoginTime));
+  app.get("/api/getMoneyandExp", wrap(infoRoute.getMoneyandExp))
+  app.post("/api/updateMoneyandExp", wrap(infoRoute.updateMoneyandExp))
   app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
+
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));
@@ -26,12 +32,11 @@ function main(app) {
   app.post("/api/createCalendarEvent", wrap(calendarRoute.createCalendarEvent));
   app.post("/api/deleteCalendarEvent", wrap(calendarRoute.deleteCalendarEvent));
   app.get("/api/getCalendarEvent", wrap(calendarRoute.getCalendarEvent));
+  app.post("/api/checkEventCounted", wrap(calendarRoute.checkEventCounted))
 
-  //app.get(
-  //"/api/getCommentsByRestaurantId",
-  //wrap(commentRoute.GetCommentsByRestaurantId)
-  //);
-  //app.post("/api/createComment", wrap(commentRoute.CreateComment));
+  app.post("/api/createMarket", wrap(marketRoute.createMarket));
+  app.get("/api/getMarket", wrap(marketRoute.getMarket));
+  app.put("/api/purchaseItem", wrap(marketRoute.purchaseItem));
 }
 
 export default main;

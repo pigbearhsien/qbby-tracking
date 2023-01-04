@@ -10,8 +10,11 @@ import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack c
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import axios from "../hooks/api"
+import { useInfo } from "../hooks/util";
+
 
 const MyCalendar = () => {
+  const { userName, userId } = useInfo();
   const [events, setEvents] = useState([]);
   const [eventClicked, setEventClicked] = useState("")
   const [stdStartClicked, setStdStartClicked] = useState("")
@@ -45,6 +48,7 @@ const MyCalendar = () => {
     if(delEvent === eventClicked){
       console.log("correct input")
       const {data:{msg}} = await axios.post("deleteCalendarEvent/", {
+        id: userId,
         name: eventClicked,              
         stdEventStart: stdStartClicked,          // start time in standard form
         stdEventEnd: stdEndClicked               // end time in standard form
@@ -62,10 +66,11 @@ const MyCalendar = () => {
 
   const createEvent = async()=>{  // save event to mongoDB
     const {data:{msg}} = await axios.post("createCalendarEvent/", {
-      id: "B10901098",
+      id: userId,
       interval: eventInterval,
       name: newEvent,
       type: type,
+      status: false,
       time: eventStartShow+eventEndShow,  // time
       color: typecolor,                   // color
       stdEventStart: eventStart,          // start time in standard form
@@ -77,7 +82,7 @@ const MyCalendar = () => {
     console.log("in getEvent")
     
     let {data: {msg, events}} = await axios.get("getCalendarEvent/", {
-      params: {id: "B10901098"},
+      params: {id: userId},
     })
     console.log("done")
     let eventArr = []

@@ -26,7 +26,9 @@ const TodoList = () => {
   const [chkTodo, setChkTodo] = useState(false);
 
   const addTodo = async () => {
-    await instance.post("/addTodo", {
+    const {
+      data: { msg },
+    } = await instance.post("/addTodo", {
       studentId: userId,
       event: newTodo,
       status: "undone",
@@ -35,7 +37,7 @@ const TodoList = () => {
 
   const getTodo = async () => {
     const {
-      data: { eventList },
+      data: { eventList, msg },
     } = await instance.get("/getTodo", { params: { studentId: userId } });
     console.log(eventList);
     setTodos(eventList);
@@ -46,7 +48,9 @@ const TodoList = () => {
     if (state === "undone") newState = "done";
     else if (state === "done") newState = "undone";
 
-    await instance.put("/checkTodo", {
+    const {
+      data: { msg },
+    } = await instance.put("/checkTodo", {
       studentId: userId,
       event: target,
       status: newState,
@@ -54,7 +58,9 @@ const TodoList = () => {
   };
 
   const deleteTodo = async (target) => {
-    await instance.delete("/deleteTodo", {
+    const {
+      data: { msg },
+    } = await instance.delete("/deleteTodo", {
       params: {
         studentId: userId,
         event: target,
@@ -100,8 +106,7 @@ const TodoList = () => {
               className="partA"
               style={{
                 width: "80%",
-                fontWeight: "600",
-                fontFamily: "Trebuchet MS",
+                fontWeight: "500",
               }}
             >
               <Checkbox
@@ -144,83 +149,81 @@ const TodoList = () => {
             fontWeight: "600",
             padding: "2vh",
             textAlign: "bottom",
-            fontFamily: "Trebuchet MS",
+            color: "black",
           }}
         >
           <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>TODOS
         </div>
       </div>
       <div className="todoBody">
-        <div className="todoContainer">
-          <div className="todoAddBar">
-            {chkInput ? (
-              <FormControl variant="standard">
-                {/*<InputLabel></InputLabel>*/}
-                <Input
-                  id="input-with-icon-adornment"
-                  value={newTodo}
-                  onChange={(e) => {
-                    setNewTodo(e.target.value);
-                  }}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <AddCircleRoundedIcon
-                        color={newTodo ? "" : "disabled"}
-                        size={20}
-                        style={{ userSelect: "none" }}
-                        onClick={() => {
-                          if (!newTodo) {
-                            setChkInput(false);
-                            console.log(load);
-                          } else {
-                            addTodo();
-                            setChkInput(true);
-                            setLoad(true);
-                            setNewTodo("");
-                          }
-                        }}
-                      ></AddCircleRoundedIcon>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            ) : (
-              <FormControl error variant="standard">
-                {/*<InputLabel></InputLabel>*/}
-                <Input
-                  id="input-with-icon-adornment"
-                  value={newTodo}
-                  onChange={(e) => {
-                    setNewTodo(e.target.value);
-                  }}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <AddCircleRoundedIcon
-                        color={newTodo ? "" : "disabled"}
-                        size={20}
-                        style={{ userSelect: "none" }}
-                        onClick={() => {
-                          if (!newTodo) {
-                            setChkInput(false);
-                            console.log(load);
-                          } else {
-                            addTodo();
-                            setChkInput(true);
-                            setLoad(true);
-                            setNewTodo("");
-                          }
-                        }}
-                      ></AddCircleRoundedIcon>
-                    </InputAdornment>
-                  }
-                />
-                <FormHelperText id="component-error-text">
-                  It seems you've forgot to enter a TODO...
-                </FormHelperText>
-              </FormControl>
-            )}
-          </div>
-          {todoFormat()}
+        <div className="todoContainer">{todoFormat()}</div>
+        <div className="todoAddBar">
+          {chkInput ? (
+            <FormControl variant="standard">
+              {/*<InputLabel></InputLabel>*/}
+              <Input
+                id="input-with-icon-adornment"
+                value={newTodo}
+                onChange={(e) => {
+                  setNewTodo(e.target.value);
+                }}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <AddCircleRoundedIcon
+                      color={newTodo ? "" : "disabled"}
+                      size={20}
+                      style={{ userSelect: "none" }}
+                      onClick={() => {
+                        if (!newTodo) {
+                          setChkInput(false);
+                          console.log(load);
+                        } else {
+                          addTodo();
+                          setChkInput(true);
+                          setLoad(true);
+                          setNewTodo("");
+                        }
+                      }}
+                    ></AddCircleRoundedIcon>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          ) : (
+            <FormControl error variant="standard">
+              {/*<InputLabel></InputLabel>*/}
+              <Input
+                id="input-with-icon-adornment"
+                value={newTodo}
+                onChange={(e) => {
+                  setNewTodo(e.target.value);
+                }}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <AddCircleRoundedIcon
+                      color={newTodo ? "" : "disabled"}
+                      size={20}
+                      style={{ userSelect: "none" }}
+                      onClick={() => {
+                        if (!newTodo) {
+                          setChkInput(false);
+                          console.log(load);
+                        } else {
+                          addTodo();
+                          setChkInput(true);
+                          setLoad(true);
+                          setNewTodo("");
+                        }
+                      }}
+                    ></AddCircleRoundedIcon>
+                  </InputAdornment>
+                }
+              />
+              <FormHelperText id="component-error-text">
+                It seems you've forgot to enter a TODO...
+              </FormHelperText>
+            </FormControl>
+          )}
         </div>
       </div>
     </div>
