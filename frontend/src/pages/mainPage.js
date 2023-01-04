@@ -18,7 +18,7 @@ import { height } from "@mui/system";
 import axios from "../hooks/api";
 
 const chatContents = [
-  "Good Job",
+  "Good Job👍",
   "Well done!",
   "🤤🤤🤤",
   "YOLO😎",

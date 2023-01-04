@@ -5,15 +5,18 @@ const infoContext = createContext({
   username: "",
   userId: "",
   profileHead: "",
+  market: [],
   setUserName: () => {},
   setUserId: () => {},
   setProfileHead: () => {},
+  setMarket: () => {},
 });
 
 const InfoProvider = (props) => {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const [profileHead, setProfileHead] = useState(profileMan);
+  const [market, setMarket] = useState([]);
 
   return (
     <infoContext.Provider
@@ -21,9 +24,11 @@ const InfoProvider = (props) => {
         userName,
         userId,
         profileHead,
+        market,
         setUserName,
         setUserId,
         setProfileHead,
+        setMarket,
       }}
       {...props}
     />

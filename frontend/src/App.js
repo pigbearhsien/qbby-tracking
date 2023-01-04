@@ -18,7 +18,7 @@ function App() {
     else if (page == "Market") return <MarketPage setPage={setPage} />;
     else if (page == "Timer")
       return <TimerPage setPage={setPage} page={page} />;
-  } else return <LogInPage setLogIn={setLogIn}></LogInPage>;
+  } else return <LogInPage setLogIn={setLogIn} logIn={logIn}></LogInPage>;
 }
 
 export default App;
