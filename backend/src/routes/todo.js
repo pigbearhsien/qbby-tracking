@@ -12,7 +12,6 @@ exports.getTodo = async (req, res) => {
     eventList = Array.from(eventList);
     res.status(200).send({ eventList: eventList, msg: "getTodo" });
   }
-  console.log("updated");
 };
 
 exports.addTodo = async (req, res) => {

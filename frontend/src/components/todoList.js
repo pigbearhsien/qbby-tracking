@@ -39,7 +39,6 @@ const TodoList = () => {
     const {
       data: { eventList, msg },
     } = await instance.get("/getTodo", { params: { studentId: userId } });
-    console.log(eventList);
     setTodos(eventList);
   };
 
