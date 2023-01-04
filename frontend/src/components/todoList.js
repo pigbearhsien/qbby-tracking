@@ -106,8 +106,7 @@ const TodoList = () => {
               className="partA"
               style={{
                 width: "80%",
-                fontWeight: "600",
-                fontFamily: "Trebuchet MS",
+                fontWeight: "500",
               }}
             >
               <Checkbox
@@ -150,7 +149,6 @@ const TodoList = () => {
             fontWeight: "600",
             padding: "2vh",
             textAlign: "bottom",
-            fontFamily: "Trebuchet MS",
           }}
         >
           <TaskAltRoundedIcon fontSize="large"></TaskAltRoundedIcon>TODOS
@@ -158,7 +156,9 @@ const TodoList = () => {
       </div>
       <div className="todoBody">
         <div className="todoContainer">
-          <div className="todoAddBar">
+          {todoFormat()}
+        </div>
+        <div className="todoAddBar">
             {chkInput ? (
               <FormControl variant="standard">
                 {/*<InputLabel></InputLabel>*/}
@@ -226,8 +226,6 @@ const TodoList = () => {
               </FormControl>
             )}
           </div>
-          {todoFormat()}
-        </div>
       </div>
     </div>
   );

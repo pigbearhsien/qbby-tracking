@@ -3,9 +3,9 @@
   font-weight: 900;
   padding: 10px 20px;
   border: 3px solid black;
-  border-radius: 10%;
+  border-radius: 25px;
   display: flex;
   align-items: center;
-  background-color: #c9d9f3;
+  background-color: #ffcc55;
   color: black;
 }

@@ -23,6 +23,7 @@ const ExpBar = ({exp, level}) => {
         height: 60,
         display: "flex",
         border: "3px solid black",
+        borderRadius: "30px",
       }}
     >
       <div

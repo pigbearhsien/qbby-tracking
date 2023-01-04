@@ -121,17 +121,17 @@
   font-family: "Comic Sans MS";
   font-weight: 900;
   padding: 10px 20px;
-  color: #5a1714;
+  color: #a10b03;
   border-radius: 25px;
-  background-color: #fccfcd;
-  border: 3px solid #b84742;
+  background-color: #abe3c4;
+  border: 3px solid #76cf97;
   margin: 1%;
 }
 
 .loginBtn:hover {
   cursor: pointer;
-  background-color: #b84742;
-  color: #fccfcd;
+  background-color: #76cf97;
+  color: #a10b03;
   border: 3px solid transparent;
 }
 
