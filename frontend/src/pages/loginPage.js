@@ -54,14 +54,16 @@ const initialMarket = [
   },
 ];
 
-const LogInPage = ({ setLogIn }) => {
+const LogInPage = ({ setLogIn, logIn }) => {
   const {
     userName,
     userId,
     profileHead,
+    market,
     setUserName,
     setUserId,
     setProfileHead,
+    setMarket,
   } = useInfo();
   const [password, setPassword] = useState("");
   const [experience, setExperience] = useState(0);
@@ -82,6 +84,7 @@ const LogInPage = ({ setLogIn }) => {
       setUserName(userInfo.data.contents[0].username);
       setUserId(userInfo.data.contents[0].studentId);
       setProfileHead(userInfo.data.contents[0].profileHead);
+      getMarket();
       setLogIn(true);
     } else if (userInfo.data.message === "nouser") {
       setCheckErr(true);
@@ -90,7 +93,7 @@ const LogInPage = ({ setLogIn }) => {
 
   const createLoginInfo = async () => {
     let time = new Date();
-    time = time.toString()
+    time = time.toString();
     await instance.post("/createLoginInfo", {
       username: userName,
       studentId: userId,
@@ -102,15 +105,26 @@ const LogInPage = ({ setLogIn }) => {
       timerRecords: [],
       studyTime: 0,
       dailyPopup: false,
-      lastLoginTime: time
+      lastLoginTime: time,
     });
   };
 
   const createMarket = async () => {
-    await instance.post("/createMarket", {
+    const {
+      data: { msg },
+    } = await instance.post("/createMarket", {
       studentId: userId,
       initialMarket: initialMarket,
     });
+  };
+
+  const getMarket = async () => {
+    const {
+      data: { marketList, msg },
+    } = await instance.get("/getMarket", { params: { studentId: userId } });
+    console.log(marketList);
+
+    setMarket(marketList);
   };
 
   return (
@@ -247,6 +261,7 @@ const LogInPage = ({ setLogIn }) => {
                       createLoginInfo();
                       createMarket();
                       setLogIn(true);
+                      getMarket();
                     } else setCheckErr(true);
                   }
                 }}

@@ -11,11 +11,15 @@ exports.createMarket = async (req, res) => {
       status: com.status,
     }).save();
   });
+
+  await res.send({ msg: "createMarket" });
 };
 
 exports.getMarket = async (req, res) => {
   const studentId = req.query.studentId;
-  const items = Market.collection.find({ studentId: studentId });
+  const items = Market.collection
+    .find({ studentId: studentId })
+    .sort({ item: 1 });
   let marketList = new Set();
   if (!items) res.status(403).send([]);
   else {
@@ -23,7 +27,8 @@ exports.getMarket = async (req, res) => {
       marketList.add(item);
     });
     marketList = Array.from(marketList);
-    res.status(200).send({ marketList: marketList });
+    marketList = marketList;
+    await res.status(200).send({ marketList: marketList, msg: "getMarket" });
   }
 };
 
@@ -35,4 +40,5 @@ exports.purchaseItem = async (req, res) => {
     { studentId: studentId, item: item },
     { status: status }
   );
+  await res.send({ msg: "purchaseItem" });
 };

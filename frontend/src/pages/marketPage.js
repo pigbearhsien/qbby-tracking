@@ -11,6 +11,7 @@ import profileAngel from "../assets/angel.png";
 import profileRobot from "../assets/robot.png";
 import profileCupCake from "../assets/cupcake.png";
 import Popup from "reactjs-popup";
+import Profile from "../components/profile";
 import instance from "../hooks/api";
 
 const marketList = {
@@ -23,27 +24,29 @@ const marketList = {
 };
 
 const MarketPage = ({ setPage }) => {
-  const { userName, userId, profileHead, setProfileHead } = useInfo();
+  const { userName, userId, profileHead, market, setProfileHead, setMarket } =
+    useInfo();
   const [popUp, setPopUp] = useState(false);
   const [headType, setHeadType] = useState("");
   const [head, setHead] = useState(""); //for mapping
-  const [market, setMarket] = useState([]);
   const [purchase, setPurchase] = useState(false);
 
   const getMarket = async () => {
     const {
-      data: { marketList },
+      data: { marketList, msg },
     } = await instance.get("/getMarket", { params: { studentId: userId } });
+    console.log(msg);
 
     setMarket(marketList);
   };
 
   const purchaseItem = async () => {
-    instance.put("/purchaseItem", {
+    const {
+      data: { msg },
+    } = await instance.put("/purchaseItem", {
       studentId: userId,
       item: profileHead,
     });
-    console.log("pur!");
     setPurchase(true);
   };
 
@@ -55,19 +58,20 @@ const MarketPage = ({ setPage }) => {
       studentId: userId,
       profileHead: profileHead,
     });
-
-    console.log(msg);
   };
+
+  useEffect(() => {
+    getMarket();
+  }, []);
 
   useEffect(() => {
     console.log(market);
   }, [market]);
 
   useEffect(() => {
-    console.log("in");
     saveProfileHead();
-    //purchaseItem();
-  }, [popUp]);
+    purchaseItem();
+  }, [profileHead]);
 
   useEffect(() => {
     if (purchase) {
@@ -99,48 +103,54 @@ const MarketPage = ({ setPage }) => {
         <div className="items">
           <div className="itemRow">
             <MarketItem
-              name="Cat"
-              item={profileCat}
-              setPopUp={setPopUp}
-              setHead={setHead}
-              setHeadType={setHeadType}
-            ></MarketItem>
-            <MarketItem
-              name="Star"
-              item={profileStar}
-              setPopUp={setPopUp}
-              setHead={setHead}
-              setHeadType={setHeadType}
-            ></MarketItem>
-            <MarketItem
               name="Angel"
-              item={profileAngel}
+              item={market[0]?.item ?? profileAngel}
               setPopUp={setPopUp}
               setHead={setHead}
               setHeadType={setHeadType}
+              status={market[0]?.status ?? "unPurchase"}
+            ></MarketItem>
+            <MarketItem
+              name="Cat"
+              item={market[1]?.item ?? profileCat}
+              setPopUp={setPopUp}
+              setHead={setHead}
+              setHeadType={setHeadType}
+              status={market[1]?.status ?? "unPurchase"}
+            ></MarketItem>
+            <MarketItem
+              name="CupCake"
+              item={market[2]?.item ?? profileCupCake}
+              setPopUp={setPopUp}
+              setHead={setHead}
+              setHeadType={setHeadType}
+              status={market[2]?.status ?? "unPurchase"}
             ></MarketItem>
           </div>
           <div className="itemRow">
             <MarketItem
               name="Robot"
-              item={profileRobot}
+              item={market[3]?.item ?? profileRobot}
               setPopUp={setPopUp}
               setHead={setHead}
               setHeadType={setHeadType}
+              status={market[3]?.status ?? "unPurchase"}
+            ></MarketItem>
+            <MarketItem
+              name="Star"
+              item={market[4]?.item ?? profileStar}
+              setPopUp={setPopUp}
+              setHead={setHead}
+              setHeadType={setHeadType}
+              status={market[4]?.status ?? "unPurchase"}
             ></MarketItem>
             <MarketItem
               name="Woman"
-              item={profileWoman}
+              item={market[5]?.item ?? profileWoman}
               setPopUp={setPopUp}
               setHead={setHead}
               setHeadType={setHeadType}
-            ></MarketItem>
-            <MarketItem
-              name="CupCake"
-              item={profileCupCake}
-              setPopUp={setPopUp}
-              setHead={setHead}
-              setHeadType={setHeadType}
+              status={market[5]?.status ?? "unPurchase"}
             ></MarketItem>
           </div>
         </div>
