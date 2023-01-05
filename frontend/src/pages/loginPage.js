@@ -86,7 +86,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
       setProfileHead(userInfo.data.contents[0].profileHead);
       getMarket();
       setLogIn(true);
-    } else if (userInfo.data.message === "nouser") {
+    } else {
       setCheckErr(true);
     }
   };
@@ -94,7 +94,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
   const createLoginInfo = async () => {
     let time = new Date();
     time = time.toString();
-    await instance.post("/createLoginInfo", {
+    const {data:{message} } = await instance.post("/createLoginInfo", {
       username: userName,
       studentId: userId,
       password: password,
@@ -107,6 +107,11 @@ const LogInPage = ({ setLogIn, logIn }) => {
       dailyPopup: false,
       lastLoginTime: time,
     });
+    if (message === "userexist") {
+      setCheckErr(true);
+    } else {
+      setLogIn(true)
+    }
   };
 
   const createMarket = async () => {
@@ -260,7 +265,6 @@ const LogInPage = ({ setLogIn, logIn }) => {
                     if (userName && userId && password) {
                       createLoginInfo();
                       createMarket();
-                      setLogIn(true);
                       getMarket();
                     } else setCheckErr(true);
                   }
