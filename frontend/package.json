@@ -6,7 +6,8 @@
     "@ant-design/icons": "^4.8.0",
     "@coreui/react": "^4.4.0",
     "@fullcalendar/bootstrap5": "^5.11.3",
-    "@fullcalendar/core": "^6.0.2",
+
+    "@fullcalendar/core": "^5.11.3",
     "@fullcalendar/daygrid": "^5.11.3",
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/list": "^5.11.3",
