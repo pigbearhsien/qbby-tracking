@@ -21,7 +21,7 @@
   },
   "scripts": {
     "server": "nodemon src/server.js --ext js --exec babel-node",
-    "deploy": "set NODE_ENV=production && node app"
+    "deploy": "NODE_ENV=production babel-node src/server.js"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
