@@ -56,11 +56,14 @@ const MarketPage = ({ setPage }) => {
   const [money, setMoney] = useState(0);
 
   const deductMoney = async () => {
+    let MoneyDeduct = 0;
+    if (mode === "profileHead") MoneyDeduct = money - marketList[head];
+    else MoneyDeduct = money - marketList[mons];
     const {
       data: { msg },
     } = await instance.post("deductMoney", {
       studentId: userId,
-      money: money - marketList[head],
+      money: MoneyDeduct,
     });
   };
 
@@ -76,7 +79,7 @@ const MarketPage = ({ setPage }) => {
 
   useEffect(() => {
     if (popUp === true) {
-      if (marketList[head] < money) setEnoughMoney(true);
+      if (marketList[head] <= money) setEnoughMoney(true);
       else setEnoughMoney(false);
     }
   }, [popUp]);
@@ -394,11 +397,10 @@ const MarketPage = ({ setPage }) => {
                   </>
                 ) : (
                   <>
-                    <div>
-                      The item "{mons}" cost {marketList[mons]} dollar.
-                    </div>
+                    <div>This monster cost {marketList[mons]} dollar.</div>
+
                     <div style={{ display: purchaseWarn[0] }}>
-                      Are you sure to purchase "{mons}"?
+                      Are you sure to purchase this monster?
                     </div>
                     <div style={{ color: "red", display: purchaseWarn[1] }}>
                       You don't have enough money !{" "}

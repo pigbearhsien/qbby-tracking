@@ -1,26 +1,34 @@
 import Info from "../models/info";
+import bcrypt from 'bcrypt';
 
 exports.findUserInfo = async (req, res) => {
   const studentId = req.query.userId;
   const password = req.query.password;
 
-  Info.find({ studentId: studentId, password: password }).exec((err, data) => {
-    if (data.length === 0) res.send({ message: "nouser", contents: [] });
-    else res.status(200).send({ message: "success", contents: data });
+  Info.find({ studentId: studentId }).exec((err, data) => {
+    if (data.length === 0) {
+      res.send({ message: "nouser", contents: [] })
+    } else if (bcrypt.compareSync(password, data[0].password)) {
+      res.status(200).send({ message: "success", contents: data })
+    } else {
+      res.send({ message: "wrongpassword", contents: [] })
+    }
   });
 };
 
 exports.createLoginInfo = async (req, res) => {
   const body = req.body;
-  let flag = false;
   Info.find({
-    username: body.username,
-    studentId: body.userId,
-    password: body.password,
+    studentId: body.studentId,
   }).exec((err, data) => {
-    if (data.length === 0) flag = true;
+    if (data.length !== 0) {
+      res.send({message: "userexist"})
+    } else {
+      body.password = bcrypt.hashSync(body.password, 10)
+      new Info(body).save();
+      res.send({message: "success"})
+    }
   });
-  if (!flag) new Info(body).save();
 };
 
 exports.createMonsterData = async (req, res) => {};
