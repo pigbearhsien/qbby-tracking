@@ -95,7 +95,7 @@ const TodoList = () => {
   const todoFormat = () => {
     return (
       <>
-        {todos.map((todo) => (
+        {todos?.map((todo) => (
           <div className="todoContainerRow">
             <div
               className="partA"
