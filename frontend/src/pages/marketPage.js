@@ -30,6 +30,47 @@ const MarketPage = ({ setPage }) => {
   const [headType, setHeadType] = useState("");
   const [head, setHead] = useState(""); //for mapping
   const [purchase, setPurchase] = useState(false);
+  const [purchaseWarn, setPurchaseWarn] = useState(["none", "", "Confirm"])
+  const [enoughMoney, setEnoughMoney] = useState(false);
+  const [money, setMoney] = useState(0)
+
+  const deductMoney = async()=>{
+    console.log("moneydeduct", money, marketList[head], head)
+    const {data: {msg}} = await instance.post("deductMoney", {
+      studentId: userId,
+      money: money-marketList[head]
+    })
+  }
+
+  const getMoney = async()=>{
+    const {
+      data: { msg, MONEY, EXP, LEVEL },
+    } = await instance.get("getMoneyandExp/", {
+      params: { userId: userId },
+    });
+    console.log("money in market", MONEY)
+    setMoney(MONEY)
+  }
+
+  useEffect(()=>{
+    if(popUp===true){
+      if(marketList[head] < money)setEnoughMoney(true)
+      else setEnoughMoney(false)
+    }
+  }, [popUp])
+
+  useEffect(()=>{
+    getMoney()
+  }, [])
+
+  useEffect(()=>{
+    if(enoughMoney===true){
+      setPurchaseWarn(["", "none", "Confirm"])
+    }
+    else if(enoughMoney===false){
+      setPurchaseWarn(["none", "", "Cancel"])
+    }
+  }, [enoughMoney])
 
   const getMarket = async () => {
     const {
@@ -75,6 +116,8 @@ const MarketPage = ({ setPage }) => {
 
   useEffect(() => {
     if (purchase) {
+      console.log("head", head==="")
+      if(!(head===""))deductMoney()
       getMarket();
       setPurchase(false);
     }
@@ -188,17 +231,20 @@ const MarketPage = ({ setPage }) => {
                 <div>
                   The item "{head}" cost {marketList[head]} dollar.
                 </div>
-                <div>Are you sure to purchase "{head}"?</div>
+                <div style={{display: purchaseWarn[0]}}>Are you sure to purchase "{head}"?</div>
+                <div style={{color: "red", display: purchaseWarn[1]}}>You don't have enough money ! </div>
               </div>
               <div className="confirmBtnWrapper">
                 <button
                   className="confirmBtn"
                   onClick={() => {
                     setPopUp(false);
-                    setProfileHead(headType);
+                    if(enoughMoney){
+                      setProfileHead(headType);
+                    }
                   }}
                 >
-                  Confirm
+                  {purchaseWarn[2]}
                 </button>
               </div>
             </div>
