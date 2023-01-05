@@ -53,6 +53,7 @@ const StudyTimer = ({ page }) => {
   };
 
   //從外面傳入id跟timerRecords
+  
   const studentId = userId;
 
   const [studyTime, setStudyTime] = useState(0);
@@ -65,7 +66,7 @@ const StudyTimer = ({ page }) => {
 
   const getTimerRecord = async () => {
     const {
-      data: { timerRecords },
+      data: { msg, timerRecords },
     } = await instance.get("/getTimerRecords", {
       params: { studentId: studentId },
     });
@@ -101,7 +102,7 @@ const StudyTimer = ({ page }) => {
   };
 
   const updateStudyTime = async(studyTime)=>{
-    const {date: {msg}} = await instance.post("/updateStudyTime", {
+    const {data: {msg}} = await instance.post("/updateStudyTime", {
       studentId: studentId,
       studyTime: studyTime
     })
@@ -126,14 +127,12 @@ const StudyTimer = ({ page }) => {
   };
 
   const handleSave = () => {
-    
     if (studyTime) {
-      let recordTime = parseInt(formatTime(studyTime)[0])+parseInt(formatTime(studyTime)[1])+parseInt(formatTime(studyTime)[2])
       let newRecord = {
         date: moment().format("YYYY/MM/DD"),
         currentTime: moment().format("HH:mm"),
         tag: tag,
-        recordTime: recordTime,
+        recordTime: studyTime,
       };
       setAllRecords([...allRecords, newRecord]);
       handleReset();
@@ -163,8 +162,8 @@ const StudyTimer = ({ page }) => {
   }, [showRecords]);
 
   useEffect(()=>{
-    let studyTime = parseInt(formatTime(studyTime)[0])+parseInt(formatTime(studyTime)[1])+parseInt(formatTime(studyTime)[2])
-    updateStudyTime(studyTime)
+    let StudyTime = parseInt(formatTime(totalTime)[0])+parseInt(formatTime(totalTime)[1])+parseInt(formatTime(totalTime)[2])
+    updateStudyTime(StudyTime)
   }, [totalTime])
 
   return (

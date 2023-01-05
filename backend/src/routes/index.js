@@ -20,6 +20,8 @@ function main(app) {
   app.post("/api/updateMoneyandExp", wrap(infoRoute.updateMoneyandExp))
   app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
   app.post("/api/updateStudyTime", wrap(infoRoute.updateStudyTime))
+  app.get("/api/getStudyTime", wrap(infoRoute.getStudyTime))
+  app.post("/api/deductMoney", wrap(infoRoute.deductMoney))
 
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
