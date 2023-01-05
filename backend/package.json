@@ -20,7 +20,7 @@
     "ws": "^8.11.0"
   },
   "scripts": {
-    "server": "nodemon src/server.js --ext js --exec babel-node",
+    "server": "nodemon src/server.js --ext js --watch src --exec babel-node",
     "deploy": "NODE_ENV=production babel-node src/server.js"
   },
   "devDependencies": {
