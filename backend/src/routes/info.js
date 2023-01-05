@@ -123,6 +123,7 @@ exports.buyMonster = async (req, res) => {
 exports.updateStudyTime = async (req, res) => {
   const id = req.body.params.studentId;
   const time = req.body.params.studyTime;
+}
 
 exports.updateStudyTime = async (req, res) =>{
   const id = req.body.studentId;
@@ -142,9 +143,10 @@ exports.getStudyTime = async (req, res) => {
   const User = await Info.find({ studentId: userId });
   console.log(User)
   if (!User) res.send({ msg: "no user", studyTime: 0 })
-  else
+  else{
     res.send({
       msg: "success",
       studyTime: User[0].studyTime
     });
-}
+  }
+};
