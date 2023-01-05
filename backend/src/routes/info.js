@@ -85,6 +85,16 @@ exports.updateMoneyandExp = async (req, res) => {
     });
 };
 
+exports.deductMoney = async (req, res) => {
+  const id = req.body.studentId
+  const money = req.body.money
+  await Info.findOneAndUpdate(
+    {studentId: id},
+    {money: money}
+  )
+  res.send("success")
+}
+
 exports.buyHeadProfile = async (req, res) => {
   const username = req.body.username;
   const studentId = req.body.studentId;
@@ -96,6 +106,7 @@ exports.buyHeadProfile = async (req, res) => {
   res.send({ msg: "buyHeadProfile" });
   console.log("Head updated.");
 };
+
 
 exports.buyMonster = async (req, res) => {
   const username = req.body.username;
@@ -112,6 +123,10 @@ exports.buyMonster = async (req, res) => {
 exports.updateStudyTime = async (req, res) => {
   const id = req.body.params.studentId;
   const time = req.body.params.studyTime;
+
+exports.updateStudyTime = async (req, res) =>{
+  const id = req.body.studentId;
+  const time = req.body.studyTime;
   const User = await Info.findOneAndUpdate(
     { studentId: id },
     { studyTime: time }
@@ -119,3 +134,17 @@ exports.updateStudyTime = async (req, res) => {
   if (!User) res.send({ msg: "no user" });
   else res.send({ msg: "success" });
 };
+
+exports.getStudyTime = async (req, res) => {
+  console.log("in getStudyTime")
+  console.log(req.query)
+  const userId = req.query.userId;
+  const User = await Info.find({ studentId: userId });
+  console.log(User)
+  if (!User) res.send({ msg: "no user", studyTime: 0 })
+  else
+    res.send({
+      msg: "success",
+      studyTime: User[0].studyTime
+    });
+}

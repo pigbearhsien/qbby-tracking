@@ -21,6 +21,9 @@ function main(app) {
   app.put("/api/buyHeadProfile", wrap(infoRoute.buyHeadProfile));
   app.put("/api/buyMonster", wrap(infoRoute.buyMonster));
   app.post("/api/updateStudyTime", wrap(infoRoute.updateStudyTime));
+  app.post("/api/updateStudyTime", wrap(infoRoute.updateStudyTime))
+  app.get("/api/getStudyTime", wrap(infoRoute.getStudyTime))
+  app.post("/api/deductMoney", wrap(infoRoute.deductMoney))
 
   app.get("/api/getTimerRecords", wrap(timerRoute.getTimerRecords));
   app.post("/api/createTimerRecord", wrap(timerRoute.createTimerRecord));

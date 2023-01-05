@@ -8,7 +8,7 @@ import { rgbToHex } from "@mui/system";
 
 
 const ExpBar = ({exp, level}) => {
-  console.log("EXP", exp-((Math.pow(2, level)-1)*120), (120*Math.pow(2, level)))
+  console.log("EXP", exp-((Math.pow(2, level-1)-1)*120), (120*Math.pow(2, level)))
 
   return (
     <>
@@ -32,7 +32,7 @@ const ExpBar = ({exp, level}) => {
         aria-valuenow="75"
         aria-valuemin="0"
         aria-valuemax="100"
-        style={{ flex: (exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level)) }}
+        style={{ flex: (exp-((Math.pow(2, level-1)-1)*120)) / (120*Math.pow(2, level)) }}
       ></div>
       <p
         style={{
@@ -44,7 +44,7 @@ const ExpBar = ({exp, level}) => {
           fontWeight: "1000",
         }}
       >
-        {Math.round((exp-((Math.pow(2, level)-1)*120)) / (120*Math.pow(2, level)))*100} %
+        {Math.round(((exp-((Math.pow(2, level-1)-1)*120)) / (120*Math.pow(2, level)))*100)} %
       </p>
     </div>
     </>
