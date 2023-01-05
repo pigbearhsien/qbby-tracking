@@ -7,7 +7,6 @@ import "./mainPage.css";
 import "./popUp.css";
 import Popup from "reactjs-popup";
 import bgImg from "../assets/Background.png";
-import yellowMonImg from "../assets/yellowMon.png";
 import chatBubbleImg from "../assets/thinking.png";
 import { useState, useEffect } from "react";
 import savemoney from "../images/savemoney.gif";
@@ -27,7 +26,7 @@ const chatContents = [
 ];
 
 const MainPage = ({ setPage }) => {
-  const { userName, userId } = useInfo();
+  const { userName, userId, monster } = useInfo();
   const [popup, setPopup] = useState(false);
   const [randomSeed, setRandomSeed] = useState(5);
   const [eventTime, setEventTime] = useState(0);
@@ -99,7 +98,7 @@ const MainPage = ({ setPage }) => {
         sum = Math.pow(2, i) - 1;
         level_count = i;
       }
-      if(level_count == 0)level_count=1
+      if (level_count == 0) level_count = 1;
       const {
         data: { msg4, MONEY_post, LEVEL_post, EXP_post },
       } = await axios.post("/updateMoneyandExp", {
@@ -182,7 +181,7 @@ const MainPage = ({ setPage }) => {
           <div
             className="monsImg"
             style={{
-              backgroundImage: `url(${yellowMonImg})`,
+              backgroundImage: `url(${monster})`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
@@ -254,6 +253,7 @@ const MainPage = ({ setPage }) => {
             <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
               <p className="popupwords">You won {Math.round(studyTime/60)*(level+2)+money} $ and {exp} exp !</p>
+
             </div>
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>

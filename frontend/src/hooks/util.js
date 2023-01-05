@@ -1,14 +1,17 @@
 import { useEffect, useState, useContext, createContext } from "react";
 import profileMan from "../assets/man.png";
+import monsterYellow from "../assets/yellowMon.png";
 
 const infoContext = createContext({
   username: "",
   userId: "",
   profileHead: "",
+  monster: "",
   market: [],
   setUserName: () => {},
   setUserId: () => {},
   setProfileHead: () => {},
+  setMonster: () => {},
   setMarket: () => {},
 });
 
@@ -16,6 +19,7 @@ const InfoProvider = (props) => {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const [profileHead, setProfileHead] = useState(profileMan);
+  const [monster, setMonster] = useState(monsterYellow);
   const [market, setMarket] = useState([]);
 
   return (
@@ -24,10 +28,12 @@ const InfoProvider = (props) => {
         userName,
         userId,
         profileHead,
+        monster,
         market,
         setUserName,
         setUserId,
         setProfileHead,
+        setMonster,
         setMarket,
       }}
       {...props}

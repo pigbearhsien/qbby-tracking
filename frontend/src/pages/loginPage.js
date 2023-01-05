@@ -11,7 +11,7 @@ import "./loginPage.css";
 import instance from "../hooks/api";
 import Popup from "reactjs-popup";
 import { useInfo } from "../hooks/util";
-import lgImg from "../assets/loginPage.png";
+import lgImg from "../assets/loginPage_move.png";
 import lgWrapperImg from "../assets/loginPage_info.png";
 import lgTitleImg from "../assets/loginPage_title.png";
 import profileCat from "../assets/cat.png";
@@ -20,6 +20,10 @@ import profileWoman from "../assets/woman.png";
 import profileAngel from "../assets/angel.png";
 import profileRobot from "../assets/robot.png";
 import profileCupCake from "../assets/cupcake.png";
+import monsterGreen from "../assets/greenMon.png";
+import monsterRed from "../assets/redMon.png";
+import monsterOrange from "../assets/orangeMon.png";
+import monsterPurple from "../assets/purpleMon.png";
 
 const initialMarket = [
   {
@@ -28,28 +32,48 @@ const initialMarket = [
     status: "unPurchase",
   },
   {
-    type: "profiledHead",
+    type: "profileHead",
     item: profileStar,
     status: "unPurchase",
   },
   {
-    type: "profiledHead",
+    type: "profileHead",
     item: profileWoman,
     status: "unPurchase",
   },
   {
-    type: "profiledHead",
+    type: "profileHead",
     item: profileAngel,
     status: "unPurchase",
   },
   {
-    type: "profiledHead",
+    type: "profileHead",
     item: profileRobot,
     status: "unPurchase",
   },
   {
-    type: "profiledHead",
+    type: "profileHead",
     item: profileCupCake,
+    status: "unPurchase",
+  },
+  {
+    type: "monster",
+    item: monsterGreen,
+    status: "unPurchase",
+  },
+  {
+    type: "monster",
+    item: monsterRed,
+    status: "unPurchase",
+  },
+  {
+    type: "monster",
+    item: monsterOrange,
+    status: "unPurchase",
+  },
+  {
+    type: "monster",
+    item: monsterPurple,
     status: "unPurchase",
   },
 ];
@@ -59,12 +83,15 @@ const LogInPage = ({ setLogIn, logIn }) => {
     userName,
     userId,
     profileHead,
+    monster,
     market,
     setUserName,
     setUserId,
     setProfileHead,
+    setMonster,
     setMarket,
   } = useInfo();
+
   const [password, setPassword] = useState("");
   const [experience, setExperience] = useState(0);
   const [money, setMoney] = useState(0);
@@ -84,6 +111,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
       setUserName(userInfo.data.contents[0].username);
       setUserId(userInfo.data.contents[0].studentId);
       setProfileHead(userInfo.data.contents[0].profileHead);
+      setMonster(userInfo.data.contents[0].monster);
       getMarket();
       setLogIn(true);
     } else if (userInfo.data.message === "nouser") {
@@ -100,6 +128,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
       password: password,
       level: 1,
       profileHead: profileHead,
+      monster: monster,
       experience: 0,
       money: 0,
       timerRecords: [],
@@ -121,9 +150,10 @@ const LogInPage = ({ setLogIn, logIn }) => {
   const getMarket = async () => {
     const {
       data: { marketList, msg },
-    } = await instance.get("/getMarket", { params: { studentId: userId } });
+    } = await instance.get("/getMarket", {
+      params: { studentId: userId, type: "profileHead" },
+    });
     console.log(marketList);
-
     setMarket(marketList);
   };
 
@@ -290,7 +320,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
         <div className="insTitle">Welcome to QBBY!</div>
         <div className="insContents">
           In QBBY, there are 4 pages, and each of them has differnt functions.
-          Functions of each page are listed below :
+          Functions of each page are listed below
           <ul>
             <li>Homepage -</li>
             <li>Calendar - </li>
