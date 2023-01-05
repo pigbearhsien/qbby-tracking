@@ -73,16 +73,13 @@ const TodoList = () => {
 
   useEffect(() => {
     if (load) {
-      console.log("get");
       getTodo();
-      console.log(todos);
       setLoad(false);
     }
   }, [load]);
 
   useEffect(() => {
     if (del) {
-      console.log("delete");
       getTodo();
       setDel(false);
     }
@@ -90,7 +87,6 @@ const TodoList = () => {
 
   useEffect(() => {
     if (chkTodo) {
-      console.log("get check");
       getTodo();
       setChkTodo(false);
     }
@@ -125,7 +121,6 @@ const TodoList = () => {
             <IconButton
               style={{ width: "25%", verticalAlign: "bottom" }}
               onClick={() => {
-                console.log(todos);
                 deleteTodo(todo.event);
                 setDel(true);
               }}
@@ -175,7 +170,6 @@ const TodoList = () => {
                       onClick={() => {
                         if (!newTodo) {
                           setChkInput(false);
-                          console.log(load);
                         } else {
                           addTodo();
                           setChkInput(true);
@@ -206,7 +200,6 @@ const TodoList = () => {
                       onClick={() => {
                         if (!newTodo) {
                           setChkInput(false);
-                          console.log(load);
                         } else {
                           addTodo();
                           setChkInput(true);

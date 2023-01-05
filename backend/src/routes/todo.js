@@ -16,9 +16,8 @@ exports.getTodo = async (req, res) => {
 
 exports.addTodo = async (req, res) => {
   const body = req.body;
-  //console.log(body);
   new Todo(body).save();
-  console.log("added");
+
   await res.send({ msg: "addTodo" });
 };
 
@@ -30,15 +29,14 @@ exports.checkTodo = async (req, res) => {
     { studentId: studentId, event: event },
     { status: status }
   );
-  console.log("checked");
+
   await res.send({ msg: "checkTodo" });
 };
 
 exports.deleteTodo = async (req, res) => {
   const studentId = req.query.studentId;
   const event = req.query.event;
-  //console.log(studentId);
+
   await Todo.collection.deleteMany({ studentId: studentId, event: event });
-  console.log("deleted");
   await res.send({ msg: "deleteTodo" });
 };

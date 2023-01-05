@@ -23,12 +23,9 @@ exports.createLoginInfo = async (req, res) => {
   if (!flag) new Info(body).save();
 };
 
-exports.createMonsterData = async (req, res) => {
-  console.log("monster");
-};
+exports.createMonsterData = async (req, res) => {};
 
 exports.getDailyCheckInfo = async (req, res) => {
-  // console.log(req.query)
   const userId = req.query.userId;
   const User = await Info.find({ studentId: userId });
   if (!User) res.send({ msg: "no user", lasgLoginTime: "" });
@@ -49,7 +46,6 @@ exports.updateLoginTime = async (req, res) => {
 exports.getMoneyandExp = async (req, res) => {
   const userId = req.query.userId;
   const User = await Info.find({ studentId: userId });
-  console.log(User[0].level);
   if (!User) res.send({ msg: "no user", MONEY: 0, LEVEL: 0, EXP: 0 });
   else
     res.send({
@@ -62,7 +58,7 @@ exports.getMoneyandExp = async (req, res) => {
 
 exports.updateMoneyandExp = async (req, res) => {
   const userInfo = req.body.params;
-  console.log(userInfo);
+
   const User = await Info.findOneAndUpdate(
     { studentId: userInfo.studentId },
     { money: userInfo.money }
@@ -86,14 +82,11 @@ exports.updateMoneyandExp = async (req, res) => {
 };
 
 exports.deductMoney = async (req, res) => {
-  const id = req.body.studentId
-  const money = req.body.money
-  await Info.findOneAndUpdate(
-    {studentId: id},
-    {money: money}
-  )
-  res.send("success")
-}
+  const id = req.body.studentId;
+  const money = req.body.money;
+  await Info.findOneAndUpdate({ studentId: id }, { money: money });
+  res.send("success");
+};
 
 exports.buyHeadProfile = async (req, res) => {
   const username = req.body.username;
@@ -104,9 +97,7 @@ exports.buyHeadProfile = async (req, res) => {
     { profileHead: profileHead }
   );
   res.send({ msg: "buyHeadProfile" });
-  console.log("Head updated.");
 };
-
 
 exports.buyMonster = async (req, res) => {
   const username = req.body.username;
@@ -117,15 +108,14 @@ exports.buyMonster = async (req, res) => {
     { monster: monster }
   );
   res.send({ msg: "buyMonster" });
-  console.log("Monster updated.");
 };
 
 exports.updateStudyTime = async (req, res) => {
   const id = req.body.params.studentId;
   const time = req.body.params.studyTime;
-}
+};
 
-exports.updateStudyTime = async (req, res) =>{
+exports.updateStudyTime = async (req, res) => {
   const id = req.body.studentId;
   const time = req.body.studyTime;
   const User = await Info.findOneAndUpdate(
@@ -137,16 +127,14 @@ exports.updateStudyTime = async (req, res) =>{
 };
 
 exports.getStudyTime = async (req, res) => {
-  console.log("in getStudyTime")
-  console.log(req.query)
   const userId = req.query.userId;
   const User = await Info.find({ studentId: userId });
-  console.log(User)
-  if (!User) res.send({ msg: "no user", studyTime: 0 })
-  else{
+
+  if (!User) res.send({ msg: "no user", studyTime: 0 });
+  else {
     res.send({
       msg: "success",
-      studyTime: User[0].studyTime
+      studyTime: User[0].studyTime,
     });
   }
 };

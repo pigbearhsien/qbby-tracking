@@ -32,20 +32,21 @@ const MainPage = ({ setPage }) => {
   const [eventTime, setEventTime] = useState(0);
   const [exp, setExp] = useState(0);
   const [money, setMoney] = useState(0);
-  const [studyTime, setStudyTime] = useState(0)
+  const [studyTime, setStudyTime] = useState(0);
   const [level, setLevel] = useState(0);
   const textGenerator = () => {
     return <>{chatContents[randomSeed]}</>;
   };
 
-  const getStudyTime = async()=>{
-    console.log("in getStudyTime")
-    const {data: {msg, studyTime}} = await axios.get("getStudyTime/", {
-      params: {userId: userId}
-    })
-    console.log("studyTime", studyTime)
-    setStudyTime(studyTime)
-  }
+  const getStudyTime = async () => {
+    const {
+      data: { msg, studyTime },
+    } = await axios.get("getStudyTime/", {
+      params: { userId: userId },
+    });
+
+    setStudyTime(studyTime);
+  };
 
   const getMoneyandExp = async () => {
     const {
@@ -73,7 +74,7 @@ const MainPage = ({ setPage }) => {
       params: { userId: userId },
     });
     let last = new Date(lastLoginTime);
-    console.log(last, threshold, now);
+
     if (now > threshold && last < threshold) {
       let {
         data: { msg2, eventTotalTime },
@@ -90,11 +91,10 @@ const MainPage = ({ setPage }) => {
         LEVEL = Info.LEVEL;
       });
       getStudyTime();
-      
 
       let sum = 0;
       let level_count = 0;
-      for (let i = 1; sum < (eventTotalTime+EXP) / 120; i++) {
+      for (let i = 1; sum < (eventTotalTime + EXP) / 120; i++) {
         sum = Math.pow(2, i) - 1;
         level_count = i;
       }
@@ -109,11 +109,12 @@ const MainPage = ({ setPage }) => {
           level: level_count,
         },
       });
-      const {data: {msg5}} = await axios.post("/updateStudyTime", {
-        studentId: userId, studyTime: 0
-      })
-      console.log("EXP_Post", EXP_post);
-      console.log("MONEY_Post", MONEY_post);
+      const {
+        data: { msg5 },
+      } = await axios.post("/updateStudyTime", {
+        studentId: userId,
+        studyTime: 0,
+      });
 
       setExp(EXP_post);
       setMoney(MONEY_post);
@@ -141,13 +142,6 @@ const MainPage = ({ setPage }) => {
 
   useEffect(() => {
     checkEventCounted();
-    // getMoneyandExp().then(Info => {
-    //   setExp(Info.EXP)
-    //   setMoney(Info.MONEY)
-    //   setLevel(Info.LEVEL)
-    //   console.log("INFOOOOO", Info.EXP, Info.MONEY)
-    // })
-    // console.log("EXP", )
     setInterval(() => setRandomSeed(Math.floor(Math.random() * 6)), 6000);
   }, []);
   return (
@@ -238,7 +232,8 @@ const MainPage = ({ setPage }) => {
             <div style={{ width: "18vw" }}>
               <p className="popupsmallTitle">Congratulation!</p>
               <p className="popupwords">
-                You worked for {eventTime+(studyTime/3600).toFixed(1)} hours yesterday
+                You worked for {eventTime + (studyTime / 3600).toFixed(1)} hours
+                yesterday
               </p>
             </div>
           </header>
@@ -252,8 +247,10 @@ const MainPage = ({ setPage }) => {
             <img src={savemoney} style={{ width: "8vw" }}></img>
             <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
-              <p className="popupwords">You won {Math.round(studyTime/60)*(level+2)+money} $ and {exp} exp !</p>
-
+              <p className="popupwords">
+                You won {Math.round(studyTime / 60) * (level + 2) + money} $ and{" "}
+                {exp} exp !
+              </p>
             </div>
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>

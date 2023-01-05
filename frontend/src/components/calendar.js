@@ -9,110 +9,116 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import axios from "../hooks/api"
-import "./calendar.css"
+import axios from "../hooks/api";
+import "./calendar.css";
 import { useInfo } from "../hooks/util";
-
 
 const MyCalendar = () => {
   const { userName, userId } = useInfo();
   const [events, setEvents] = useState([]);
-  const [eventClicked, setEventClicked] = useState("")
-  const [stdStartClicked, setStdStartClicked] = useState("")
-  const [stdEndClicked, setStdEndClicked] = useState("")
-  const [eventInterval, setEventInterval] = useState(0)
+  const [eventClicked, setEventClicked] = useState("");
+  const [stdStartClicked, setStdStartClicked] = useState("");
+  const [stdEndClicked, setStdEndClicked] = useState("");
+  const [eventInterval, setEventInterval] = useState(0);
 
-  const [resetCount, setResetCount] = useState(0)
+  const [resetCount, setResetCount] = useState(0);
   const [newEvent, setNewEvent] = useState("");
-  const [delEvent, setDelEvent] = useState("")
+  const [delEvent, setDelEvent] = useState("");
   const [eventStart, setEventStart] = useState("");
   const [eventEnd, setEventEnd] = useState("");
   const [eventStartShow, setEventStartShow] = useState("");
   const [eventEndShow, setEventEndShow] = useState("");
   const [eventWarn, setEventWarn] = useState("hidden");
   const [warnmsg, setWarnmsg] = useState("");
-  const [delPopup, setDelPopup] = useState(false)
+  const [delPopup, setDelPopup] = useState(false);
   const [popup, setPopup] = useState(false);
   const [type, setType] = useState("");
   const [typecolor, setTypeColor] = useState("");
 
+  const eventOnClick = (e) => {
+    const event = e.event.title;
+    setStdStartClicked(e.event.startStr);
+    setStdEndClicked(e.event.endStr);
+    setEventClicked(event);
+    setDelPopup(true);
+  };
 
-  const eventOnClick = (e)=>{
-    const event = e.event.title
-    setStdStartClicked(e.event.startStr)
-    setStdEndClicked(e.event.endStr)
-    setEventClicked(event)
-    setDelPopup(true)
-  }
-
-  const deleteEvent = async()=>{
-    if(delEvent === eventClicked){
-      console.log("correct input")
-      const {data:{msg}} = await axios.post("deleteCalendarEvent/", {
+  const deleteEvent = async () => {
+    if (delEvent === eventClicked) {
+      const {
+        data: { msg },
+      } = await axios.post("deleteCalendarEvent/", {
         id: userId,
-        name: eventClicked,              
-        stdEventStart: stdStartClicked,          // start time in standard form
-        stdEventEnd: stdEndClicked               // end time in standard form
-      })
-      getEvent()
+        name: eventClicked,
+        stdEventStart: stdStartClicked, // start time in standard form
+        stdEventEnd: stdEndClicked, // end time in standard form
+      });
+      getEvent();
       setDelPopup(false);
-      setEventWarn("hidden")
-    }
-    else{
-      setWarnmsg("Wrong Input")
+      setEventWarn("hidden");
+    } else {
+      setWarnmsg("Wrong Input");
       setEventWarn("");
     }
-    setDelEvent("")
-  }
+    setDelEvent("");
+  };
 
-  const createEvent = async()=>{  // save event to mongoDB
-    const {data:{msg}} = await axios.post("createCalendarEvent/", {
+  const createEvent = async () => {
+    // save event to mongoDB
+    const {
+      data: { msg },
+    } = await axios.post("createCalendarEvent/", {
       id: userId,
       interval: eventInterval,
       name: newEvent,
       type: type,
       status: false,
-      time: eventStartShow+eventEndShow,  // time
-      color: typecolor,                   // color
-      stdEventStart: eventStart,          // start time in standard form
-      stdEventEnd: eventEnd               // end time in standard form
-    })
-  }
+      time: eventStartShow + eventEndShow, // time
+      color: typecolor, // color
+      stdEventStart: eventStart, // start time in standard form
+      stdEventEnd: eventEnd, // end time in standard form
+    });
+  };
 
-  const getEvent = async()=>{   // get events from mongoDB
-    console.log("in getEvent")
-    
-    let {data: {msg, events}} = await axios.get("getCalendarEvent/", {
-      params: {id: userId},
-    })
-    console.log("done")
-    let eventArr = []
-    events.events.map(event => {eventArr = [...eventArr, {
-      title: event.name,
-      start: event.stdEventStart,
-      end: event.stdEventEnd,
-      backgroundColor: event.color,
-      borderColor: event.color,
-    }]})
-    console.log("eventArr", eventArr)
-    console.log("get")
-    setEvents(eventArr)
-    setResetCount(resetCount+1)
-  }
+  const getEvent = async () => {
+    // get events from mongoDB
 
-  useEffect(()=>{
-    if(resetCount===0){
-      console.log("in");
+    let {
+      data: { msg, events },
+    } = await axios.get("getCalendarEvent/", {
+      params: { id: userId },
+    });
+
+    let eventArr = [];
+    events.events.map((event) => {
+      eventArr = [
+        ...eventArr,
+        {
+          title: event.name,
+          start: event.stdEventStart,
+          end: event.stdEventEnd,
+          backgroundColor: event.color,
+          borderColor: event.color,
+        },
+      ];
+    });
+
+    setEvents(eventArr);
+    setResetCount(resetCount + 1);
+  };
+
+  useEffect(() => {
+    if (resetCount === 0) {
       getEvent();
     }
-  }, [resetCount])
+  }, [resetCount]);
 
-
-  const handleDateClick = (arg) => {  // handle select and event
+  const handleDateClick = (arg) => {
+    // handle select and event
     // bind with an arrow function
-    let start = new Date(arg.startStr)
-    let end = new Date(arg.endStr)
-    setEventInterval(Math.abs(end-start)/60000)
+    let start = new Date(arg.startStr);
+    let end = new Date(arg.endStr);
+    setEventInterval(Math.abs(end - start) / 60000);
     setPopup(true);
     setEventStart(arg.startStr);
     setEventEnd(arg.endStr);
@@ -151,30 +157,18 @@ const MyCalendar = () => {
           endBuffer[2].split("+")[0].slice(0, 8).split("T")[1]
       );
     endBuffer = endBuffer[2].split("+")[0].slice(0, 8).split("T");
-
-    console.log(endBuffer);
-
-    // console.log((parseInt(buffer[2], 10)-1).toString())
-    // setEventEndShow(arg.endStr)
-    // let event = prompt("Create an event from "+arg.startStr+" to "+arg.endStr+"(excl)\nEnter the event :")
-    // prompt("hello")
-    // if(event)setEvents([...eevent: event, start: arg.startStr, end: arg.endStr, backgroundColor: typecolor, borderColor: typecolor}])
-
-    
-
   };
 
   const closePopup = () => {
     setPopup(false);
     setDelPopup(false);
     setEventWarn("hidden");
-    setDelEvent("")
+    setDelEvent("");
     setNewEvent("");
     setType("");
   };
 
-  const confirm = async() => {
-
+  const confirm = async () => {
     if (newEvent != "" && type != "") {
       await createEvent();
       setEventWarn("hidden");
@@ -201,7 +195,6 @@ const MyCalendar = () => {
   };
 
   const handleType = (arg) => {
-    console.log(arg.target.innerHTML);
     setType(arg.target.innerHTML);
     setTypeColor(arg.target.id);
   };
@@ -235,7 +228,7 @@ const MyCalendar = () => {
         selectMirror={true}
         select={(e) => handleDateClick(e)}
         events={events}
-        eventClick={(e)=>eventOnClick(e)}
+        eventClick={(e) => eventOnClick(e)}
         headerToolbar={{
           left: "today prev,next",
           center: "title",
@@ -409,13 +402,13 @@ const MyCalendar = () => {
             </ul>
             <span
               className="badge rounded-pill"
-              style={{ 
+              style={{
                 fontSize: "Medium",
                 color: typecolor,
                 backgroundColor: "rgb(255,255,255,0.5)",
                 border: `3px solid ${typecolor}`,
-                width: "60%"
-             }}
+                width: "60%",
+              }}
             >
               {type}
             </span>
@@ -424,7 +417,7 @@ const MyCalendar = () => {
               <button
                 type="button"
                 className="btn btn-primary btn-info btn-sm"
-                style={{ 
+                style={{
                   position: "left",
                 }}
                 onClick={confirm}

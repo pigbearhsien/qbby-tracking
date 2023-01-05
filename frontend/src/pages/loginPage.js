@@ -106,7 +106,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
         password: password,
       },
     });
-    //console.log(userInfo.data.message);
+
     if (userInfo.data.message === "success") {
       setUserName(userInfo.data.contents[0].username);
       setUserId(userInfo.data.contents[0].studentId);
@@ -153,7 +153,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
     } = await instance.get("/getMarket", {
       params: { studentId: userId, type: "profileHead" },
     });
-    console.log(marketList);
+
     setMarket(marketList);
   };
 

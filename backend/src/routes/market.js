@@ -25,7 +25,6 @@ exports.getMarket = async (req, res) => {
   if (!items) res.status(403).send([]);
   else {
     await items.forEach((item) => {
-      console.log("time");
       marketList.add(item);
     });
     marketList = Array.from(marketList);

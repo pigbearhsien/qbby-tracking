@@ -10,7 +10,7 @@ const ThemePicker = () => {
   }, []);
   const setTheme = (e) => {
     const themeName = themes[e.target.selectedIndex].name;
-    console.log("themeName", themeName);
+
     document.getElementById("theme").href = themes[e.target.selectedIndex].css;
   };
   return (
