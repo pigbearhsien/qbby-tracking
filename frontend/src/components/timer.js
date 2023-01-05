@@ -9,13 +9,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextField from "@material-ui/core/TextField";
 import { IconButton } from "@mui/material";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import axios from "axios";
+import instance from "../hooks/api";
 import { useInfo } from "../hooks/util";
-
-
-const instance = axios.create({
-  baseURL: "http://localhost:4000/api",
-});
 
 var clocktimer;
 var startAt = 0;
@@ -53,7 +48,7 @@ const StudyTimer = ({ page }) => {
   };
 
   //從外面傳入id跟timerRecords
-  
+
   const studentId = userId;
 
   const [studyTime, setStudyTime] = useState(0);
@@ -101,12 +96,14 @@ const StudyTimer = ({ page }) => {
     setTag("");
   };
 
-  const updateStudyTime = async(studyTime)=>{
-    const {data: {msg}} = await instance.post("/updateStudyTime", {
+  const updateStudyTime = async (studyTime) => {
+    const {
+      data: { msg },
+    } = await instance.post("/updateStudyTime", {
       studentId: studentId,
-      studyTime: studyTime
-    })
-  }
+      studyTime: studyTime,
+    });
+  };
 
   useEffect(() => {
     if (startAt) {
@@ -161,10 +158,13 @@ const StudyTimer = ({ page }) => {
     setTotalTime(showRecords.reduce((a, v) => (a = a + v.recordTime), 0));
   }, [showRecords]);
 
-  useEffect(()=>{
-    let StudyTime = parseInt(formatTime(totalTime)[0])+parseInt(formatTime(totalTime)[1])+parseInt(formatTime(totalTime)[2])
-    updateStudyTime(StudyTime)
-  }, [totalTime])
+  useEffect(() => {
+    let StudyTime =
+      parseInt(formatTime(totalTime)[0]) +
+      parseInt(formatTime(totalTime)[1]) +
+      parseInt(formatTime(totalTime)[2]);
+    updateStudyTime(StudyTime);
+  }, [totalTime]);
 
   return (
     <>
