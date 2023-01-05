@@ -36,7 +36,7 @@ exports.getCalendarEvent = async (req, res) => {
     console.log(!calendarUser)
     console.log("hello")
     if(!calendarUser){
-        await new CalendarModel({id: id}).save();
+        await new CalendarModel({id: id, events: []}).save();
         await res.send({msg: "new User", events: calendarUser})
     }
     else{

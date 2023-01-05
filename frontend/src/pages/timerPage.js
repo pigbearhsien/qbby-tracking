@@ -7,16 +7,14 @@ const TimerPage = ({ setPage }) => {
     <div className="Timer">
       <div className="menuWrapper">
         <MainDrawer setPage={setPage}></MainDrawer>
-        <p
+        <div
           style={{
-            marginTop: "3vh",
-            fontSize: "150%",
+            fontSize: "4vh",
             fontWeight: "900",
-            fontFamily: "Comic Sans MS"
           }}
         >
           Menu
-        </p>
+        </div>
       </div>
       <StudyTimer></StudyTimer>
     </div>

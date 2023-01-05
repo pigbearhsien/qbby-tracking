@@ -7,7 +7,6 @@ import "./mainPage.css";
 import "./popUp.css";
 import Popup from "reactjs-popup";
 import bgImg from "../assets/Background.png";
-import yellowMonImg from "../assets/yellowMon.png";
 import chatBubbleImg from "../assets/thinking.png";
 import { useState, useEffect } from "react";
 import savemoney from "../images/savemoney.gif";
@@ -17,26 +16,38 @@ import { useInfo } from "../hooks/util";
 import { height } from "@mui/system";
 import axios from "../hooks/api";
 
-const chatContents = [
-  "Good Job👍",
-  "Well done!",
-  "🤤🤤🤤",
-  "YOLO😎",
-  "Catch some Z's!",
-  "WP is lit🔥",
-];
+
 
 const MainPage = ({ setPage }) => {
-  const { userName, userId } = useInfo();
+  const { userName, userId, monster } = useInfo();
   const [popup, setPopup] = useState(false);
-  const [randomSeed, setRandomSeed] = useState(5);
+  const [randomSeed, setRandomSeed] = useState(6);
   const [eventTime, setEventTime] = useState(0);
   const [exp, setExp] = useState(0);
   const [money, setMoney] = useState(0);
+  const [studyTime, setStudyTime] = useState(0)
   const [level, setLevel] = useState(0);
+  const chatContents = [
+    "Good Job👍",
+    "Well done!",
+    "🤤🤤🤤",
+    "YOLO😎",
+    "Catch some Z's!",
+    "WP is lit🔥",
+    "Earn $"+(level) + "/min💰!" 
+  ];
   const textGenerator = () => {
     return <>{chatContents[randomSeed]}</>;
   };
+
+  const getStudyTime = async()=>{
+    console.log("in getStudyTime")
+    const {data: {msg, studyTime}} = await axios.get("getStudyTime/", {
+      params: {userId: userId}
+    })
+    console.log("studyTime", studyTime)
+    setStudyTime(studyTime)
+  }
 
   const getMoneyandExp = async () => {
     const {
@@ -44,7 +55,6 @@ const MainPage = ({ setPage }) => {
     } = await axios.get("getMoneyandExp/", {
       params: { userId: userId },
     });
-    console.log("getMoneyandExp", LEVEL);
     return { EXP, MONEY, LEVEL };
   };
 
@@ -55,9 +65,9 @@ const MainPage = ({ setPage }) => {
       now.getFullYear(),
       now.getMonth(),
       now.getDate(),
-      22,
-      26,
-      37
+      17,   // hours
+      1,    // minutes
+      44    // seconds
     );
     const {
       data: { msg1, lastLoginTime },
@@ -81,23 +91,29 @@ const MainPage = ({ setPage }) => {
         MONEY = Info.MONEY;
         LEVEL = Info.LEVEL;
       });
+      getStudyTime();
+      
+
       let sum = 0;
       let level_count = 0;
-      for (let i = 1; sum < eventTotalTime / 120; i++) {
+      for (let i = 1; sum < (eventTotalTime+EXP) / 120; i++) {
         sum = Math.pow(2, i) - 1;
         level_count = i;
       }
-      if(level_count == 0)level_count=1
+      if (level_count == 0) level_count = 1;
       const {
         data: { msg4, MONEY_post, LEVEL_post, EXP_post },
       } = await axios.post("/updateMoneyandExp", {
         params: {
           studentId: userId,
-          money: MONEY + eventTotalTime,
+          money: MONEY + eventTotalTime*(LEVEL),
           exp: EXP + eventTotalTime,
-          level: level_count - 1,
+          level: level_count,
         },
       });
+      const {data: {msg5}} = await axios.post("/updateStudyTime", {
+        studentId: userId, studyTime: 0
+      })
       console.log("EXP_Post", EXP_post);
       console.log("MONEY_Post", MONEY_post);
 
@@ -167,7 +183,7 @@ const MainPage = ({ setPage }) => {
           <div
             className="monsImg"
             style={{
-              backgroundImage: `url(${yellowMonImg})`,
+              backgroundImage: `url(${monster})`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
@@ -224,7 +240,8 @@ const MainPage = ({ setPage }) => {
             <div style={{ width: "18vw" }}>
               <p className="popupsmallTitle">Congratulation!</p>
               <p className="popupwords">
-                You worked for {eventTime} hours yesterday
+                
+                You worked for {parseFloat(eventTime)+parseFloat(parseFloat((studyTime/3600)).toFixed(1))} hours yesterday
               </p>
             </div>
           </header>
@@ -238,7 +255,8 @@ const MainPage = ({ setPage }) => {
             <img src={savemoney} style={{ width: "8vw" }}></img>
             <div style={{ width: "18vw", height: "15vh" }}>
               <p className="popupsmallTitle">Money & Exp</p>
-              <p className="popupwords">You won {money} $ and {exp} exp !</p>
+              <p className="popupwords">You won {Math.round(studyTime/60)*(level)+money} $ and {exp} exp !</p>
+
             </div>
           </header>
           <header style={{ display: "flex", justifyContent: "center" }}>

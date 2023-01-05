@@ -2,12 +2,21 @@ import express from "express";
 import cors from "cors";
 import routes from "./routes";
 import mongoose from "mongoose";
+import path from "path";
 
 require("dotenv").config();
 const app = express();
 
 // init middleware
-app.use(cors());
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "../frontend", "build")));
+}
+
+if (process.env.NODE_ENV === "development") {
+  app.use(cors());
+}
+
 app.use(express.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
