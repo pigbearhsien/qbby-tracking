@@ -40,14 +40,6 @@ if (!process.env.MONGO_URL) {
   process.exit(1);
 }
 
-if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, "../frontend", "build")));
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
-  });
-}
-
 mongoose.connect(process.env.MONGO_URL, dboptions).then(async (res) => {
   console.log("mongo db connection created");
 });
