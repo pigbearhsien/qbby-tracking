@@ -130,7 +130,7 @@ const LogInPage = ({ setLogIn, logIn }) => {
       profileHead: profileHead,
       monster: monster,
       experience: 0,
-      money: 0,
+      money: 5000,
       timerRecords: [],
       studyTime: 0,
       dailyPopup: false,
