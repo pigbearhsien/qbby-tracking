@@ -52,6 +52,8 @@
   width: 100%;
   border: none;
   border-radius: 50%;
+  background-color: #f0f0f0;
+
   /*animation: changeMode 1.3s linear infinite;*/
 }
 
