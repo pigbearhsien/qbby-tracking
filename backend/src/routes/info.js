@@ -97,13 +97,25 @@ exports.buyHeadProfile = async (req, res) => {
   console.log("Head updated.");
 };
 
-exports.updateStudyTime = async (req, res) =>{
+exports.buyMonster = async (req, res) => {
+  const username = req.body.username;
+  const studentId = req.body.studentId;
+  const monster = req.body.monster;
+  await Info.updateOne(
+    { username: username, studentId: studentId },
+    { monster: monster }
+  );
+  res.send({ msg: "buyMonster" });
+  console.log("Monster updated.");
+};
+
+exports.updateStudyTime = async (req, res) => {
   const id = req.body.params.studentId;
   const time = req.body.params.studyTime;
   const User = await Info.findOneAndUpdate(
-    {studentId: id},
-    {studyTime: time}
-  )
+    { studentId: id },
+    { studyTime: time }
+  );
   if (!User) res.send({ msg: "no user" });
   else res.send({ msg: "success" });
-}
+};

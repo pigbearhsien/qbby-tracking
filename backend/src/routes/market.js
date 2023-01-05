@@ -17,13 +17,15 @@ exports.createMarket = async (req, res) => {
 
 exports.getMarket = async (req, res) => {
   const studentId = req.query.studentId;
+  const type = req.query.type;
   const items = Market.collection
-    .find({ studentId: studentId })
+    .find({ studentId: studentId, type: type })
     .sort({ item: 1 });
   let marketList = new Set();
   if (!items) res.status(403).send([]);
   else {
     await items.forEach((item) => {
+      console.log("time");
       marketList.add(item);
     });
     marketList = Array.from(marketList);
@@ -34,10 +36,11 @@ exports.getMarket = async (req, res) => {
 
 exports.purchaseItem = async (req, res) => {
   const studentId = req.body.studentId;
+  const type = req.body.type;
   const item = req.body.item;
   const status = "purchased";
   await Market.updateOne(
-    { studentId: studentId, item: item },
+    { studentId: studentId, type: type, item: item },
     { status: status }
   );
   await res.send({ msg: "purchaseItem" });
