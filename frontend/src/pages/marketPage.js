@@ -17,6 +17,7 @@ import monsterPurple from "../assets/purpleMon.png";
 import Popup from "reactjs-popup";
 import RtImg from "../assets/rotate.png";
 import instance from "../hooks/api";
+import { ImRadioChecked } from "react-icons/im";
 
 const marketList = {
   Cat: 1500,
@@ -57,8 +58,14 @@ const MarketPage = ({ setPage }) => {
 
   const deductMoney = async () => {
     let MoneyDeduct = 0;
-    if (mode === "profileHead") MoneyDeduct = money - marketList[head];
-    else MoneyDeduct = money - marketList[mons];
+    if (mode === "profileHead"){
+      if(head==="")return
+      MoneyDeduct = money - marketList[head];
+    }
+    else{
+      if(mons==="")return
+      MoneyDeduct = money - marketList[mons];
+    }
     const {
       data: { msg },
     } = await instance.post("deductMoney", {
@@ -79,8 +86,14 @@ const MarketPage = ({ setPage }) => {
 
   useEffect(() => {
     if (popUp === true) {
-      if (marketList[head] <= money) setEnoughMoney(true);
-      else setEnoughMoney(false);
+      if(mode === "profileHead"){
+        if (marketList[head] <= money) setEnoughMoney(true);
+        else setEnoughMoney(false);
+      }
+      else{
+        if (marketList[mons] <= money) setEnoughMoney(true);
+        else setEnoughMoney(false);
+      }
     }
   }, [popUp]);
 
@@ -166,7 +179,8 @@ const MarketPage = ({ setPage }) => {
 
   useEffect(() => {
     if (purchase) {
-      if (!(head === "" || mons === "")) deductMoney();
+      console.log("head", head, "mons", mons)
+      deductMoney();
       getMarket(mode);
       setPurchase(false);
     }
