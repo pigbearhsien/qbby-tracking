@@ -187,7 +187,7 @@ File structure:
 Qbby is built on the following stack:
 
 - [React](https://react.dev/) - framework
-- [MUI](https://mui.com/) - UI Library
+- [MUI](https://mui.com/) - components
 - [MongoDB](https://www.mongodb.com) - database
 - [FullCalendar](https://fullcalendar.io/) - calendar
 
